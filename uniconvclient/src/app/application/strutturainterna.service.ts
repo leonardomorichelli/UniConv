@@ -27,8 +27,7 @@ export class StrutturaInternaService extends BaseService implements IQueryMetada
         type: 'string',
         hideExpression: false,
         templateOptions: {
-          label: 'Nome',
-          disabled: true,
+          label: 'Nome',        
           column: { width: 10, cellTemplate: 'valuecolumn' }
         }
       },
