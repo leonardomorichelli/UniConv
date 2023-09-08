@@ -6,9 +6,9 @@ const app = create({
   },  
   users: [
     {
-      id: 'test1',
-      name: 'SuperAdmin Enrico Oliva',
-      username: 'enrico',
+      id: 'super-admin',
+      name: 'Super-Admin Leonardo Morichelli',
+      username: 'leonard01.morichelli',
       password: 'pwd',
       attributes: {
         pisa_id: {
@@ -16,19 +16,9 @@ const app = create({
           value: 'super-admin',
           type: 'xs:string'
         },
-        'nome':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'Enrico',
-          type: 'xs:string'
-        },
-        'cognome':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'Oliva',
-          type: 'xs:string'
-        },
        'urn:oid:2.16.840.1.113730.3.1.241':{
           format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'Enrico Oliva',
+          value: 'Leonardo Morichelli',
           type: 'xs:string'
         },
         'urn:oid:1.3.6.1.4.1.4203.666.11.11.1.0':{
@@ -38,21 +28,53 @@ const app = create({
         },
         'urn:oid:0.9.2342.19200300.100.1.3':{
           format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'enrico.oliva@uniurb.it',
+          value: 'leonardo.morichelli@unicam.it',
           type: 'xs:string'
         },
         'urn:oid:1.3.6.1.4.1.5923.1.1.1.9':{
           format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value:  'staff@uniurb.it',
+          value:  'staff@unicam.it',
           type: 'xs:string'
         },
-       
       }
-    },   
+    },
     {
-      id: 'test2',
-      name: 'Operatore Uff.',
-      username: 'enrico',
+      id: 'super-admin',
+      name: 'Super-Admin Fabrizio Quadrani',
+      username: 'quadranif',
+      password: 'pwd',
+      attributes: {
+        pisa_id: {
+          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+          value: 'super-admin',
+          type: 'xs:string'
+        },
+       'urn:oid:2.16.840.1.113730.3.1.241':{
+          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+          value: 'Fabrizio Quadrani',
+          type: 'xs:string'
+        },
+        'urn:oid:1.3.6.1.4.1.4203.666.11.11.1.0':{
+          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+          value: '2222222222222222',
+          type: 'xs:string'
+        },
+        'urn:oid:0.9.2342.19200300.100.1.3':{
+          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+          value: 'fabrizio.quadrani@unicam.it',
+          type: 'xs:string'
+        },
+        'urn:oid:1.3.6.1.4.1.5923.1.1.1.9':{
+          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+          value:  'staff@unicam.it',
+          type: 'xs:string'
+        },
+      }
+    },
+    {
+      id: 'admin',
+      name: 'Admin Sara Buti',
+      username: 'butis',
       password: 'pwd',
       attributes: {
         pisa_id: {
@@ -62,7 +84,7 @@ const app = create({
         },
        'urn:oid:2.16.840.1.113730.3.1.241':{
           format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'Lucia Bedini',
+          value: 'Sara Buti',
           type: 'xs:string'
         },
         'urn:oid:1.3.6.1.4.1.4203.666.11.11.1.0':{
@@ -72,30 +94,30 @@ const app = create({
         },
         'urn:oid:0.9.2342.19200300.100.1.3':{
           format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'lucia.bedini@uniurb.it',
+          value: 'sara.buti@unicam.it',
           type: 'xs:string'
         },
         'urn:oid:1.3.6.1.4.1.5923.1.1.1.9':{
           format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value:  'staff@uniurb.it',
+          value:  'staff@unicam.it',
           type: 'xs:string'
         },
       }
     },
     {
-      id: 'test3',
-      name: 'Operatore Uff. Contabilità',
-      username: 'mirella',
+      id: 'User',
+      name: 'User Paolo Mancinelli',
+      username: 'mancinellip',
       password: 'pwd',
       attributes: {
         pisa_id: {
           format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'admin',
+          value: 'user',
           type: 'xs:string'
         },
        'urn:oid:2.16.840.1.113730.3.1.241':{
           format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'Mirella Guglielmi',
+          value: 'Paolo Mancinelli',
           type: 'xs:string'
         },
         'urn:oid:1.3.6.1.4.1.4203.666.11.11.1.0':{
@@ -105,116 +127,16 @@ const app = create({
         },
         'urn:oid:0.9.2342.19200300.100.1.3':{
           format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'mirella.guglielmi@uniurb.it',
+          value: 'paolo.mancinelli@unicam.it',
           type: 'xs:string'
         },
         'urn:oid:1.3.6.1.4.1.5923.1.1.1.9':{
           format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value:  'staff@uniurb.it',
+          value:  'staff@unicam.it',
           type: 'xs:string'
         },
       }
     },
-    {
-      id: 'test4',
-      name: 'Operatore Uff. Bilancio',
-      username: 'anna',
-      password: 'pwd',
-      attributes: {
-        pisa_id: {
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'op_uff_bilancio',
-          type: 'xs:string'
-        },
-       'urn:oid:2.16.840.1.113730.3.1.241':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'Anna Valentini',
-          type: 'xs:string'
-        },
-        'urn:oid:1.3.6.1.4.1.4203.666.11.11.1.0':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: '2222222222222222',
-          type: 'xs:string'
-        },
-        'urn:oid:0.9.2342.19200300.100.1.3':{
-          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'anna.valentini@uniurb.it',
-          type: 'xs:string'
-        },
-        'urn:oid:1.3.6.1.4.1.5923.1.1.1.9':{
-          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value:  'staff@uniurb.it',
-          type: 'xs:string'
-        },
-      }
-    },
-    {
-      id: 'test6',
-      name: 'Operatore Uff.',
-      username: 'anna',
-      password: 'pwd',
-      attributes: {
-        pisa_id: {
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: '',
-          type: 'xs:string'
-        },
-       'urn:oid:2.16.840.1.113730.3.1.241':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'Maria Gargano',
-          type: 'xs:string'
-        },
-        'urn:oid:1.3.6.1.4.1.4203.666.11.11.1.0':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: '2222222222222223',
-          type: 'xs:string'
-        },
-        'urn:oid:0.9.2342.19200300.100.1.3':{
-          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'maria.gargano@uniurb.it',
-          type: 'xs:string'
-        },
-        'urn:oid:1.3.6.1.4.1.5923.1.1.1.9':{
-          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value:  'staff@uniurb.it',
-          type: 'xs:string'
-        },
-      }
-    },
-    {
-      id: 'test5',
-      name: 'Responsabile Plesso',
-      username: 'JOSEPH',
-      password: 'pwd',
-      attributes: {
-        pisa_id: {
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'admin',
-          type: 'xs:string'
-        },
-       'urn:oid:2.16.840.1.113730.3.1.241':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'JOSEPH',
-          type: 'xs:string'
-        },
-        'urn:oid:1.3.6.1.4.1.4203.666.11.11.1.0':{
-          format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: '2222222222222222',
-          type: 'xs:string'
-        },
-        'urn:oid:0.9.2342.19200300.100.1.3':{
-          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value: 'joseph.fontana@uniurb.it',
-          type: 'xs:string'
-        },
-        'urn:oid:1.3.6.1.4.1.5923.1.1.1.9':{
-          format:  'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-          value:  'staff@uniurb.it',
-          type: 'xs:string'
-        },
-      }
-    },
-    
   ]
 })
 
