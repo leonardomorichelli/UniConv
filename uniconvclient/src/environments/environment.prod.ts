@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  API_URL: 'https://unidem.uniurb.it/unidem/uniconv/uniconv/public/',
+  API_URL: 'https://uniconv.unicam.it/public/',
   baseHref: '/uniconv/',
-  whitelistedDomains: ['unidem.uniurb.it'],
-  blacklistedRoutes: ['https://unidem.uniurb.it/unidem/uniconv/uniconv/public/auth/'],
-  documentation: 'https://unidem.uniurb.it/uniconv/documentation/'
+  whitelistedDomains: ['uniconv.unicam.it'],
+  blacklistedRoutes: ['https://uniconv.unicam.it/public/auth/'],
+  documentation: 'https://uniconv.unicam.it/documentation/'
 };

@@ -86,6 +86,7 @@ import { RiquadroWrapperComponent } from './riquadro-wrapper/riquadro-wrapper.co
 import { TranslateSelectPipe } from './pipe/translate-select.pipe';
 import { FormlyRiquadroWrapperComponent } from './dynamic-form/wrapper/formly-riquadro-wrapper/formly-riquadro-wrapper.component';
 import { HeaderNavigationComponent } from './header-navigation/header-navigation.component';
+import { NavigationComponent } from './header-navigation/navigation.component';
 import { CollapseRiquadroWrapperComponent } from './collapse-riquadro-wrapper/collapse-riquadro-wrapper.component';
 import { InputConfirmationDialogComponent } from './input-confirmation-dialog/input-confirmation-dialog.component';
 import { MyDiffdatePipe } from './pipe/custom.diffdatepipe';
@@ -137,16 +138,16 @@ export function checkNumeric(field,event){
   if (event.shiftKey){
     event.preventDefault();     // Prevent character input
   }
-  
+
   if( !(event.keyCode == 9  //Tab!!
     || event.keyCode == 8    // backspace
     || event.keyCode == 46      // delete
     || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
     || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
     || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-    ) {      
+    ) {
         event.preventDefault();     // Prevent character input
-  }       
+  }
 }
 
 export const customCurrencyMaskConfig = {
@@ -166,7 +167,7 @@ export const customCurrencyMaskConfig = {
   imports: [
     CommonModule,
     NgbModule,
-    NgbTooltipModule,    
+    NgbTooltipModule,
     FormsModule,
     ReactiveFormsModule,
     NgxDatatableModule,
@@ -195,7 +196,7 @@ export const customCurrencyMaskConfig = {
       { name: 'pdfviewerinput', component: PdfTypeInputComponent, wrappers: ['form-field']},
       { name: 'pdfviewer', component: PdfTypeComponent, wrappers: ['form-field']},
       { name: 'fileinput', component: InputFileComponent,
-        wrappers: ['form-field'], 
+        wrappers: ['form-field'],
         defaultOptions: {
           templateOptions: {
             readonly: true,
@@ -236,7 +237,7 @@ export const customCurrencyMaskConfig = {
       { name: 'datepicker', component: DatepickerTypeComponent, wrappers: ['form-field'],
         defaultOptions: {
          templateOptions: {
-          datepickerOptions:{            
+          datepickerOptions:{
             }
           }
         }
@@ -259,19 +260,19 @@ export const customCurrencyMaskConfig = {
       },
       {
         name: 'provincia',
-        extends: 'input',       
-        defaultOptions: {                            
+        extends: 'input',
+        defaultOptions: {
           templateOptions: {
-            required: true,                                  
+            required: true,
             minLength: 2,
-            maxLength: 2,           
+            maxLength: 2,
           },
           validators: {
             prov: {
               expression: validationProvincia,
               message: provinciaValidationMessage,
             }
-          }          
+          }
         },
       },
       {
@@ -318,35 +319,35 @@ export const customCurrencyMaskConfig = {
       },
       {
         name: 'numore',
-        extends: 'input',       
-        defaultOptions: {            
+        extends: 'input',
+        defaultOptions: {
           templateOptions: {
             required: false,
             type: 'number',
             min: 0,
-            max: 3000,   
+            max: 3000,
             //per diverso comportamento firefox
             keydown: checkNumeric,
             attributes: {
               onpaste: 'return false;',
-            },                           
-          },        
+            },
+          },
         },
-      },      
-      { 
-        name: 'numfix', 
-        extends: 'input', 
-        defaultOptions: {            
+      },
+      {
+        name: 'numfix',
+        extends: 'input',
+        defaultOptions: {
           templateOptions: {
             required: false,
             type: 'number',
-            min: 0,            
+            min: 0,
             //per diverso comportamento firefox
             keydown: checkNumeric,
             attributes: {
               onpaste: 'return false;',
-            },                           
-          },        
+            },
+          },
         },
       }
       ],
@@ -412,8 +413,9 @@ export const customCurrencyMaskConfig = {
     BaseEntityComponent,
     BaseResearchComponent,
     FullComponent,
-    BlankComponent,    
+    BlankComponent,
     HeaderNavigationComponent,
+    NavigationComponent,
     BreadcrumbComponent,
     SidebarComponent,
     TooltipWrapperComponent,
@@ -435,7 +437,7 @@ export const customCurrencyMaskConfig = {
     TranslateModule,
     BaseComponent,
     RiquadroWrapperComponent,
-    TranslateSelectPipe,    
+    TranslateSelectPipe,
     CollapseRiquadroWrapperComponent,
     InputConfirmationDialogComponent,
     ViewListComponent,
@@ -460,6 +462,7 @@ export const customCurrencyMaskConfig = {
     FullComponent,
     BlankComponent,
     HeaderNavigationComponent,
+    NavigationComponent,
     BreadcrumbComponent,
     SidebarComponent,
     TooltipWrapperComponent,
@@ -481,7 +484,7 @@ export const customCurrencyMaskConfig = {
     CollapseWrapperComponent,
     FormlyMaskTypeComponent,
     BaseComponent,
-    RiquadroWrapperComponent,    
+    RiquadroWrapperComponent,
     TranslateSelectPipe,
     FormlyRiquadroWrapperComponent,
     CollapseRiquadroWrapperComponent,

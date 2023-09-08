@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   API_URL: 'http://127.0.0.1:80/', //'http://127.0.0.1:80/',
-  baseHref: '/',   
-  whitelistedDomains: ['localhost:4200', 'pcoliva.uniurb.it','127.0.0.1:80'],
+  baseHref: '/',
+  whitelistedDomains: ['localhost:4200', 'uniconv.unicam.it','127.0.0.1:80'],
   blacklistedRoutes: ['localhost:4200/auth/'],
   documentation: 'https://enoliva.bitbucket.io/index.html'
 };

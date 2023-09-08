@@ -27,7 +27,7 @@ export class StrutturaInternaService extends BaseService implements IQueryMetada
         type: 'string',
         hideExpression: false,
         templateOptions: {
-          label: 'Nome',        
+          label: 'Nome',
           column: { width: 10, cellTemplate: 'valuecolumn' }
         }
       },
@@ -88,7 +88,7 @@ export class StrutturaInternaService extends BaseService implements IQueryMetada
 
   constructor(protected http: HttpClient, public messageService: MessageService,public confirmationDialogService: ConfirmationDialogService) {
      super(http,messageService,confirmationDialogService);
-     this.basePath = 'struttureinterne';     
+     this.basePath = 'struttureinterne';
   }
 
 }
