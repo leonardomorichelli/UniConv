@@ -224,8 +224,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function findPersonaleRespons(): PersonaleResponsOrg {
         if ($this->personaleRespons()->first()){
-            $aff_org = $this->personaleRelation()->first()->aff_org;
-            return $this->personaleRespons()->where('cd_csa',$aff_org)->first();
+            //TODO: ID_AB <-> aff_org
+            $id_ab = $this->personaleRelation()->first()->id_ab;
+            return $this->personaleRespons()->where('id_ab',$id_ab)->first();
         }else{
             $myself = $this->myselfPersonaleRespons()->first();
             if ($myself->cd_tipo_posizorg_resp==PersonaleResponsOrg::RESP_PLESSO){
