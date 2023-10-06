@@ -26,7 +26,7 @@ import { MyFlattenPipe } from 'src/app/shared/pipe/custom.flattenpipe';
 export class ConvenzioniComponent extends BaseResearchComponent {
 
   @ViewChild('detailRow', { static: false }) detailRow: TemplateRef<any>;
-  
+
   researchMetadata: FormlyFieldConfig[];
 
   fieldsRow: FormlyFieldConfig[] = [
@@ -53,7 +53,7 @@ export class ConvenzioniComponent extends BaseResearchComponent {
       },
       modelOptions: {
         updateOn: 'blur',
-      }, 
+      },
     },
 
 
@@ -84,8 +84,8 @@ export class ConvenzioniComponent extends BaseResearchComponent {
       className: "col-md-6",
       templateOptions: {
         label: 'Responsabile scientifico',
-        required: true, 
-              
+        required: true,
+
       }
     },
     {
@@ -148,7 +148,7 @@ export class ConvenzioniComponent extends BaseResearchComponent {
         label: 'Modalità di pagamento',
         required: true
       }
-    }, 
+    },
     {
       key: 'corrispettivo',
       type: 'input',
@@ -165,8 +165,8 @@ export class ConvenzioniComponent extends BaseResearchComponent {
       templateOptions: {
         label: 'Data inizio',
         required: true,
-      },        
-    },  
+      },
+    },
     {
       key: 'data_fine_conv',
       type: 'date',
@@ -174,8 +174,8 @@ export class ConvenzioniComponent extends BaseResearchComponent {
       templateOptions: {
         label: 'Data fine',
         required: true,
-      },       
-    },  
+      },
+    },
     {
       key: 'bollo_virtuale',
       type: 'select',
@@ -188,20 +188,20 @@ export class ConvenzioniComponent extends BaseResearchComponent {
         label: 'Bollo virtuale',
         required: true,
       },
-    },    
+    },
     {
       key: 'current_place',
       type: 'select',
       className: "col-md-6",
       templateOptions: {
         options: [
-          { value: 'proposta', label: 'Proposta' }, 
-          { value: 'approvato', label: 'Approvata' }, 
-          { value: 'inapprovazione', label: 'In approvazione' },                        
-          { value: 'da_firmare_direttore', label: 'Stipula controparte' }, //Da controfirmare UniUrb
-          { value: 'da_firmare_controparte2', label: 'Stipula UniUrb' },  //Da controfirmare controparte
-          { value: 'firmato', label: 'Firmata' },  
-          { value: 'repertoriato', label: 'Repertoriata' },            
+          { value: 'proposta', label: 'Proposta' },
+          { value: 'approvato', label: 'Approvata' },
+          { value: 'inapprovazione', label: 'In approvazione' },
+          { value: 'da_firmare_direttore', label: 'Stipula controparte' }, //Da controfirmare UniCam
+          { value: 'da_firmare_controparte2', label: 'Stipula UniCam' },  //Da controfirmare controparte
+          { value: 'firmato', label: 'Firmata' },
+          { value: 'repertoriato', label: 'Repertoriata' },
         ],
         label: 'Stato',
         required: true,
@@ -212,7 +212,7 @@ export class ConvenzioniComponent extends BaseResearchComponent {
   currency = new MycurrencyPipe();
   flatten = new MyFlattenPipe('');
   translate: MyTranslatePipe;
-  
+
   resultMetadata: FormlyFieldConfig[];
   @ViewChild('tooltip', { static: true }) tooltipCellTemplate: TemplateRef<any>;
 
@@ -230,7 +230,7 @@ export class ConvenzioniComponent extends BaseResearchComponent {
 
     if (this.rules == null){
     }
-    
+
   }
 
   ngOnInit() {
@@ -249,39 +249,39 @@ export class ConvenzioniComponent extends BaseResearchComponent {
       {
           key: 'data',
           type: 'datatablelookup',
-          wrappers: ['accordion'],      
+          wrappers: ['accordion'],
           templateOptions: {
-            label: 'Convenzioni',   
+            label: 'Convenzioni',
             columnMode: 'force',
             headerHeight: 50,
             footerHeight: 50,
-            rowHeight: 50,            
-            scrollbarH: true,             
-            hidetoolbar: true, 
+            rowHeight: 50,
+            scrollbarH: true,
+            hidetoolbar: true,
             detailRow: this.detailRow,
-            selected: [],                        
-            page: new Page(25),       
+            selected: [],
+            page: new Page(25),
             onDblclickRow: (event) => this.onDblclickRow(event),
-            onSetPage: (pageInfo) => this.onSetPageWithInit(pageInfo),               
+            onSetPage: (pageInfo) => this.onSetPageWithInit(pageInfo),
             columns: [
               { name: '', prop: 'id',  with: 60, maxWidth: 60, cellTemplate: this.apri },
               { name: '#', prop: 'id', width: 60, maxWidth: 70},
               { name: 'Descrizione Titolo', prop: 'descrizione_titolo', minWidth: 400, maxWidth: 450},
               { name: 'Azienda o ente', prop:'aziende', pipe: this.flatten, minWidth: 300 },
-              { name: 'Dipartimento', prop: 'dipartimemto_cd_dip', cellTemplate: this.tooltipCellTemplate, 
+              { name: 'Dipartimento', prop: 'dipartimemto_cd_dip', cellTemplate: this.tooltipCellTemplate,
                 pipe: this.translate, width: 135, maxWidth: 135 },
               { name: 'Responsabile scientifico', prop: 'resp_scientifico', width: 150},
               { name: 'Tipo convenzione', prop: 'convenzione_type', pipe: this.translate },
               { name: 'Ambito', prop: 'ambito', pipe: this.translate },
-              { name: 'Modalità di pagamento', prop: 'tipopagamento.descrizione', width: 200 },   
-              { 
-                name: 'Corrispettivo',  prop: 'corrispettivo', 
-                cellClass: "text-right", width:'200', pipe: this.currency              
+              { name: 'Modalità di pagamento', prop: 'tipopagamento.descrizione', width: 200 },
+              {
+                name: 'Corrispettivo',  prop: 'corrispettivo',
+                cellClass: "text-right", width:'200', pipe: this.currency
               },
-              { name: 'Data inizio', prop: 'data_inizio_conv', type: 'date' },      
-              { name: 'Data fine', prop: 'data_fine_conv', type: 'date' },                    
-              { name: 'Stato', prop: 'current_place',  pipe: this.translate },                    
-            ]                                
+              { name: 'Data inizio', prop: 'data_inizio_conv', type: 'date' },
+              { name: 'Data fine', prop: 'data_fine_conv', type: 'date' },
+              { name: 'Stato', prop: 'current_place',  pipe: this.translate },
+            ]
           },
           fieldArray: {
             fieldGroup: []
@@ -295,5 +295,5 @@ export class ConvenzioniComponent extends BaseResearchComponent {
 
   }
 
-  
+
 }

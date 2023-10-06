@@ -99,8 +99,8 @@ class RepertorioController extends Controller
         $parameters = $request->json()->all();
         array_push($parameters['rules'],[
             "operator" => "=",
-            "field" => "doc_repertoriocod",                
-            "value" => "Coac"
+            "field" => "COAC",                
+            "value" => "Convenzioni e Accordi"
         ]);
 
         $fp = new \App\FindParameter($parameters);

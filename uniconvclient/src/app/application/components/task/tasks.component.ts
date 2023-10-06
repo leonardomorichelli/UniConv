@@ -23,7 +23,7 @@ export class TasksComponent extends BaseResearchComponent {
   isLoading = false;
 
   @ViewChild('stateattivita', { static: true }) stateattivita: TemplateRef<any>;
-  
+
   fieldsRow: FormlyFieldConfig[] = [
           {
             key: 'id',
@@ -82,14 +82,14 @@ export class TasksComponent extends BaseResearchComponent {
                 { value:'approvato', label:'Sottoscrizione'},
                 { value:'store_validazione', label:'Approvazione'},
                 { value:'repertorio', label:'Apposizione bollo e repertoriazione'},
-                { value:'firma_da_direttore2', label:'Firma da UniUrb'},
-                { value:'firma_da_controparte2', label:'Firma della controparte'},            
+                { value:'firma_da_direttore2', label:'Firma da UniCam'},
+                { value:'firma_da_controparte2', label:'Firma della controparte'},
                 { value:'emissione', label:'Emissione documento di debito'},
                 { value:'registrazionepagamento', label:'In pagamento'},
                 { value:'richiestaemissione', label:'Richiesta emissione del documento di debito'},
               ]
             }
-            
+
           },
           {
             key: 'model_type',
@@ -121,22 +121,22 @@ export class TasksComponent extends BaseResearchComponent {
             templateOptions: {
               label: 'Data creazione',
               required: true,
-            },        
-          },  
+            },
+          },
 
         ];
 
 
   resultMetadata: FormlyFieldConfig[];
 
-  
 
-  constructor(protected service: UserTaskService, protected router: Router, protected route: ActivatedRoute, translateService: TranslateService)  {    
+
+  constructor(protected service: UserTaskService, protected router: Router, protected route: ActivatedRoute, translateService: TranslateService)  {
     super(router,route)
-    this.routeAbsolutePath = 'home/tasks';    
+    this.routeAbsolutePath = 'home/tasks';
     this.prefix = 'usertasks';
     this.translate = new MyTranslatePipe(translateService);
-    
+
     this.initRule();
   }
 
@@ -155,15 +155,15 @@ export class TasksComponent extends BaseResearchComponent {
       {
         key: 'data',
         type: 'datatablelookup',
-        wrappers: ['accordion'],      
+        wrappers: ['accordion'],
         templateOptions: {
-          label: 'Attività',   
+          label: 'Attività',
           columnMode: 'force',
-          scrollbarH: true,     
+          scrollbarH: true,
           page: new Page(25),
-          hidetoolbar: true,      
+          hidetoolbar: true,
           onDblclickRow: (event) => this.onDblclickRow(event),
-          onSetPage: (pageInfo) => this.onSetPageWithInit(pageInfo),      
+          onSetPage: (pageInfo) => this.onSetPageWithInit(pageInfo),
           columns: [
             { name: '#', prop: 'id',  with: 60, maxWidth: 60, cellTemplate: this.apri },
             { name: 'Ufficio', prop: 'unitaorganizzativa_uo',  pipe: this.translate, width: 100, maxWidth: 120},
@@ -174,10 +174,10 @@ export class TasksComponent extends BaseResearchComponent {
             { name: 'Tipo collegato', prop:'model_type',  width: 120 },
             { name: 'Codice collegato', prop: 'model_id', width: 100, maxWidth: 100 },
             { name: 'Data creazione', prop: 'created_at', type: 'date', with: 100, maxWidth: 150 },
-          ]  
+          ]
         },
         fieldArray: {
-          //fieldGroupClassName: 'row',   
+          //fieldGroupClassName: 'row',
           fieldGroup: [] //this.fieldsRow,
         }
       }
@@ -189,7 +189,7 @@ export class TasksComponent extends BaseResearchComponent {
   }
 
   rowSelection(row) {
-    this.setStorageResult();      
+    this.setStorageResult();
     if (row.workflow_place) {
       if (row.state == 'aperto' || row.workflow_transition == 'emissione'){
         const path = TaskComponent.pathEsecuzioneTask(row.workflow_transition,row.workflow_place);
@@ -201,7 +201,7 @@ export class TasksComponent extends BaseResearchComponent {
   }
 
   onDblclickRow(event) {
-    this.setStorageResult();    
+    this.setStorageResult();
     if (event.type === 'dblclick') {
       if (event.row.id) {
         this.router.navigate([this.routeAbsolutePath, event.row.id]);

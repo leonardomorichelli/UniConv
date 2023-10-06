@@ -46,7 +46,7 @@ class TitulusHelper
      * @param $conv convenzione
      * @param $fascicolo_nrecord nrecord del fascicolo in cui mettere il documento protocollato
      * @param $send_email appaiono i tasti di invio email
-     * @param $addrepertorio il documento protocolollato viene aggiunto al repertorio 'Coac','Convenzione e Accordi'
+     * @param $addrepertorio il documento protocolollato viene aggiunto al repertorio 'RepProv','Convenzione e Accordi'
      */
     public static function saveDocumentInTitulus($oggetto,  $attachments, $tipodoc, $aziende, $conv, $fascicolo_nrecord, $send_mail=false, $addrepertorio=false){
 
@@ -67,7 +67,7 @@ class TitulusHelper
         $doc->rootElementAttributes->tipo = $tipodoc;
 
         if ($addrepertorio)
-            $doc->addRepertorio('Coac','Convenzione e Accordi');    
+            $doc->addRepertorio('COAC','Convenzione e Accordi');    
             
         if ($oggetto){
             $doc->oggetto = $oggetto.' '.$attch_type->descrizione; //almeno 30 caratteri          
@@ -97,9 +97,9 @@ class TitulusHelper
             TitulusHelper::addCC_Titulus($doc);
         }
 
-        if (App::environment(['local','preprod'])) {         
-            $doc->addCC("Attività sistemistiche e software Gestionali e Documentali", "Oliva Enrico");
-        }
+        //if (App::environment(['local','preprod'])) {         
+        //    $doc->addCC("Attività sistemistiche e software Gestionali e Documentali", "vitali david");
+        //}
         
         if ($tipodoc ==  Documento::ARRIVO){
             $doc->addAzienda($aziende[0]);
@@ -193,8 +193,7 @@ class TitulusHelper
         $ctrPers = new PersonaInternaController();
         $persint = $ctrPers->getminimal($strint->cod_responsabile); 
 
-        $element->addRPA($mapping->descrizione_uff, $persint->nomepersona);         
-         
+        $element->addRPA($mapping->descrizione_uff, $persint->nomepersona);
     }
 
     /*

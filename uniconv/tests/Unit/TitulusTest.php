@@ -612,11 +612,11 @@ class TitulusTest extends TestCase
         $doc = new Documento;
 
         //'arrivo' --> errore
-        $doc->rootElementAttributes->tipo = 'partenza';
-        $doc->addRepertorio('Coac', 'Convenzione e Accordi');        
+        $doc->rootElementAttributes->tipo = 'arrivo'; //'partenza';
+        $doc->addRepertorio('COAC', 'Convenzione e Accordi');
         $doc->oggetto = 'test repertorio almeno 30 caratteri';
         $doc->addClassifCod('03/13');
-        $doc->allegato = '0 - Nessun allegato';                              
+        $doc->allegato = '0 - Nessun allegato';
 
         $doc->addRPA(TitulusTest::UFF,TitulusTest::NOME_RPA); 
 

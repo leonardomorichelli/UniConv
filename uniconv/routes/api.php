@@ -30,8 +30,14 @@ Route::group([
 Route::get('loginSaml', function(Request $request){    
     if(\Auth::guest())
     {
-        $redirect = $request->query('redirect'); 
-        $referrer = $request->query('referrer');   
+        $redirect = $request->query('redirect');        
+        $parameters = array();
+        $forceAuthn = false;
+        $isPassive = false;
+        $nameId = null; //'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress';
+        $stay = true;
+
+        $referrer = $request->query('referrer');
         if ($referrer){
             Log::info('referrer: '.$referrer);
             $url = parse_url($referrer);
@@ -39,8 +45,8 @@ Route::get('loginSaml', function(Request $request){
                 if (isset($url['host'])){
                     Log::info('host: '.$url['host']);                 
                     if ($url['host'] !== 'www.uniurb.it'){
-                        Log::info('redirect: https://www.uniurb.it/');                 
-                        return redirect()->away('https://www.uniurb.it/');
+                        Log::info('redirect: https://www.unicam.it/');                 
+                        return redirect()->away('https://www.unicam.it/');
                     }                    
                 }
                 if (isset($url['query'])){
@@ -49,10 +55,22 @@ Route::get('loginSaml', function(Request $request){
             }                       
         }                               
         $saml2Auth = new Saml2Auth(Saml2Auth::loadOneLoginAuthFromIpdConfig( env('IDP_ENV_ID', 'local')));
-        return $saml2Auth->login($redirect ? $redirect : 'home');
+        //return  \Saml2::login($redirect ? $redirect : 'home'); 
+        $saml2AuthUrl =  $saml2Auth->login($redirect ? $redirect : 'home', $parameters, $forceAuthn, $isPassive, $stay, ($nameId !== null));
+        $saml2AuthRequestFields = App\Common\Helpers::explode_query($saml2AuthUrl);        
+        return view('formPost', array('saml2AuthRequest' => $saml2AuthRequestFields));
     }
 });
-   
+
+Route::get('metadata', function(Request $request){
+    ob_end_clean();
+    $saml2Auth = new Saml2Auth(Saml2Auth::loadOneLoginAuthFromIpdConfig( env('IDP_ENV_ID', 'local')));
+    header("Content-type: text/xml");
+    header("Content-Disposition: attachment;filename=SpUniconv.xml");
+    echo $saml2Auth->getMetadata();
+    exit();
+});
+
    
 Route::group([
     'middleware' => ['api','cors'],

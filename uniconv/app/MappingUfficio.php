@@ -14,7 +14,12 @@ class MappingUfficio extends Model
 
     public $table = 'mappinguffici';
 
-    protected $fillable = ['unitaorganizzativa_uo', 'descrizione_uo' ,'strutturainterna_cod_uff','descrizione_uff'];
+    protected $fillable = [
+        'unitaorganizzativa_uo',
+        'descrizione_uo',
+        'strutturainterna_cod_uff',
+        'descrizione_uff'
+    ];
 
     public function unitaorganizzativa()
     {

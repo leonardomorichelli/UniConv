@@ -36,14 +36,17 @@ class DatiSeeder extends Seeder
     }
 
     public function insertUsers_Plesso(){
-        $adminUsers = ['emanuela.rebucci@uniurb.it','maria.gargano@uniurb.it','mara.mancini@uniurb.it','erika.pigliapoco@uniurb.it','ester.carloni@uniurb.it','anna.buchi@uniurb.it'];
-        $persColl = Personale::where('aff_org','005199')->get();
-        $this->insertUser($persColl, $adminUsers);
+        //$adminUsers = ['emanuela.rebucci@uniurb.it','maria.gargano@uniurb.it','mara.mancini@uniurb.it','erika.pigliapoco@uniurb.it','ester.carloni@uniurb.it','anna.buchi@uniurb.it'];
+        //$persColl = Personale::where('aff_org','005199')->get();
+        //$this->insertUser($persColl, $adminUsers);
 
-        // $adminUsers = ['francesco.calzini@uniurb.it','daniela.capponi@uniurb.it',
-        // 'paola.casoli@uniurb.it','alessandra.cupparoni@uniurb.it','adele.guerra@uniurb.it','joseph.fontana@uniurb.it','roberto.pandolfi@uniurb.it'];
-        // $persColl = Personale::where('aff_org','004960')->get();
-        // $this->insertUser($persColl, $adminUsers);
+        //$adminUsers = ['francesco.calzini@uniurb.it','daniela.capponi@uniurb.it',
+        //'paola.casoli@uniurb.it','alessandra.cupparoni@uniurb.it','adele.guerra@uniurb.it','joseph.fontana@uniurb.it','roberto.pandolfi@uniurb.it'];
+        //$persColl = Personale::where('aff_org','004960')->get();
+        //$this->insertUser($persColl, $adminUsers);
+
+        $adminUsers = ['leonardo.morichelli@unicam.it'];
+        $persColl = Personale::where('aff_org','000866')->get();
     }
     
     public function insertUser($persColl, $adminUsers){
@@ -67,9 +70,9 @@ class DatiSeeder extends Seeder
     
         $this->insertOffice(config('unidem.unitaSuperAdmin'), 'super-admin');
         $this->insertOffice(config('unidem.unitaAdmin'), 'admin');
-        $this->insertOffice(config('unidem.ufficiPerValidazione'), 'op_approvazione');
-        $this->insertOffice(config('unidem.uffFiscale'), 'op_contabilita');      
-        $this->insertOffice(['005339','005340','005361'], 'admin_amm');           
+        //$this->insertOffice(config('unidem.ufficiPerValidazione'), 'op_approvazione');
+        //$this->insertOffice(config('unidem.uffFiscale'), 'op_contabilita');      
+        //$this->insertOffice(['005339','005340','005361'], 'admin_amm');           
     }
 
     private function insertOffice(Array $offices, $rolename){
@@ -103,9 +106,24 @@ class DatiSeeder extends Seeder
     }
 
     public function mappingtable(){
-        
+        /*       
+        DB::table('mappinguffici')->insert([
+            'unitaorganizzativa_uo' => '000843',
+            'descrizione_uo' => 'AREA PIANIFICAZIONE, DIDATTICA E SISTEMI QUALITA',
+            'strutturainterna_cod_uff' => 'SI000051',
+            'descrizione_uff' => 'Area Programmazione, Valutazione e Sistemi di Qualità (USIQUAL)',                     
+        ]);
+
+        DB::table('mappinguffici')->insert([
+            'unitaorganizzativa_uo' => '000866', //U-GOV
+            'descrizione_uo' => 'AREA INFRASTRUTTURE E SERVIZI INFORMATICI',
+            'strutturainterna_cod_uff' => 'SI000053', //Titulus PP
+            'descrizione_uff' => 'Area Infrastrutture, Servizi Informatici e Amministrazione Digitale (CINFO)',
+        ]);
+        */
+        /*        
         DB::table('mappinguffici')->insert([                          
-            'unitaorganizzativa_uo' => '005199',
+            'unitaorganizzativa_uo' => '005199', //
             'descrizione_uo' => 'Plesso Scientifico (DiSPeA-DiSB)',                     
             'strutturainterna_cod_uff' => 'SI000083',
             'descrizione_uff' => 'Plesso Scientifico (DISPeA e DISB)',                     
@@ -140,7 +158,7 @@ class DatiSeeder extends Seeder
             'strutturainterna_cod_uff' => 'SI000100',
             'descrizione_uff' => 'Rete Dati e Voce, Servizi Telematici e Assistenza Informatica',                     
         ]);
-
+        */
     }
 
 
@@ -377,8 +395,8 @@ class DatiSeeder extends Seeder
         DB::table('attachmenttypes')->insert([   
             'codice' => 'CONV_FIRM_UNIURB',      
             'gruppo' => 'sottoscrizione',
-            'descrizione' => 'Convenzione firmata da UniUrb',   
-            'descrizione_compl' => 'Convenzione firmata da UniUrb',   
+            'descrizione' => 'Convenzione firmata da UniCam',   
+            'descrizione_compl' => 'Convenzione firmata da UniCam',   
             'parent_type' => Convenzione::class,         
         ]);
 

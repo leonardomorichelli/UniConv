@@ -19,7 +19,7 @@ class CreateMappingUffici extends Migration
             $table->increments('id');                
 
             //riferimento ugov vista_org_attiva uo
-            $table->string('unitaorganizzativa_uo', 20)->unique();                
+            $table->string('unitaorganizzativa_uo', 20);                
             $table->string('descrizione_uo',255);            
 
             //riferimento titulus cod_uff

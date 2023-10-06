@@ -100,17 +100,17 @@ class ConvenzioneService implements ApplicationService
             TitulusHelper::addRPA_Titulus($fasc, $dip_unitaorganizzativa_uo);
         }else if ($data['unitaorganizzativa_uo']){
             //caso convenzione amministrativa
-            $aff_org = $data['unitaorganizzativa_uo'];                        
+            $aff_org = $data['unitaorganizzativa_uo'];
             TitulusHelper::addRPA_Titulus($fasc,$aff_org);        
         }else{
             //...altrimenti l'unità oranizzativa della persona che esegue la convenzione
-            $aff_org = Auth::user()->personale->aff_org;            
+            $aff_org = Auth::user()->personale->aff_org;  
             TitulusHelper::addRPA_Titulus($fasc,$aff_org);        
         }
 
-        if (App::environment(['local','preprod'])) {         
-            $fasc->addCC("Attività sistemistiche e software Gestionali e Documentali", "Oliva Enrico");
-        }
+        //if (App::environment(['local','preprod'])) {         
+        //    $fasc->addCC("AREA INFRASTRUTTURE E SERVIZI INFORMATICI", "Morichelli Leonardo");
+        //}
 
         $response = $sc->newFascicolo($fasc->toXml());                
 
@@ -282,9 +282,9 @@ class ConvenzioneService implements ApplicationService
             ->workflow_transition($conv->workflow_transitions()[0]->getName());
 
         if ($conv->stipula_type == 'controparte') {        
-            $task->subject('Firma da UniUrb')->description('Portare alla firma la convenzione già firmata dalla controparte');
+            $task->subject('Firma da UniCam')->description('Portare alla firma la convenzione già firmata dalla controparte');
         } else {
-            $task->subject('Firma della controparte')->description('Richiedere la firma della contraparte sulla convenzione già firmata da UniUrb');
+            $task->subject('Firma della controparte')->description('Richiedere la firma della contraparte sulla convenzione già firmata da ');
         }
 
         $task->save();

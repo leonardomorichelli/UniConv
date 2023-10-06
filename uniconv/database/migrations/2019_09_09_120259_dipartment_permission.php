@@ -28,6 +28,16 @@ class DipartmentPermission extends Migration
         if ($role!=null){
             $role->givePermissionTo('view attachments');
         }
+        
+        //SST
+        DB::table('mappinguffici')->insert([                          
+            'unitaorganizzativa_uo' => '000087',
+            'descrizione_uo' => 'Scuola di Scienze e Tecnologie',                     
+            'strutturainterna_cod_uff' => 'SI000060',
+            'descrizione_uff' => 'Collegamento Scuola di Scienze e Tecnologie',                     
+        ]);
+
+        /*
     
         //004939	Dipartimento di Studi Umanistici (DISTUM) Dipartimento di Studi Umanistici (DISTUM) SI000089 PI000073
         DB::table('mappinguffici')->insert([                          
@@ -77,7 +87,7 @@ class DipartmentPermission extends Migration
             'strutturainterna_cod_uff' => 'SI000084',
             'descrizione_uff' => 'Dipartimento di Scienze Pure e Applicate - DISPeA',                     
         ]);
-
+        */
     }
 
     /**

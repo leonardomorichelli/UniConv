@@ -5,17 +5,17 @@
 publiccodeYmlVersion: '0.2'
 name: UniConv
 releaseDate: '2019-04-15'
-url: 'https://github.com/uniurbit/UniConv'
-landingURL: 'https://github.com/uniurbit/UniConv'
+url: 'https://github.com/leonardomorichelli/UniConv'
+landingURL: 'https://github.com/leonardomorichelli/UniConv'
 logo: docs/img/logo.png
 developmentStatus: stable
 softwareType: standalone/web
-roadmap: 'https://github.com/uniurbit/UniConv/issues'
+roadmap: 'https://github.com/leonardomorichelli/UniConv/issues'
 platforms:
   - linux
   - web
 usedBy:
-  - 'https://www.uniurb.it'
+  - 'https://www.unicam.it'
 categories:
   - employee-management
 dependsOn:
@@ -32,6 +32,12 @@ maintenance:
     - name: Enrico Oliva
       email: enrico.oliva@uniurb.it
       affiliation: UniUrb
+    - name: Andrea Orlando
+      email: andrea.orlando@unicam.it
+      affiliation: 
+    - name: Leonardo Morichelli 
+      email: leonardo.morichelli@unicam.it
+      affiliation: 
 legal:
   license: AGPL-3.0-only
   mainCopyrightOwner: Università degli Studi di Urbino Carlo Bo

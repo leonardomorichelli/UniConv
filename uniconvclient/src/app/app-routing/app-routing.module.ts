@@ -64,25 +64,25 @@ const externalLoginUrlProvider = new InjectionToken('externalUrlRedirectResolver
 
 const routes: Routes = [
 
-  { path: '', component: BlankComponent }, 
-  { path: 'externallogin', 
+  { path: '', component: BlankComponent },
+  { path: 'externallogin',
     resolve: {
       url: externalLoginUrlProvider,
     },
     canActivate: [externalLoginUrlProvider],
     component: NotFoundComponent,
   },
-  { path: 'home',  component: FullComponent, 
-    canActivate: [LoginActivate],      
+  { path: 'home',  component: FullComponent,
+    canActivate: [LoginActivate],
     children:[
       {
         path: 'dashboard',
         loadChildren: () => import('../dashboards/dashboard.module').then(m => m.DashboardModule)
       },
-      { 
-        path: 'convenzione',  component: ConvenzioneComponent,  canActivate:[AuthGuard],        
-      }, 
-      { 
+      {
+        path: 'convenzione',  component: ConvenzioneComponent,  canActivate:[AuthGuard],
+      },
+      {
         path: 'convenzioni/:id',  component: ConvenzioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Convenzione',
@@ -90,9 +90,9 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Convenzione' }
           ]
-        } 
-      },     
-      { 
+        }
+      },
+      {
         path: 'convdetails/:id',  component: ConvenzionedetailsComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Dettagli convenzione',
@@ -100,9 +100,9 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Convenzione' }
           ]
-        } 
-      },     
-      { 
+        }
+      },
+      {
         path: 'convenzioni',  component: ConvenzioniComponent,  canActivate:[NgxPermissionsGuard],
         data: {
           title: 'Ricerca convenzioni',
@@ -111,7 +111,7 @@ const routes: Routes = [
             { title: 'Ricerca convenzioni' }
           ],
         }
-      }, 
+      },
       {
         path: 'validazione/:id', component: ConvvalidationComponent, canActivate:[AuthGuard], pathMatch:'full',
         data: {
@@ -166,30 +166,30 @@ const routes: Routes = [
       {
         path: 'registrazionefirmadirettore/:id', component: RegistrazioneCompletamentoDirettoreComponent, canActivate:[AuthGuard], pathMatch:'full',
         data: {
-          title: 'Registrazione completamento sottoscrizione controfirma UniUrb',
+          title: 'Registrazione completamento sottoscrizione controfirma UniCam',
           urls: [
             { title: 'Home', url: '/home' },
-            { title: 'Registrazione completamento sottoscrizione controfirma UniUrb' }
+            { title: 'Registrazione completamento sottoscrizione controfirma UniCam' }
           ]
         },
       },
       {
         path: 'firmadirettore/:id', component: FirmaDirettoreComponent, canActivate:[AuthGuard], pathMatch:'full',
         data: {
-          title: 'Completamento sottoscrizione controfirma UniUrb',
+          title: 'Completamento sottoscrizione controfirma UniCam',
           urls: [
             { title: 'Home', url: '/home' },
-            { title: 'Completamento sottoscrizione controfirma UniUrb' }
+            { title: 'Completamento sottoscrizione controfirma UniCam' }
           ]
         },
       },
       {
         path: 'firmadirettore', component: FirmaDirettoreComponent, canActivate:[AuthGuard],
         data: {
-          title: 'Completamento sottoscrizione controfirma UniUrb',
+          title: 'Completamento sottoscrizione controfirma UniCam',
           urls: [
             { title: 'Home', url: '/home' },
-            { title: 'Completamento sottoscrizione controfirma UniUrb' }
+            { title: 'Completamento sottoscrizione controfirma UniCam' }
           ]
         },
       },
@@ -223,7 +223,7 @@ const routes: Routes = [
           ]
         },
       },
-      
+
       {
         path: 'registrabollorepertoriazione/:id', component: RegistrazioneBolloRepertoriazioneComponent, canActivate:[AuthGuard], pathMatch:'full',
         data: {
@@ -254,8 +254,8 @@ const routes: Routes = [
           ]
         },
       },
-      
-      { path: 'allegati',  component: AllegatiComponent,  canActivate:[AuthGuard] }, 
+
+      { path: 'allegati',  component: AllegatiComponent,  canActivate:[AuthGuard] },
       { path: 'multistep-schematipo',  component: MultistepSchematipoComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Nuova convenzione dipartimentale',
@@ -264,7 +264,7 @@ const routes: Routes = [
             { title: 'Nuova convenzione dipartimentale' }
           ]
         }
-      },     
+      },
       { path: 'ins-conv-amm',  component: InsConvAmmComponent,  canActivate:[AuthGuard],
       data: {
         title: 'Nuova convenzione amministrativa',
@@ -273,9 +273,9 @@ const routes: Routes = [
           { title: 'Nuova convenzione amministrativa' }
         ]
       }
-    },     
-      { 
-        path: 'users',  component: UsersComponent, canActivate:[AuthGuard], 
+    },
+      {
+        path: 'users',  component: UsersComponent, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca utenti',
           urls: [
@@ -283,8 +283,8 @@ const routes: Routes = [
             { title: 'Utenti' }
           ]
         }
-      },     
-      { 
+      },
+      {
         path: 'users/:id',  component: UserComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Utente',
@@ -292,10 +292,10 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Utente' }
           ]
-        } 
+        }
       },
-      { 
-        path: 'roles/new',  component: RoleComponent,  canActivate:[AuthGuard], 
+      {
+        path: 'roles/new',  component: RoleComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Nuovo ruolo',
           urls: [
@@ -303,8 +303,8 @@ const routes: Routes = [
             { title: 'Nuovo ruolo' }
           ]
         }
-      }, 
-      { 
+      },
+      {
         path: 'roles/:id',  component: RoleComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Ruolo',
@@ -313,7 +313,7 @@ const routes: Routes = [
             { title: 'Ruolo' }
           ]
         }
-      }, 
+      },
       {
          path: 'roles',  component: RolesComponent, canActivate:[AuthGuard],
          data: {
@@ -323,8 +323,8 @@ const routes: Routes = [
             { title: 'Ricerca ruoli' }
           ]
         }
-      },               
-      { 
+      },
+      {
         path: 'permissions/new',  component: PermissionComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Nuovo permesso',
@@ -332,9 +332,9 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Nuovo permesso' }
           ]
-        } 
-      }, 
-      { 
+        }
+      },
+      {
         path: 'permissions/:id',  component: PermissionComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Permesso',
@@ -342,10 +342,10 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Permesso' }
           ]
-        } 
-      }, 
-      { 
-        path: 'permissions',  component: PermissionsComponent,  canActivate:[AuthGuard], 
+        }
+      },
+      {
+        path: 'permissions',  component: PermissionsComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Ricerca permessi',
           urls: [
@@ -353,9 +353,9 @@ const routes: Routes = [
             { title: 'Ricerca permessi' }
           ]
         }
-      }, 
-      { 
-        path: 'tipopagamenti',  component: TipoPagamentiComponent, canActivate:[AuthGuard], 
+      },
+      {
+        path: 'tipopagamenti',  component: TipoPagamentiComponent, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca tipo pagamento',
           urls: [
@@ -363,8 +363,8 @@ const routes: Routes = [
             { title: 'Ricerca tipo pagamento' }
           ]
         }
-      },         
-      { 
+      },
+      {
         path: 'tipopagamenti/:id',  component: TipoPagamentoComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Tipo pagamento',
@@ -373,8 +373,8 @@ const routes: Routes = [
             { title: 'Tipo pagamento' }
           ]
         }
-      }, 
-      { 
+      },
+      {
         path: 'tasks/new',  component: TaskComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Nuova attività',
@@ -383,9 +383,9 @@ const routes: Routes = [
             { title: 'Nuova attività' }
           ]
         },
-      }, 
-      { 
-        path: 'tasks',  component: TasksComponent, canActivate:[AuthGuard], 
+      },
+      {
+        path: 'tasks',  component: TasksComponent, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca attività',
           urls: [
@@ -393,8 +393,8 @@ const routes: Routes = [
             { title: 'Ricerca attività' }
           ]
         }
-      },         
-      { 
+      },
+      {
         path: 'tasks/:id',  component: TaskComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Attività',
@@ -403,8 +403,8 @@ const routes: Routes = [
             { title: 'Attività' }
           ]
         }
-      },      
-      { 
+      },
+      {
         path: 'aziendeloc/new',  component: AziendaLocComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Nuova azienda',
@@ -413,9 +413,9 @@ const routes: Routes = [
             { title: 'Nuova azienda' }
           ]
         },
-      }, 
-      { 
-        path: 'aziendeloc',  component: AziendeLocComponent, canActivate:[AuthGuard], 
+      },
+      {
+        path: 'aziendeloc',  component: AziendeLocComponent, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca aziende',
           urls: [
@@ -424,7 +424,7 @@ const routes: Routes = [
           ]
         }
       },
-      { 
+      {
         path: 'aziendeloc/:id',  component: AziendaLocComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Azienda',
@@ -433,9 +433,9 @@ const routes: Routes = [
             { title: 'Attività' }
           ]
         }
-      },                   
-      { 
-        path: 'personeinterne',  component: PersoneinterneTitulus, canActivate:[AuthGuard], 
+      },
+      {
+        path: 'personeinterne',  component: PersoneinterneTitulus, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca persone interne',
           urls: [
@@ -444,8 +444,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'struttureinterne',  component: StruttureInterneTitulus, canActivate:[AuthGuard], 
+      {
+        path: 'struttureinterne',  component: StruttureInterneTitulus, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca strutture interne',
           urls: [
@@ -454,8 +454,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'struttureesterne',  component: StruttureEsterneTitulus, canActivate:[AuthGuard], 
+      {
+        path: 'struttureesterne',  component: StruttureEsterneTitulus, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca strutture esterne',
           urls: [
@@ -464,8 +464,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'documenti',  component: DocumentiTitulus, canActivate:[AuthGuard], 
+      {
+        path: 'documenti',  component: DocumentiTitulus, canActivate:[AuthGuard],
         data: {
           title: 'Ricerca documenti',
           urls: [
@@ -474,7 +474,7 @@ const routes: Routes = [
           ]
         }
       },
-      { 
+      {
         path: 'classificazioni/new',  component: ClassificazioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Nuovo codice di classificazione',
@@ -482,9 +482,9 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Nuovo codice di classificazione' }
           ]
-        } 
-      }, 
-      { 
+        }
+      },
+      {
         path: 'classificazioni/:id',  component: ClassificazioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Classificazione',
@@ -492,10 +492,10 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Classificazione' }
           ]
-        } 
-      }, 
-      { 
-        path: 'classificazioni',  component: ClassificazioniComponent,  canActivate:[AuthGuard], 
+        }
+      },
+      {
+        path: 'classificazioni',  component: ClassificazioniComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Classificazione',
           urls: [
@@ -503,9 +503,9 @@ const routes: Routes = [
             { title: 'Ricerca classificazione' }
           ]
         }
-      }, 
-      { 
-        path: 'mappinguffici',  component: MappingUfficiTitulus,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'mappinguffici',  component: MappingUfficiTitulus,  canActivate:[AuthGuard],
         data: {
           title: 'Mapping uffici',
           urls: [
@@ -513,9 +513,9 @@ const routes: Routes = [
             { title: 'Ricerca associazione uffici' }
           ]
         }
-      }, 
-      { 
-        path: 'mappinguffici/:id',  component: MappingUfficioTitulus,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'mappinguffici/:id',  component: MappingUfficioTitulus,  canActivate:[AuthGuard],
         data: {
           title: 'Mapping uffici',
           urls: [
@@ -523,9 +523,9 @@ const routes: Routes = [
             { title: 'Ricerca mapping uffici' }
           ]
         }
-      }, 
-      { 
-        path: 'mappinguffici/new',  component: MappingUfficioTitulus,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'mappinguffici/new',  component: MappingUfficioTitulus,  canActivate:[AuthGuard],
         data: {
           title: 'Nuova associazione uffici',
           urls: [
@@ -533,11 +533,11 @@ const routes: Routes = [
             { title: 'Nuova associazione uffici' }
           ]
         }
-      }, 
+      },
 
       //mapping ruoli
-      { 
-        path: 'mappingruoli',  component: MappingRuoli,  canActivate:[AuthGuard], 
+      {
+        path: 'mappingruoli',  component: MappingRuoli,  canActivate:[AuthGuard],
         data: {
           title: 'Associazioni ruoli per primo inserimento',
           urls: [
@@ -545,9 +545,9 @@ const routes: Routes = [
             { title: 'Ricerca associazione ruoli' }
           ]
         }
-      }, 
-      { 
-        path: 'mappingruoli/:id',  component: MappingRuolo,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'mappingruoli/:id',  component: MappingRuolo,  canActivate:[AuthGuard],
         data: {
           title: 'Associazioni ruoli per primo inserimento',
           urls: [
@@ -555,9 +555,9 @@ const routes: Routes = [
             { title: 'Ricerca associazioni ruoli' }
           ]
         }
-      }, 
-      { 
-        path: 'mappingruoli/new',  component: MappingRuolo,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'mappingruoli/new',  component: MappingRuolo,  canActivate:[AuthGuard],
         data: {
           title: 'Nuova associazione ruolo per primo inserimento',
           urls: [
@@ -565,11 +565,11 @@ const routes: Routes = [
             { title: 'Nuova associazione ruolo' }
           ]
         }
-      }, 
+      },
 
       //scadenze
-      { 
-        path: 'scadenze',  component: ScadenzeComponent,  canActivate:[AuthGuard], 
+      {
+        path: 'scadenze',  component: ScadenzeComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Scadenze pagamenti',
           urls: [
@@ -577,9 +577,9 @@ const routes: Routes = [
             { title: 'Ricerca scadenze pagamenti' }
           ]
         }
-      }, 
-      { 
-        path: 'scadenze/:id',  component: ScadenzaComponent,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'scadenze/:id',  component: ScadenzaComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Scadenza pagamenti',
           urls: [
@@ -587,9 +587,9 @@ const routes: Routes = [
             { title: 'Scadenza pagamenti' }
           ]
         }
-      },       
-      { 
-        path: 'scadenze/new',  component: ScadenzaComponent,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'scadenze/new',  component: ScadenzaComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Nuova scadenza pagamento',
           urls: [
@@ -597,9 +597,9 @@ const routes: Routes = [
             { title: 'Nuova scadenza pagamento' }
           ]
         }
-      }, 
-      { 
-        path: 'richiestaemissione',  component: RichiestaEmissioneComponent,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'richiestaemissione',  component: RichiestaEmissioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Richiesta emissione',
           urls: [
@@ -608,8 +608,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'richiestaemissione/:id',  component: RichiestaEmissioneComponent,  canActivate:[AuthGuard], 
+      {
+        path: 'richiestaemissione/:id',  component: RichiestaEmissioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Richiesta emissione',
           urls: [
@@ -618,8 +618,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'richiestaemissione',  component: EmissioneComponent,  canActivate:[AuthGuard], 
+      {
+        path: 'richiestaemissione',  component: EmissioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Richiesta emissione',
           urls: [
@@ -628,8 +628,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'inviorichiestapagamento',  component: InvioRichiestaPagamentoComponent,  canActivate:[AuthGuard], 
+      {
+        path: 'inviorichiestapagamento',  component: InvioRichiestaPagamentoComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Invio richiesta di pagamento',
           urls: [
@@ -637,9 +637,9 @@ const routes: Routes = [
             { title: 'Invio richiesta di pagamento' }
           ]
         }
-      },    
-      { 
-        path: 'inviorichiestapagamento/:id',  component: InvioRichiestaPagamentoComponent,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'inviorichiestapagamento/:id',  component: InvioRichiestaPagamentoComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Invio richiesta di pagamento',
           urls: [
@@ -647,9 +647,9 @@ const routes: Routes = [
             { title: 'Invio richiesta di pagamento' }
           ]
         }
-      },      
-      { 
-        path: 'emissione',  component: EmissioneComponent,  canActivate:[AuthGuard], 
+      },
+      {
+        path: 'emissione',  component: EmissioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Emissione',
           urls: [
@@ -658,8 +658,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'emissione/:id',  component: EmissioneComponent,  canActivate:[AuthGuard], 
+      {
+        path: 'emissione/:id',  component: EmissioneComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Emissione',
           urls: [
@@ -668,8 +668,8 @@ const routes: Routes = [
           ]
         }
       },
-      { 
-        path: 'pagamento/:id',  component: PagamentoComponent,  canActivate:[AuthGuard], 
+      {
+        path: 'pagamento/:id',  component: PagamentoComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Registrazione incasso',
           urls: [
@@ -678,7 +678,7 @@ const routes: Routes = [
           ]
         }
       },
-      { 
+      {
         path: 'scadenzeview/:id',  component: ScadenzaViewComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Dettagli scadenza',
@@ -686,10 +686,10 @@ const routes: Routes = [
             { title: 'Home', url: '/home' },
             { title: 'Scadenza' }
           ]
-        } 
-      },     
-      { 
-        path: 'logattivita',  component: LogAttivitaComponent,  canActivate:[AuthGuard], 
+        }
+      },
+      {
+        path: 'logattivita',  component: LogAttivitaComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Log attività',
           urls: [
@@ -700,8 +700,8 @@ const routes: Routes = [
       },
 
        //bolli
-       { 
-        path: 'bolli',  component: BolliComponent,  canActivate:[AuthGuard], 
+       {
+        path: 'bolli',  component: BolliComponent,  canActivate:[AuthGuard],
         data: {
           title: 'Report bolli virtuali',
           urls: [
@@ -709,15 +709,15 @@ const routes: Routes = [
             { title: 'Report bolli virtuali' }
           ]
         }
-      }, 
+      },
         // LINK AI DOCUMENTI
         {
           path: 'lineeguida/:val',
           component: LinkEsterniComponent, canActivate: [AuthGuard], pathMatch: 'full',
         },
 
-      { path: 'test',  component: TestTabComponent,  canActivate:[AuthGuard] },     
-  ]}, 
+      { path: 'test',  component: TestTabComponent,  canActivate:[AuthGuard] },
+  ]},
   { path: 'error', component: SystemErrorComponent },
   { path: '**', component: NotFoundComponent }
 ];

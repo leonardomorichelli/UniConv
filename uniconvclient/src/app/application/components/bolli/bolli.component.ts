@@ -18,12 +18,12 @@ import { BolloService } from '../../bollo.service';
 
 //ng g c application/components/bolli -s true --spec false -t true
 export class BolliComponent extends BaseResearchComponent {
- 
+
   currency = new MycurrencyPipe();
   flatten = new MyFlattenPipe('');
   translate: MyTranslatePipe;
-  
-  resultMetadata: FormlyFieldConfig[];  
+
+  resultMetadata: FormlyFieldConfig[];
 
 
 
@@ -36,7 +36,7 @@ export class BolliComponent extends BaseResearchComponent {
         label: 'Codice',
         disabled: true
       },
-    }, 
+    },
     {
       key: 'descrizione_titolo',
       type: 'input',
@@ -57,7 +57,7 @@ export class BolliComponent extends BaseResearchComponent {
           {value: '2019', label: '2019'},
           {value: '2020', label: '2020'},
           {value: '2021', label: '2021'},
-          {value: '2022', label: '2022'},          
+          {value: '2022', label: '2022'},
         ]
       }
     },
@@ -79,8 +79,8 @@ export class BolliComponent extends BaseResearchComponent {
       className: "col-md-6",
       templateOptions: {
         label: 'Responsabile scientifico',
-        required: true, 
-              
+        required: true,
+
       }
     },
     {
@@ -104,49 +104,49 @@ export class BolliComponent extends BaseResearchComponent {
         label: 'Denominazione azienda o ente',
         required: true
       }
-    },      
+    },
     {
       key: 'bollo_virtuale',
       type: 'select',
       className: "col-md-4",
-      defaultValue: true,    
+      defaultValue: true,
       templateOptions: {
         disabled: true,
         options: [
-          { label: 'Sì', value: true },       
+          { label: 'Sì', value: true },
         ],
         label: 'Bollo virtuale',
         required: true,
       },
-    },    
+    },
     {
       key: 'current_place',
       type: 'select',
       className: "col-md-6",
       templateOptions: {
         options: [
-          { value: 'proposta', label: 'Proposta' }, 
-          { value: 'approvato', label: 'Approvata' }, 
-          { value: 'inapprovazione', label: 'In approvazione' },                        
-          { value: 'da_firmare_direttore', label: 'Stipula controparte' }, //Da controfirmare UniUrb
-          { value: 'da_firmare_controparte2', label: 'Stipula UniUrb' },  //Da controfirmare controparte
-          { value: 'firmato', label: 'Firmata' },  
-          { value: 'repertoriato', label: 'Repertoriata' },            
+          { value: 'proposta', label: 'Proposta' },
+          { value: 'approvato', label: 'Approvata' },
+          { value: 'inapprovazione', label: 'In approvazione' },
+          { value: 'da_firmare_direttore', label: 'Stipula controparte' }, //Da controfirmare UniCam
+          { value: 'da_firmare_controparte2', label: 'Stipula UniCam' },  //Da controfirmare controparte
+          { value: 'firmato', label: 'Firmata' },
+          { value: 'repertoriato', label: 'Repertoriata' },
         ],
         label: 'Stato',
         required: true,
       },
     }
   ];
-  
-  constructor(protected service: BolloService, protected appservice: ApplicationService, router: Router, route: ActivatedRoute, private translateService: TranslateService)  {    
-    super(router,route);    
-    this.routeAbsolutePath = 'home/convdetails'    
-    
+
+  constructor(protected service: BolloService, protected appservice: ApplicationService, router: Router, route: ActivatedRoute, private translateService: TranslateService)  {
+    super(router,route);
+    this.routeAbsolutePath = 'home/convdetails'
+
     this.enableNew= false;
     this.enabledExport = true;
     this.isLoading = false;
-    
+
     this.translate = new MyTranslatePipe(translateService);
     this.prefix = 'bolli';
 
@@ -160,16 +160,16 @@ export class BolliComponent extends BaseResearchComponent {
     }
 
   }
- 
+
   protected getRules(model) {
     if (model.rules) {
       let rulestmp = JSON.parse(JSON.stringify(model.rules)) as (Array<any>);
-      const ruleAnno = rulestmp.find(x => x.field == 'anno');   
+      const ruleAnno = rulestmp.find(x => x.field == 'anno');
       if (ruleAnno) {
-        rulestmp.splice(rulestmp.indexOf(ruleAnno), 1);   
-        rulestmp  = rulestmp.concat([        
+        rulestmp.splice(rulestmp.indexOf(ruleAnno), 1);
+        rulestmp  = rulestmp.concat([
           { field: "data_stipula", operator: "<=", value: '31-12-'+ruleAnno.value, type: "date" },
-          { field: "data_stipula",  operator: ">=", value: '1-1-'+ruleAnno.value, type: "date" },            
+          { field: "data_stipula",  operator: ">=", value: '1-1-'+ruleAnno.value, type: "date" },
         ]);
       }
       return rulestmp;
@@ -193,19 +193,19 @@ export class BolliComponent extends BaseResearchComponent {
       {
           key: 'data',
           type: 'datatablelookup',
-          wrappers: ['accordion'],      
+          wrappers: ['accordion'],
           templateOptions: {
-            label: 'Convenzioni',   
+            label: 'Convenzioni',
             columnMode: 'force',
             headerHeight: 50,
             footerHeight: 50,
-            rowHeight: 50,            
-            scrollbarH: true,             
-            hidetoolbar: true,           
-            selected: [],                        
-            page: new Page(25),       
+            rowHeight: 50,
+            scrollbarH: true,
+            hidetoolbar: true,
+            selected: [],
+            page: new Page(25),
             onDblclickRow: (event) => this.onDblclickRow(event),
-            onSetPage: (pageInfo) => this.onSetPageWithInit(pageInfo),               
+            onSetPage: (pageInfo) => this.onSetPageWithInit(pageInfo),
             columns: [
               { name: '#', prop: 'id', width: 60, maxWidth: 70},
               { name: 'Descrizione Titolo', prop: 'descrizione_titolo', minWidth: 400, maxWidth: 450},
@@ -214,16 +214,16 @@ export class BolliComponent extends BaseResearchComponent {
               { name: 'Responsabile scientifico', prop: 'resp_scientifico', width: 150},
               { name: 'Tipo convenzione', prop: 'convenzione_type', pipe: this.translate },
               { name: 'Ambito', prop: 'ambito', pipe: this.translate },
-              { name: 'Modalità di pagamento', prop: 'tipopagamento.descrizione', width: 200 },   
-              { 
-                name: 'Corrispettivo',  prop: 'corrispettivo', 
-                cellClass: "text-right", width:'200', pipe: this.currency              
+              { name: 'Modalità di pagamento', prop: 'tipopagamento.descrizione', width: 200 },
+              {
+                name: 'Corrispettivo',  prop: 'corrispettivo',
+                cellClass: "text-right", width:'200', pipe: this.currency
               },
-              { name: 'Data stipula', prop: 'data_stipula', type: 'date' },  
-              { name: 'Data inizio', prop: 'data_inizio_conv', type: 'date' },      
-              { name: 'Data fine', prop: 'data_fine_conv', type: 'date' },                    
-              { name: 'Stato', prop: 'current_place',  pipe: this.translate },                    
-            ]                                
+              { name: 'Data stipula', prop: 'data_stipula', type: 'date' },
+              { name: 'Data inizio', prop: 'data_inizio_conv', type: 'date' },
+              { name: 'Data fine', prop: 'data_fine_conv', type: 'date' },
+              { name: 'Stato', prop: 'current_place',  pipe: this.translate },
+            ]
           },
           fieldArray: {
             fieldGroup: []

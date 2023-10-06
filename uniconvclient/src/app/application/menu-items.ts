@@ -40,8 +40,8 @@ export const ROUTES: RouteInfo[] = [
     ],
   },
 
-    
-  
+
+
   {
     path: '',
     title: 'Funzionalità',
@@ -49,8 +49,8 @@ export const ROUTES: RouteInfo[] = [
     class: 'nav-small-cap',
     extralink: true,
     permissions: ['ADMIN','SUPER-ADMIN','ADMIN_AMM'],
-    submenu: [],    
-  },    
+    submenu: [],
+  },
   {
     path: '',
     title: 'Nuova convenzione',
@@ -58,14 +58,14 @@ export const ROUTES: RouteInfo[] = [
     class: 'has-arrow',
     extralink: false,
     permissions: ['ADMIN','SUPER-ADMIN','ADMIN_AMM'],
-    submenu: [ 
+    submenu: [
       {
         path: 'multistep-schematipo',
         title: 'Dipartimentale',
         icon: 'icon-File',
         class: '',
         extralink: false,
-        submenu: [],  
+        submenu: [],
         permissions: ['ADMIN','SUPER-ADMIN'],
       },
       {
@@ -74,7 +74,7 @@ export const ROUTES: RouteInfo[] = [
         icon: 'icon-File',
         class: '',
         extralink: false,
-        submenu: [],  
+        submenu: [],
         permissions: ['ADMIN_AMM','SUPER-ADMIN'],
       }
     ],
@@ -95,8 +95,8 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     extralink: false,
     submenu: [],
-    permissions: ['ADMIN','SUPER-ADMIN','VIEWER','OP_UFF_BILANCIO'], 
-  }, 
+    permissions: ['ADMIN','SUPER-ADMIN','VIEWER','OP_UFF_BILANCIO'],
+  },
   {
     path: 'bolli',
     title: 'Bolli',
@@ -134,7 +134,7 @@ export const ROUTES: RouteInfo[] = [
     class: 'has-arrow',
     extralink: false,
     permissions: ['SUPER-ADMIN'],
-    submenu: [ 
+    submenu: [
       {
         path: 'validazione',
         title: 'Approvazione',
@@ -143,23 +143,23 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN','SUPER-ADMIN','OP_APPROVAZIONE'],
-      },     
+      },
       {
         path: '',
         title: 'Sottoscrizione',
         icon: '',
         class: 'has-arrow',
-        extralink: false,        
-        permissions: ['ADMIN','SUPER-ADMIN'],      
-        submenu: [  
+        extralink: false,
+        permissions: ['ADMIN','SUPER-ADMIN'],
+        submenu: [
           {
             path: 'sottoscrizione',
             title: 'Inizio sottoscrizione',
             icon: '',
             class: '',
-            extralink: false,        
-            permissions: ['ADMIN','SUPER-ADMIN'],      
-            submenu: [],        
+            extralink: false,
+            permissions: ['ADMIN','SUPER-ADMIN'],
+            submenu: [],
           },
           {
             path: 'firmacontroparte',
@@ -172,14 +172,14 @@ export const ROUTES: RouteInfo[] = [
           },
           {
             path: 'firmadirettore',
-            title: 'Completa UniUrb',
+            title: 'Completa UniCam',
             icon: '',
             class: '',
             extralink: false,
             submenu: [],
             permissions: ['ADMIN','SUPER-ADMIN'],
-          },         
-        ],        
+          },
+        ],
       },
       {
         path: 'bollorepertoriazione',
@@ -189,7 +189,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN','SUPER-ADMIN'],
-      },     
+      },
       {
         path: 'richiestaemissione',
         title: 'Richiesta emissione',
@@ -198,7 +198,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN','SUPER-ADMIN'],
-      },    
+      },
       {
         path: 'inviorichiestapagamento',
         title: 'Richiesta pagamento',
@@ -207,7 +207,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN','SUPER-ADMIN'],
-      },     
+      },
       {
         path: 'emissione',
         title: 'Emissione',
@@ -216,7 +216,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN','SUPER-ADMIN','OP_CONTABILITA'],
-      },   
+      },
 
     ]
   },
@@ -228,7 +228,7 @@ export const ROUTES: RouteInfo[] = [
     class: 'nav-small-cap',
     extralink: true,
     permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-    submenu: [],    
+    submenu: [],
   },
   {
     path: '',
@@ -263,8 +263,8 @@ export const ROUTES: RouteInfo[] = [
         class: '',
         extralink: false,
         submenu: [],
-        permissions: ['SUPER-ADMIN'], 
-      }, 
+        permissions: ['SUPER-ADMIN'],
+      },
       {
         path: 'logattivita',
         title: 'Log',
@@ -272,8 +272,8 @@ export const ROUTES: RouteInfo[] = [
         class: '',
         extralink: false,
         submenu: [],
-        permissions: ['SUPER-ADMIN'], 
-      },  
+        permissions: ['SUPER-ADMIN'],
+      },
       {
         path: 'mappingruoli',
         title: 'Associazione ruoli',
@@ -282,7 +282,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['SUPER-ADMIN'],
-      }, 
+      },
     ]}, //chiude gestione utenti
     {
       path: '',
@@ -291,7 +291,7 @@ export const ROUTES: RouteInfo[] = [
       class: 'has-arrow',
       extralink: false,
       permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      submenu: [  
+      submenu: [
       {
         path: 'tipopagamenti',
         title: 'Tipo pagamenti',
@@ -300,7 +300,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      },          
+      },
       {
         path: 'classificazioni',
         title: 'Classificazione',
@@ -309,7 +309,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      }, 
+      },
       {
         path: 'mappinguffici',
         title: 'Mapping uffici',
@@ -318,7 +318,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      }, 
+      },
       {
         path: 'tasks',
         title: 'Attività',
@@ -327,7 +327,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      }, 
+      },
       {
         path: 'aziendeloc',
         title: 'Aziende',
@@ -337,7 +337,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
       },
-    ]}, //chiude configurazioni 
+    ]}, //chiude configurazioni
     {
     path: '',
     title: 'Ricerche Titulus',
@@ -345,7 +345,7 @@ export const ROUTES: RouteInfo[] = [
     class: 'has-arrow',
     extralink: false,
     permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-    submenu: [ 
+    submenu: [
       {
         path: 'personeinterne',
         title: 'Persone interne',
@@ -354,7 +354,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      }, 
+      },
       {
         path: 'struttureinterne',
         title: 'Strutture interne',
@@ -363,7 +363,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      }, 
+      },
       {
         path: 'struttureesterne',
         title: 'Strutture esterne',
@@ -372,7 +372,7 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      }, 
+      },
       {
         path: 'documenti',
         title: 'Documenti',
@@ -381,6 +381,6 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         permissions: ['ADMIN_AMM','ADMIN','SUPER-ADMIN'],
-      }, 
+      },
     ]},//chiude ricerche titulus
 ];

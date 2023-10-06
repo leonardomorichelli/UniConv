@@ -62,17 +62,17 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
               isLoading: false,
             },
           },
-          {            
+          {
             fieldGroupClassName: 'row',
             fieldGroup: [
                 {
                   key: 'unitaorganizzativa_uo',
                   type: 'select',
                   className: "col-md-6",
-                  templateOptions: {                    
+                  templateOptions: {
                     label: 'Unità organizzativa',
-                    required: true,                 
-                  },                
+                    required: true,
+                  },
                   hideExpression: (model, formState) => {
                     if (formState.model) {
                       return formState.model.convenzione_from && formState.model.convenzione_from == convenzioneFrom.dip;
@@ -84,30 +84,30 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                   },
                   hooks: {
                     onInit: (field: FormlyFieldConfig) => {
-                      field.form.get('user').valueChanges.pipe(                                                              
-                        startWith(field.model.user),                        
+                      field.form.get('user').valueChanges.pipe(
+                        startWith(field.model.user),
                         tap<any>(user => {
                           //console.log('onInit user', user);
                           //se è nuovo posso impostare l'uo di default
                           //field.formControl.setValue('');
                           if (user && user.id) {
-                            field.templateOptions.options = this.getPersonaleafferenzeorganizzative(user.id).pipe(              
+                            field.templateOptions.options = this.getPersonaleafferenzeorganizzative(user.id).pipe(
                               tap(items => {
                                 if (items.length == 1){
-                                  field.formControl.setValue(items[0].value); 
+                                  field.formControl.setValue(items[0].value);
                                 }
-                              }),                                                  
+                              }),
                             );
                           }
                         })).subscribe();
-                    }                  
+                    }
                   }
                 },
 
               ]
-          }          
+          }
         ]
-        
+
       },
       //intestazione
       {
@@ -169,10 +169,10 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                   required: true,
                   maxLength: 40,
                 },
-                expressionProperties: {          
+                expressionProperties: {
                   'templateOptions.required': (model: any, formState: any) => {
                     return model.convenzione_from !== convenzioneFrom.amm;
-                  }                  
+                  }
                 },
               },
             ]
@@ -222,10 +222,10 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                   ],
                   change: (field: FormlyFieldConfig) => {
                     if (field.formControl.value == 'TG') {
-                      field.form.get('tipopagamenti_codice').setValue(null);                      
-                      field.form.get('corrispettivo').setValue(null);                  
-                    } 
-                  },                  
+                      field.form.get('tipopagamenti_codice').setValue(null);
+                      field.form.get('corrispettivo').setValue(null);
+                    }
+                  },
                   label: 'Tipo convenzione',
                   required: true,
                 },
@@ -238,7 +238,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                   options: this.getPagamenti(),
                   valueProp: 'codice',
                   labelProp: 'descrizione',
-                  label: 'Modalità di pagamento',                  
+                  label: 'Modalità di pagamento',
                   required: true,
                   inizialization: () => {
                     return comp.tipopagamento
@@ -268,7 +268,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
               },
             ]
           },
-          //rinnovo_type        
+          //rinnovo_type
           {
             fieldGroupClassName: 'row',
             fieldGroup: [
@@ -330,7 +330,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
           },
         ]
       },
-      //bolli 
+      //bolli
       {
         wrappers: ['riquadro'],
         templateOptions: {
@@ -346,8 +346,8 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                 key: 'num_righe',
                 type: 'numfix',
                 className: 'col-md-4',
-                templateOptions: {    
-                  translate: true,              
+                templateOptions: {
+                  translate: true,
                   min: 1,
                   required: true,
                   label: 'num_righe_bolli_atti',
@@ -359,8 +359,8 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                 className: "col-md-4",
                 defaultValue: 'BOLLO_ATTI',
                 templateOptions: {
-                  translate: true,    
-                  options: GlobalConstants.tariffa_bolli['BOLLO_ATTI'],                
+                  translate: true,
+                  options: GlobalConstants.tariffa_bolli['BOLLO_ATTI'],
                   label: 'tariffa_bolli_atti',
                   required: true,
                 },
@@ -378,7 +378,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
               },
             ],
           },
-          //bollo allegato  
+          //bollo allegato
           {
             key: 'bollo_allegati',
             fieldGroupClassName: 'row',
@@ -394,7 +394,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                   label: 'num_righe_bolli_allegati',
                 },
                 expressionProperties: {
-                  'templateOptions.required': (model: any, formState: any, field: FormlyFieldConfig) => {                   
+                  'templateOptions.required': (model: any, formState: any, field: FormlyFieldConfig) => {
                     return model!=null && model.num_bolli != null && model.num_bolli > 0;
                   },
                 },
@@ -406,7 +406,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                 defaultValue: 'BOLLO_ALLEGATI',
                 templateOptions: {
                   translate: true,
-                  options: GlobalConstants.tariffa_bolli['BOLLO_ALLEGATI'],                                    
+                  options: GlobalConstants.tariffa_bolli['BOLLO_ALLEGATI'],
                   label: 'tariffa_bolli_allegati',
                 },
               },
@@ -420,10 +420,10 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                   min: 1,
                   label: 'num_bolli_allegati',
                 },
-                expressionProperties: {                  
+                expressionProperties: {
                   'templateOptions.required': (model: any, formState: any, field: FormlyFieldConfig) => {
-                     return model!=null && model.num_righe != null && model.num_righe > 0;         
-                  } 
+                     return model!=null && model.num_righe != null && model.num_righe > 0;
+                  }
                 },
               },
             ],
@@ -448,7 +448,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
               show: true
             },
             templateOptions: {
-              min: aziende_min, 
+              min: aziende_min,
             },
             validators: {
               atleastone: {
@@ -618,7 +618,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
         templateOptions: {
           label: 'Responsabile scientifico',
           required: true,
-        },       
+        },
       },
       {
         key: 'aziende.id',
@@ -708,8 +708,8 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
             { value: 'proposta', label: 'Proposta' },
             { value: 'approvato', label: 'Approvata' },
             { value: 'inapprovazione', label: 'In approvazione' },
-            { value: 'da_firmare_direttore', label: 'Stipula controparte' }, //Da controfirmare UniUrb
-            { value: 'da_firmare_controparte2', label: 'Stipula UniUrb' },  //Da controfirmare controparte
+            { value: 'da_firmare_direttore', label: 'Stipula controparte' }, //Da controfirmare UniCam
+            { value: 'da_firmare_controparte2', label: 'Stipula UniCam' },  //Da controfirmare controparte
             { value: 'firmato', label: 'Firmata' },
             { value: 'repertoriato', label: 'Repertoriata' },
           ],
@@ -1066,9 +1066,9 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
       )
     );
   }
-  
+
   @Cacheable()
-  getPersonaleafferenzeorganizzative(id): Observable<any> {    
+  getPersonaleafferenzeorganizzative(id): Observable<any> {
     return this.http.get<any>(this._baseURL + '/users/personaleafferenzeorganizzative/' + id, httpOptions).pipe(
       map(x => {
         return x == null ? [] : x.map(el => { return { value: el.cd_csa, label: el.nome_uo } })

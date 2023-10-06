@@ -30,7 +30,7 @@ import { RichiestaEmissioneComponent } from '../../pages/richiestaemissione.comp
 export class TaskComponent extends BaseEntityComponent {
 
   //associazione tra task e pagine esecuzione attività
-  public static pathEsecuzioneTask(workflow_transition, workflow_place){                                        
+  public static pathEsecuzioneTask(workflow_transition, workflow_place){
     if (workflow_transition == ConvvalidationComponent.WORKFLOW_ACTION){
         return ConvvalidationComponent.ABSULTE_PATH;
     }
@@ -65,7 +65,7 @@ export class TaskComponent extends BaseEntityComponent {
 
     if (workflow_transition == PagamentoComponent.WORKFLOW_ACTION){
         return PagamentoComponent.ABSULTE_PATH;
-    }          
+    }
 
     return null;
   }
@@ -76,17 +76,17 @@ export class TaskComponent extends BaseEntityComponent {
     'approvato': 'Sottoscrizione',
     'store_validazione': 'Approvazione',
     'repertorio': 'Apposizione bollo e repertoriazione',
-    'firma_da_direttore2': 'Firma da UniUrb',
+    'firma_da_direttore2': 'Firma da UniCam',
     'firma_da_controparte2': 'Firma della controparte',
 
     'emissione': 'Richiesta di emissione',
     'registrazionepagamento': 'In pagamento',
 
   }
-  
+
 
   subject = new Subject<any>();
- 
+
   isLoading = true;
   fields: FormlyFieldConfig[] = [
     {
@@ -96,30 +96,30 @@ export class TaskComponent extends BaseEntityComponent {
     {
       className: 'section-label',
       template: '<div class="mb-2">Finestra per la gestione di una attivià non per la sua esecuzione</div>',
-    }, 
+    },
     {
-      fieldGroupClassName: 'display-flex',      
+      fieldGroupClassName: 'display-flex',
       fieldGroup: [
         {
-          type: 'button',                  
-          templateOptions: {        
-            text: 'Esegui attività',            
-            btnType: 'btn btn-primary btn-sm border-0 rounded-0',       
+          type: 'button',
+          templateOptions: {
+            text: 'Esegui attività',
+            btnType: 'btn btn-primary btn-sm border-0 rounded-0',
             title: 'Esegui attività',
             onClick: ($event, model) => this.open(),
           },
           hideExpression: (model: any, formState: any) => {
             return !model.id && model.state !== 'aperto'
-          },   
+          },
           expressionProperties: {
-            'templateOptions.disabled': (model: any, formState: any) => {                        
+            'templateOptions.disabled': (model: any, formState: any) => {
               return model.state !== 'aperto';
             },
-          }                                  
+          }
         },
       ]
     },
-    
+
     {
       fieldGroupClassName: 'row',
       fieldGroup:
@@ -134,9 +134,9 @@ export class TaskComponent extends BaseEntityComponent {
             },
             hideExpression: (model: any, formState: any) => {
               return !model.id;
-           },   
+           },
           },
-       
+
           {
             className: 'col-md-5',
             type: 'select',
@@ -145,25 +145,25 @@ export class TaskComponent extends BaseEntityComponent {
             templateOptions: {
               label: 'Prossima azione',
               options: this.subject.asObservable(),
-            }, 
+            },
             hideExpression: (model: any, formState: any) => {
               return !model.id;
-            },                         
+            },
           },
-          {            
+          {
             key: 'created_at',
             className: 'col-md-5',
-            type: 'input',                 
+            type: 'input',
             templateOptions:{
               label: 'Data di creazione',
               disabled: true
             },
             hideExpression: (model: any, formState: any) => {
               return !model.id;
-            },         
-          },     
+            },
+          },
         ],
-    }, 
+    },
     {
       type: 'input',
       key: 'subject',
@@ -171,41 +171,41 @@ export class TaskComponent extends BaseEntityComponent {
         label: 'Oggetto',
         required: true,
       },
-    },     
-    {      
+    },
+    {
       type: 'select',
-      key: 'model_type',    
-      defaultValue:  'App\\Convenzione', 
+      key: 'model_type',
+      defaultValue:  'App\\Convenzione',
       templateOptions: {
-        label: 'Tipo di entità',              
+        label: 'Tipo di entità',
         options: [
           { codice: 'App\\Convenzione', descrizione: 'Convenzione' },
           { codice: 'App\\Scadenza', descrizione: 'Scandenza' },
-        ],        
+        ],
         valueProp: 'codice',
         labelProp: 'descrizione',
         description: 'Tipo di entità a cui associare una attività'
-      },      
+      },
       expressionProperties: {
-        'templateOptions.disabled': (model: any, formState: any) => {                        
+        'templateOptions.disabled': (model: any, formState: any) => {
             return model.id
         },
-      }, 
+      },
       hooks: {
         onInit: (field) => {
           field.formControl.valueChanges.pipe(
             takeUntil(this.onDestroy$),
             distinct(),
-            tap(x => {             
+            tap(x => {
             })
           ).subscribe();
         }
-      }               
+      }
     },
     //se il task è associato ad una convenzione
     {
       key: 'model',
-      type: 'externalobject',     
+      type: 'externalobject',
       templateOptions: {
         disabled: true,
         label: 'Convenzione',
@@ -214,17 +214,17 @@ export class TaskComponent extends BaseEntityComponent {
         entityLabel: 'Convenzione',
         entityPath: 'home/convenzioni',
         codeProp: 'id',
-        descriptionProp: 'descrizione_titolo',       
-        isLoading: false,        
+        descriptionProp: 'descrizione_titolo',
+        isLoading: false,
       },
       hideExpression: (model: any, formState: any) => {
         return !formState.model.id || (formState.model.model_type != 'App\\Convenzione' && formState.model.id);
-      },  
+      },
 
     },
     {
       key: 'model',
-      type: 'externalobject',     
+      type: 'externalobject',
       templateOptions: {
         disabled: true,
         label: 'Scadenza',
@@ -233,18 +233,18 @@ export class TaskComponent extends BaseEntityComponent {
         entityLabel: 'Scadenza',
         entityPath: 'home/scadenze',
         codeProp: 'id',
-        descriptionProp: 'dovuto_tranche',       
-        isLoading: false,        
+        descriptionProp: 'dovuto_tranche',
+        isLoading: false,
       },
       hideExpression: (model: any, formState: any) => {
         return !formState.model.id || (formState.model.model_type != 'App\\Scadenza' && formState.model.id);
-      },  
+      },
 
     },
     {
       key: 'modelconvenzione',
-      type: 'externalobject',         
-      templateOptions: {        
+      type: 'externalobject',
+      templateOptions: {
         label: 'Convenzione',
         type: 'string',
         entityName: 'application',
@@ -254,22 +254,22 @@ export class TaskComponent extends BaseEntityComponent {
         descriptionProp: 'descrizione_titolo',
         descriptionFunc: (data) => {
           if (data && data.descrizione_titolo){
-            this.updateAzioni(data.id); 
+            this.updateAzioni(data.id);
             return data.descrizione_titolo;
           }
           return '';
         },
-        isLoading: false,        
+        isLoading: false,
       },
       hideExpression: (model: any, formState: any) => {
         return formState.model.id  || (formState.model.model_type != 'App\\Convenzione' && !formState.model.id);
-      },        
+      },
     },
     //se il task è associato ad una scadenza
     {
       key: 'modelscadenza',
-      type: 'externalobject',      
-      templateOptions: {        
+      type: 'externalobject',
+      templateOptions: {
         label: 'Scadenza',
         type: 'string',
         entityName: 'scadenza',
@@ -279,30 +279,30 @@ export class TaskComponent extends BaseEntityComponent {
         descriptionProp: 'dovuto_tranche',
         descriptionFunc: (data) => {
           if (data && data.dovuto_tranche){
-            this.updateAzioni(data.id); 
+            this.updateAzioni(data.id);
             return data.dovuto_tranche;
           }
           return '';
         },
-        isLoading: false,        
+        isLoading: false,
       },
       hideExpression: (model: any, formState: any) => {
         return formState.model.id || (formState.model.model_type != 'App\\Scadenza' && !formState.model.id);
-      },                
+      },
     },
 
     //esendo polimorfica le prossime azioni da compiere possono essere verso convenzione o scadenza
-    {      
+    {
       type: 'select',
       key: 'workflow_transition',
       templateOptions: {
-        label: 'Azione da compiere',      
+        label: 'Azione da compiere',
         required: true,
-        options: [],        
+        options: [],
       },
       hideExpression: (model: any, formState: any) => {
         return model.id;
-      },                         
+      },
     },
     {
       key: 'unitaorganizzativa_uo',
@@ -316,12 +316,12 @@ export class TaskComponent extends BaseEntityComponent {
         // inizialization: () => {
         //   return this.model['unitaOrganizzativa'];
         // },
-        // populateAsync: () => {          
+        // populateAsync: () => {
         //   return this.service.getOffices('tutti');
         // }
-      },          
+      },
       expressionProperties: {
-        //modificarlo in base al ruolo utente ...                 
+        //modificarlo in base al ruolo utente ...
         'templateOptions.disabled': (model: any, formState: any) => { return model.id; },
       },
     },
@@ -389,7 +389,7 @@ export class TaskComponent extends BaseEntityComponent {
             key: 'v_ie_ru_personale_id_ab',
             type: 'select',
             className: "col-md-8",
-            templateOptions: {              
+            templateOptions: {
               label: 'Operatore attività',
               valueProp: 'id',
               labelProp: 'descr',
@@ -397,17 +397,17 @@ export class TaskComponent extends BaseEntityComponent {
             },
             hooks: {
               onInit: (field) => {
-               
+
                 field.parent.parent.form.get('unitaorganizzativa_uo').valueChanges.pipe(
                   takeUntil(this.onDestroy$),
                   startWith(field.parent.parent.form.get('unitaorganizzativa_uo').value),
                   distinct(),
                   filter(ev => ev !== null),
-                  tap(uo => {                    
+                  tap(uo => {
                     field.templateOptions.options = this.service.getPersonaleUfficio(uo).pipe();
-                  }),                  
+                  }),
                 ).subscribe();
-              
+
               },
             },
           },
@@ -431,8 +431,8 @@ export class TaskComponent extends BaseEntityComponent {
     super(route, router, location)
     this.activeNew = true;
     this.researchPath = 'home/tasks'
-    this.newPath = 'home/tasks/new'    
-    
+    this.newPath = 'home/tasks/new'
+
     this.model.model = { id: null, desctizione_titolo: null };
     this.model.modelconvenzione = { id: null, desctizione_titolo: null };
     this.model.modelscadenza = { id: null, dovuto_tranche: null };
@@ -444,7 +444,7 @@ export class TaskComponent extends BaseEntityComponent {
   }
 
 
-  //richiamato nel caso di nuovo 
+  //richiamato nel caso di nuovo
   protected additionalFormInitialize() {
     this.service.create().subscribe((data) => {
       this.isLoading = false;
@@ -453,29 +453,29 @@ export class TaskComponent extends BaseEntityComponent {
       this.updateTransitions();
     });
   }
-  
+
   protected updateTransitions(){
-    if (this.model['transitions']) {       
+    if (this.model['transitions']) {
       this.model['transition']='self_transition';
       this.subject.next([]);
-      this.subject.next(this.model['transitions']);        
-    }   
+      this.subject.next(this.model['transitions']);
+    }
   }
 
   protected preOnSubmit(){
     if (this.model.id == undefined){
       if (this.model.model_type == 'App\\Convenzione' ){
-        this.model.model_id = this.model.modelconvenzione.id 
+        this.model.model_id = this.model.modelconvenzione.id
       }else{
-        this.model.model_id = this.model.modelscadenza.id 
+        this.model.model_id = this.model.modelscadenza.id
       }
-      
-    }        
-        
+
+    }
+
   }
   //richiamato nella init dopo aver caricato il modello
   protected postGetById(){
-    this.updateTransitions();  
+    this.updateTransitions();
   }
 
   //richiamato nella submit dopo l'avvenuto salvataggio
@@ -487,12 +487,12 @@ export class TaskComponent extends BaseEntityComponent {
     let f = this.fields.find(x=> x.key == 'workflow_transition');
     f.formControl.setValue(null);
     f.templateOptions.options = this.service.getNextActions(id, this.model.model_type).pipe(
-      map(x => this.assignName(x)),      
+      map(x => this.assignName(x)),
       tap(x => this.checkMessage(x,f))
-    ); 
-        
+    );
+
   }
-  
+
   private checkMessage(result, field){
     if (result && result.length >0){
       field.templateOptions.description = "";
@@ -502,10 +502,10 @@ export class TaskComponent extends BaseEntityComponent {
   }
 
   private assignName(list){
-    let result = list.filter(y => y.value != 'self_transition').map(element => {      
+    let result = list.filter(y => y.value != 'self_transition').map(element => {
       element.label = element.label ? element.label : this.actions[element.value];
       return element;
-    });       
+    });
 
     return result;
   }

@@ -14,15 +14,15 @@ import { ConfirmationDialogService } from 'src/app/shared/confirmation-dialog/co
   <div class="container-fluid">
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-  <div class="btn-group btn-group">        
-    <button class="btn btn-outline-primary rounded-lg"  [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-      <span class="oi oi-arrow-top"></span>  
-      <span class="ml-2">{{labelButton}}</span>              
-    </button> 
-    <button class="btn btn-outline-primary rounded-lg ml-1"  (click)="onValidate()" >              
-    <span class="oi oi-flash"></span>  
-    <span class="ml-2">Valida</span>              
-  </button> 
+  <div class="btn-group btn-group">
+    <button class="btn btn-outline-primary rounded-lg"  [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+      <span class="oi oi-arrow-top"></span>
+      <span class="ml-2">{{labelButton}}</span>
+    </button>
+    <button class="btn btn-outline-primary rounded-lg ml-1"  (click)="onValidate()" >
+    <span class="oi oi-flash"></span>
+    <span class="ml-2">Valida</span>
+  </button>
   </div>
   </div>
   <h4 *ngIf="title">{{title}}</h4>
@@ -38,9 +38,9 @@ import { ConfirmationDialogService } from 'src/app/shared/confirmation-dialog/co
   `,
   styles: []
 })
-export class SottoscrizioneComponent extends BaseEntityComponent {  
+export class SottoscrizioneComponent extends BaseEntityComponent {
 
-  //azioni possibili 
+  //azioni possibili
 
   //stato di partenza 'approvato'
   //firma_da_controparte1 --> stipula azienda o ente --> ricevuta lettera con convenzione firmata dalla dall'azienda o ente
@@ -72,7 +72,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
         descriptionProp: 'descrizione_titolo',
         descriptionFunc: (data) => {
           if (data && data.descrizione_titolo){
-            this.updateEmails(data); 
+            this.updateEmails(data);
             return data.descrizione_titolo;
           }
           return '';
@@ -98,7 +98,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
         labelProp: 'descrizione',
         label: 'Formato di stipula',
         required: true,
-      }      
+      }
     },
     //stipula_type
     {
@@ -107,7 +107,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
       defaultValue: 'uniurb',
       templateOptions: {
         options: [
-          { codice: 'uniurb', descrizione: 'Stipula UniUrb' },
+          { codice: 'uniurb', descrizione: 'Stipula UniCam' },
           { codice: 'controparte', descrizione: 'Stipula Azienda o Ente' },
         ],
         valueProp: 'codice',
@@ -137,7 +137,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
               className: "col-md-5",
               defaultValue: 'LTU_FIRM_UNIURB',
               templateOptions: {
-                //todo chiedere lato server 
+                //todo chiedere lato server
                 options: [],
                 valueProp: 'codice',
                 labelProp: 'descrizione',
@@ -148,8 +148,8 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 onInit: (field) => {
                   field.form.parent.parent.get('stipula_format').valueChanges.pipe(
                     takeUntil(this.onDestroy$),
-                    tap(x => { 
-                      this.checkLabelButton(); 
+                    tap(x => {
+                      this.checkLabelButton();
                     })
                   ).subscribe();
 
@@ -160,7 +160,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                     tap(type => {
                       this.checkLabelButton();
                       if (type == 'uniurb') {
-                        field.templateOptions.options = [{ stipula_type: 'uniurb', codice: 'LTU_FIRM_UNIURB', descrizione: 'Lettera di trasmissione' }];                        
+                        field.templateOptions.options = [{ stipula_type: 'uniurb', codice: 'LTU_FIRM_UNIURB', descrizione: 'Lettera di trasmissione' }];
                       } else {
                         field.templateOptions.options = [
                           { stipula_type: 'controparte', codice: 'LTE_FIRM_CONTR', descrizione: "Lettera ricevuta dall'Azienda o Ente"},
@@ -183,28 +183,28 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-                required: true,                
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
-              hideExpression:(model: any, formState: any) => {               
-                  return (formState.model.stipula_format == 'cartaceo' && 
+              hideExpression:(model: any, formState: any) => {
+                  return (formState.model.stipula_format == 'cartaceo' &&
                           formState.model.stipula_type == 'controparte' &&
                           formState.model.an_dg_uniurb_an_controparte.attachment1.attachmenttype_codice == 'NESSUN_DOC');
-                },                            
+                },
             },
             //sottoscrizione
             {
               key: 'data_sottoscrizione',
               type: 'datepicker',
-              className: "col-md-5",              
+              className: "col-md-5",
               templateOptions: {
                 label: 'Data',
                 required: true,
-                //required: true,                               
+                //required: true,
               },
-              hideExpression:(model: any, formState: any) => {               
+              hideExpression:(model: any, formState: any) => {
                 return (formState.model.an_dg_uniurb_an_controparte.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
-              },                            
+              },
             },
           ],
         },
@@ -219,7 +219,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
               className: "col-md-5",
               defaultValue: 'CONV_FIRM_UNIURB',
               templateOptions: {
-                //todo chiedere lato server 
+                //todo chiedere lato server
                 options: [],
                 valueProp: 'codice',
                 labelProp: 'descrizione',
@@ -234,7 +234,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                     takeUntil(this.onDestroy$),
                     distinctUntilChanged(),
                     startWith(field.form.parent.parent.get('stipula_type').value),
-                    tap(type => {                      
+                    tap(type => {
                       //field.formControl.setValue(null);
                       this.checkLabelButton();
                       if (type == 'uniurb') {
@@ -256,7 +256,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 label: 'Scegli il documento',
                 type: 'input',
                 placeholder: 'Scegli file documento',
-                accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,            
+                accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
               expressionProperties: {
@@ -356,7 +356,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
         return !(formstate.model.stipula_format == 'digitale' && formstate.model.stipula_type == 'controparte');
       },
       key: 'digitale_controparte',
-      fieldGroup: [  
+      fieldGroup: [
         //allegato 1
         {
           key: 'attachment1',
@@ -371,7 +371,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   defaultValue: 'LTE_FIRM_CONTR_PROT',
                   templateOptions: {
-                    //todo chiedere lato server 
+                    //todo chiedere lato server
                     options: [
                       { stipula_type: 'controparte', codice: 'LTE_FIRM_CONTR_PROT', descrizione: 'Lettera ricevuta via PEC già protocollata' },
                       { stipula_type: 'controparte', codice: 'LTE_FIRM_CONTR', descrizione: "Lettera ricevuta dall'Azienda o Ente" },
@@ -407,36 +407,36 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                   className: "col-md-7",
                   templateOptions: {
                     label: 'Numero di protocollo',
-                    required: true,      
+                    required: true,
                     type: 'string',
                     subpattern: /^[0-9]+-[a-zA-Z]+-\d{7}$/,
                     entityName: 'documento',
                     entityLabel: 'Documenti',
                     codeProp: 'num_prot',
                     descriptionProp: 'oggetto',
-                    isLoading: false,  
-                    rules: [{value: "arrivo", field: "doc_tipo", operator: "="}],                       
-                  },      
+                    isLoading: false,
+                    rules: [{value: "arrivo", field: "doc_tipo", operator: "="}],
+                  },
                   hideExpression: (model, formState) => {
                     return (formState.model.digitale_controparte.attachment1.attachmenttype_codice !== 'LTE_FIRM_CONTR_PROT');
                   },
-                },   
-                //data sottoscrizione                             
+                },
+                //data sottoscrizione
                 {
                   key: 'data_sottoscrizione',
                   type: 'datepicker',
-                  className: "col-md-5",              
+                  className: "col-md-5",
                   templateOptions: {
                     label: 'Data',
                     required: true,
-                    //required: true,                               
+                    //required: true,
                   },
-                  hideExpression:(model: any, formState: any) => {               
+                  hideExpression:(model: any, formState: any) => {
                     return (formState.model.digitale_controparte.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
-                  },                            
+                  },
                 },
               ],
-            },      
+            },
           ],
         },
         //allegato 2
@@ -450,7 +450,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
               className: "col-md-5",
               defaultValue: 'CONV_FIRM_CONTR',
               templateOptions: {
-                //todo chiedere lato server 
+                //todo chiedere lato server
                 options: [{ stipula_type: 'ditta', codice: 'CONV_FIRM_CONTR', descrizione: 'Convenzione firmata dalla controparte' }],
                 valueProp: 'codice',
                 labelProp: 'descrizione',
@@ -465,7 +465,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 label: 'Scegli il documento',
                 type: 'input',
                 placeholder: 'Scegli file documento',
-                accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,            
+                accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
 
@@ -488,13 +488,13 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
         //email
         {
           key: 'email',
-          type: 'input',          
+          type: 'input',
           templateOptions: {
             label: 'Email Azienda o Ente',
             readonly: true,
-            description: 'Contatti delle aziende o enti associate alla convenzione',  
-            //required: true,                               
-          },          
+            description: 'Contatti delle aziende o enti associate alla convenzione',
+            //required: true,
+          },
         },
       ],
     },
@@ -570,8 +570,8 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
     reader.readAsArrayBuffer(currentSelFile);
   }
 
-  constructor(protected service: ApplicationService, protected route: ActivatedRoute, protected router: Router, 
-      private injector: Injector, 
+  constructor(protected service: ApplicationService, protected route: ActivatedRoute, protected router: Router,
+      private injector: Injector,
       protected location: Location,
       protected confirmationDialogService: ConfirmationDialogService) {
 
@@ -584,14 +584,14 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
         const emails = (convenzione.aziende.map(it => it.pec_email)).join(', ');
         this.model.email = emails;
       }
-      else 
+      else
         this.model.email = 'email non associata';
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.model.convenzione_id = params['id'];      
+        this.model.convenzione_id = params['id'];
         this.options.formState.disabled_covenzione_id = true;
       };
     });
@@ -611,24 +611,24 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
   onSubmit() {
     if (this.form.valid) {
       this.isLoading = true;
-      
+
       var tosubmit = this.mergeDeep(this.model,this.form.value);
 
       this.service.sottoscrizioneStep(tosubmit, true).subscribe(
         result => {
 
-          
+
           this.confirmationDialogService.confirm("Finestra messaggi", result.message, "Chiudi", null, 'lg').then(
             () => this.router.navigate(['home/dashboard/dashboard1']),
             () => this.router.navigate(['home/dashboard/dashboard1']))
-          .catch(() => {           
+          .catch(() => {
           });
 
           this.isLoading = false;
         },
         error => {
           this.isLoading = false;
-          //this.service.messageService.error(error);          
+          //this.service.messageService.error(error);
         });
     }
   }
@@ -641,7 +641,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
     isObject(item) {
       return (item && typeof item === 'object' && !Array.isArray(item) && item !== null);
     }
-    
+
     /**
      * Deep merge two objects.
      * @param target

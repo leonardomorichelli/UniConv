@@ -1,60 +1,60 @@
 
 
-<app-fase-wrapper [options]="{title: 'Sottoscrizione', type: this.executedtype()}">  
-    <div *ngIf="conv.stipula_type=='uniurb'">       
+<app-fase-wrapper [options]="{title: 'Sottoscrizione', type: this.executedtype()}">
+    <div *ngIf="conv.stipula_type=='uniurb'">
         <div class="table-responsive-md">
             <table class="table table-sm table-hover">
               <tbody>
-                  <tr class="d-flex">                                           
-                      <td class="col-md-3"> Stipula UniUrb 
-                                 
+                  <tr class="d-flex">
+                      <td class="col-md-3"> Stipula UniCam
+
                       </td>
                       <td class="col-md-9">
-                        <span [ngSwitch]="conv.current_place">                        
-                            <span *ngSwitchCase="'da_firmare_controparte2'" class="label label-rounded label-warning ml-1">In attesa di firma della controparte</span>                                                                          
-                        </span>  
+                        <span [ngSwitch]="conv.current_place">
+                            <span *ngSwitchCase="'da_firmare_controparte2'" class="label label-rounded label-warning ml-1">In attesa di firma della controparte</span>
+                        </span>
                       </td>
-                  </tr>                    
-                  <tr class="d-flex">                                           
-                      <td class="col-md-3"> Spedita alla controparte </td>
-                      <td class="col-md-9"><app-rangedetails [labeln]="'prot.'" [numero]="sottr.speditaDitta?.numero" [data]="sottr.speditaDitta?.data" [id]="sottr.speditaDitta?.id"></app-rangedetails></td>                       
                   </tr>
-                  <tr class="d-flex" *ngIf="sottr.restituita">                                           
-                      <td class="col-md-3"> Restituita  </td>                      
+                  <tr class="d-flex">
+                      <td class="col-md-3"> Spedita alla controparte </td>
+                      <td class="col-md-9"><app-rangedetails [labeln]="'prot.'" [numero]="sottr.speditaDitta?.numero" [data]="sottr.speditaDitta?.data" [id]="sottr.speditaDitta?.id"></app-rangedetails></td>
+                  </tr>
+                  <tr class="d-flex" *ngIf="sottr.restituita">
+                      <td class="col-md-3"> Restituita  </td>
                       <td class="col-md-9" *ngIf="sottr.restituita.numero"> prot. {{sottr.restituita.numero}} del {{sottr.restituita.data}}</td>
-                      <td class="col-md-9" *ngIf="!sottr.restituita.numero"> il {{sottr.restituita.data}}</td>                      
-                  </tr>    
+                      <td class="col-md-9" *ngIf="!sottr.restituita.numero"> il {{sottr.restituita.data}}</td>
+                  </tr>
               </tbody>
           </table>
       </div>
     </div>
-    
-    <div *ngIf="conv.stipula_type=='controparte'">       
+
+    <div *ngIf="conv.stipula_type=='controparte'">
         <div class="table-responsive-md">
             <table class="table table-sm table-hover">
                 <tbody>
-                    <tr class="d-flex">                                           
-                        <td class="col-md-3"> Stipula controparte 
-                                  
+                    <tr class="d-flex">
+                        <td class="col-md-3"> Stipula controparte
+
                         </td>
                         <td class="col-md-9">
-                            <span [ngSwitch]="conv.current_place">                        
-                                <span *ngSwitchCase="'da_firmare_direttore'" class="label label-rounded label-warning ml-1">In attesa di firma UniUrb</span>                                                                          
-                            </span>  
-                        </td>                                                
-                    </tr>         
-                    <tr class="d-flex">                                           
-                        <td class="col-md-3"> Arrivata  </td>        
-                        <td class="col-md-9"><app-rangedetails [labeln]="'prot.'" [numero]="sottr.arrivata?.numero" [data]="sottr.arrivata?.data" [id]="sottr.arrivata?.id"></app-rangedetails></td>                
+                            <span [ngSwitch]="conv.current_place">
+                                <span *ngSwitchCase="'da_firmare_direttore'" class="label label-rounded label-warning ml-1">In attesa di firma </span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <td class="col-md-3"> Arrivata  </td>
+                        <td class="col-md-9"><app-rangedetails [labeln]="'prot.'" [numero]="sottr.arrivata?.numero" [data]="sottr.arrivata?.data" [id]="sottr.arrivata?.id"></app-rangedetails></td>
                         <!-- <td class="col-md-3">prot. {{sottr.arrivata.numero}} del {{sottr.arrivata.data}}</td> -->
                     </tr>
-                    <tr class="d-flex" *ngIf="sottr.rispedita">                                           
+                    <tr class="d-flex" *ngIf="sottr.rispedita">
                         <td class="col-md-3"> Rispedita  </td>
                         <td class="col-md-9"><app-rangedetails [labeln]="'prot.'" [numero]="sottr.rispedita?.numero" [data]="sottr.rispedita?.data" [id]="sottr.rispedita?.id"></app-rangedetails></td>
                         <!--prot. {{sottr.rispedita.numero}} del {{sottr.rispedita.data}}-->
-                    </tr>          
+                    </tr>
                 </tbody>
             </table>
         </div>
       </div>
-</app-fase-wrapper>   
+</app-fase-wrapper>

@@ -18,6 +18,17 @@ use Illuminate\Http\Request;
 //aggiornare la documentazione
 //php artisan api:update
 
+Route::get('/info.json', function () {
+    $data = array(
+        "app_name" => "Uniconv",
+        "app_version" => "1.0.0"
+    );
+
+    header("Content-Type: application/json");
+    echo json_encode($data);
+    exit();
+});
+
 Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check'],  'namespace'=>'Api\V1'], function () {
 
     Route::get('mappingruoli', 'MappingRuoloController@index');

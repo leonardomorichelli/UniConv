@@ -48,7 +48,7 @@ return [
     ],
 
     'stipula_type' => [
-        'uniurb' => 'Stipula UniUrb',
+        'uniurb' => 'Stipula UniCam',
         'controparte' => 'Stipula Azienda o Ente',
     ],
 
@@ -59,7 +59,7 @@ return [
     "approvato"=>"Approvata", 
     "inapprovazione"=>"In approvazione",                        
     "da_firmare_direttore"=>"Stipula controparte", 
-    "da_firmare_controparte2"=>"Stipula UniUrb",  
+    "da_firmare_controparte2"=>"Stipula UniCam",  
     "firmato"=>"Firmata",  
     "repertoriato"=>"Repertoriata",   
     "start"=>"Inizio",

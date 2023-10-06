@@ -23,10 +23,10 @@ class UpdateLabel extends Migration
             $attachType->save();
         }
 
-        $mapping = MappingUfficio::where('strutturainterna_cod_uff','SI000087')->first();
-        $mapping->descrizione_uo = 'Dipartimento di Scienze della Comunicazione, Studi Umanistici e Internazionali (DISCUI)';
-        $mapping->unitaorganizzativa_uo = '005579';
-        $mapping->save();
+        //$mapping = MappingUfficio::where('strutturainterna_cod_uff','SI000087')->first();
+        //$mapping->descrizione_uo = 'Dipartimento di Scienze della Comunicazione, Studi Umanistici e Internazionali (DISCUI)';
+        //$mapping->unitaorganizzativa_uo = '005579';
+        //$mapping->save();
 
     }
 
@@ -42,10 +42,10 @@ class UpdateLabel extends Migration
         $attachType->descrizione_compl = 'Disposizione del direttore di dipartimento';
         $attachType->save();
 
-        $mapping = MappingUfficio::where('strutturainterna_cod_uff','SI000087')->first();
-        $mapping->descrizione_uo = 'Dipartimento di Scienze della Comunicazione, Studi Umanistici e Internazionali: Storia, Culture, Lingue, Letterature, Arti, Media (DISCUI)';
-        $mapping->unitaorganizzativa_uo = '004940';
-        $mapping->save();
+        //$mapping = MappingUfficio::where('strutturainterna_cod_uff','SI000087')->first();
+        //$mapping->descrizione_uo = 'Dipartimento di Scienze della Comunicazione, Studi Umanistici e Internazionali: Storia, Culture, Lingue, Letterature, Arti, Media (DISCUI)';
+        //$mapping->unitaorganizzativa_uo = '004940';
+        //$mapping->save();
 
     }
 }

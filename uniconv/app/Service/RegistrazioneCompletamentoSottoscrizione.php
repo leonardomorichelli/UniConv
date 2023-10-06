@@ -98,8 +98,8 @@ class RegistrazioneCompletamentoSottoscrizione
 
         }               
 
-        //caso stipula controparte completamento UniUrb cartacea 
-        //caso stipula controparte completamento UniUrb digitale
+        //caso stipula controparte completamento cartacea 
+        //caso stipula controparte completamento digitale
         if ($conv->stipula_type == Convenzione::STIPULA_CONTROPARTE){           
             $objdata = (object) $data;
             //invio o consegno alla ditta la convenzione firmata da entrambe le parti

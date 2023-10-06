@@ -15,7 +15,7 @@ use Aacotroneo\Saml2\Http\Controllers\Saml2Controller;
 
 class Saml2AuthController extends Saml2Controller
 {
-  
+
    
     /**
      * Process an incoming saml2 assertion request.

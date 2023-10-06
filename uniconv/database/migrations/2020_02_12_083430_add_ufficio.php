@@ -13,12 +13,12 @@ class AddUfficio extends Migration
      */
     public function up()
     {
-        DB::table('mappinguffici')->insert([                          
-            'unitaorganizzativa_uo' => '005340',
-            'descrizione_uo' => 'Ufficio Contratti e Convenzioni - Settore Acquisti - Area Econ. Finanziaria',                     
-            'strutturainterna_cod_uff' => 'SI000093',
-            'descrizione_uff' => 'Ufficio Contratti e Convenzioni',                     
-        ]);
+        //DB::table('mappinguffici')->insert([                          
+        //    'unitaorganizzativa_uo' => '005340',
+        //    'descrizione_uo' => 'Ufficio Contratti e Convenzioni - Settore Acquisti - Area Econ. Finanziaria',                     
+        //    'strutturainterna_cod_uff' => 'SI000093',
+        //    'descrizione_uff' => 'Ufficio Contratti e Convenzioni',                     
+        //]);
     }
 
     /**

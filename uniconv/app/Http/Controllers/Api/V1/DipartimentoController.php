@@ -24,11 +24,9 @@ class DipartimentoController extends Controller
      */
     public function index()
     {                
-        return Cache::rememberForever($this->cacheKey() . ':dipartimenti', function () {
-            return Dipartimento::Dipartimenti()->get();
-        });
-
-       
+        //return Cache::rememberForever($this->cacheKey() . ':dipartimenti', function () {
+            return Dipartimento::Dipartimenti()->whereNotNull('PART_IVA')->orderBy('NOME_DIP')->get();
+        //});       
     }
 
     /**

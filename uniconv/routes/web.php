@@ -11,26 +11,30 @@
 |
 */
 
-    Route::get('/loginSaml', function(){
-    
-        if(\Auth::guest())
-        {
-            return \Saml2::login("/");
-        }
-    })->name('loginSaml');
+/*
+Route::any('/info', function () {
+    return phpinfo();
+})->name('info');
+*/
 
+Route::get('/loginSaml', function () {
+    if(\Auth::guest())
+    {
+        return \Saml2::login("/");
+    }
+})->name('loginSaml');
 
-    Route::group([
-        'prefix' => config('saml2_settings.routesPrefix'),
-        'middleware' => config('saml2_settings.routesMiddleware'),
-    ], function () {
-        Route::get('metadata', function(Request $request){ 
-            $url = URL::route('saml2_metadata', env('IDP_ENV_ID', 'local'));
-            return redirect($url);
-        });
-     
-        Route::post('/acs', array(
+Route::group([
+    'prefix' => config('saml2_settings.routesPrefix'),
+    'middleware' => config('saml2_settings.routesMiddleware'),
+], function () {
+    Route::get('metadata', function(Request $request){
+        $url = URL::route('saml2_metadata', env('IDP_ENV_ID', 'local'));
+        return redirect($url);
+    });
+
+    Route::post('/acs', array(
             'as' => 'saml_acs',
             'uses' => 'Saml2AuthController@acs',
         ));
-    });
+});

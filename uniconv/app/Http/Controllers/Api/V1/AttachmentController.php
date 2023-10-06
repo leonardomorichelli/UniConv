@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Attachment;
+use App\Dipartimento;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\Convenzione;
@@ -39,7 +40,7 @@ class AttachmentController extends Controller
   
     public function query(Request $request){       
 
-        $queryBuilder = new QueryBuilder(new Dipartimeno, $request);
+        $queryBuilder = new QueryBuilder(new Dipartimento, $request);
                 
         return $queryBuilder->build()->paginate();       
 

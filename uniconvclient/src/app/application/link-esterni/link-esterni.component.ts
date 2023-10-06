@@ -8,7 +8,7 @@ import { PDFAnnotationData, PDFDocumentProxy } from 'pdfjs-dist';
 
 @Component({
   selector: 'app-link-esterni',
-  templateUrl: './link-esterni.component.html',  
+  templateUrl: './link-esterni.component.html',
 })
 export class LinkEsterniComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class LinkEsterniComponent implements OnInit {
       (params) => {
         if (params.get('val') === 'manuale') {
           this.routeManuale();
-        } 
+        }
       }
     );
   }
@@ -32,14 +32,14 @@ export class LinkEsterniComponent implements OnInit {
   routeManuale() {
     this.isLoading = true;
     this.pdfSrc = location.origin + environment.baseHref + '/assets/documents/UniConv_LineeGuida_vers22-05-2020.pdf';
-  }
+      }
 
   onOpen(){
     window.open(this.pdfSrc, '_blank');
   }
 
   onDownload(){
-    
+
     this.http.get(this.pdfSrc,{responseType: 'blob'}).subscribe(res =>{
       const names: string[] = this.pdfSrc.split('/');
       saveAs(res,names[names.length-1])
