@@ -92,6 +92,7 @@ class ConvenzioneService implements ApplicationService
         $fasc->addClassifCod($data['titolario_classificazione']);
 
         //se c'è il dipartimento...
+        //$data['dipartimemto_cd_dip'] = null; //...non c'è
         if ($data['dipartimemto_cd_dip']){
             //...prendiamo il codice dell'unità organizzativa che fa riferimento al dipartimento
             $dip = Dipartimento::find($data['dipartimemto_cd_dip']);
@@ -101,10 +102,12 @@ class ConvenzioneService implements ApplicationService
         }else if ($data['unitaorganizzativa_uo']){
             //caso convenzione amministrativa
             $aff_org = $data['unitaorganizzativa_uo'];
+            //$dip_unitaorganizzativa_uo = $aff_org;                     
             TitulusHelper::addRPA_Titulus($fasc,$aff_org);        
         }else{
             //...altrimenti l'unità oranizzativa della persona che esegue la convenzione
             $aff_org = Auth::user()->personale->aff_org;  
+            //$dip_unitaorganizzativa_uo = $aff_org;         
             TitulusHelper::addRPA_Titulus($fasc,$aff_org);        
         }
 

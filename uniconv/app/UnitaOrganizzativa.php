@@ -168,16 +168,19 @@ class UnitaOrganizzativa extends Model
     }
 
     public function scopeUfficiValidazione($query){
-        return $query->whereIn('uo', config('unidem.ufficiPerValidazione'));
-            }
+        //return $query->whereIn('uo', config('unidem.ufficiPerValidazione'));
+        return $query->where('DATA_FIN', '>=',  Carbon::now())->where('TIPO', '=',  'UFF');
+    }
 
     public function scopeUfficiFiscali($query){
-        return $query->whereIn('uo', config('unidem.uffFiscale'));
-            }
+        //return $query->whereIn('uo', config('unidem.uffFiscale'));
+        return $query->where('DATA_FIN', '>=',  Carbon::now())->where('TIPO', '=',  'UFF');
+    }
 
     public function scopeUfficiAdmin($query){
-        return $query->whereIn('uo', config('unidem.unitaAdmin'));
-            }
+        //return $query->whereIn('uo', config('unidem.unitaAdmin'));
+        return $query->where('DATA_FIN', '>=',  Carbon::now())->where('TIPO', '=',  'UFF');
+    }
 
      public function organico()
      {

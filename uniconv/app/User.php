@@ -130,7 +130,7 @@ class User extends Authenticatable implements JWTSubject
     public function personaleRespons()    
     {
         return $this->hasMany(PersonaleResponsOrg::class, 'id_ab', 'v_ie_ru_personale_id_ab');
-    }
+            }
 
     public function myselfPersonaleRespons()
     {

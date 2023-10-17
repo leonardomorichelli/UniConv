@@ -16,7 +16,7 @@ class Dipartimento extends Model
      *
      * @var string
      */
-    protected $connection = 'oracle';    
+    protected $connection = 'oracle';   
 
     public $table = 'V_IE_AC_DIPARTIMENTI';
     public $primaryKey = 'CD_DIP';
@@ -30,7 +30,7 @@ class Dipartimento extends Model
     public function scopeDipartimenti($query)
     {
         return $query->where('DT_FINE_VAL', '>=',  Carbon::now())->whereNotNull('CD_MIUR')->select('cd_dip','nome_dip','nome_breve','dip_id','cd_miur','id_ab');
-    }
+            }
 
     //restituisce tutto il personale afferente ad un dipartimento
     public function personale()

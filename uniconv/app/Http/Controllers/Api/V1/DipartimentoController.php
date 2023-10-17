@@ -24,9 +24,9 @@ class DipartimentoController extends Controller
      */
     public function index()
     {                
-        //return Cache::rememberForever($this->cacheKey() . ':dipartimenti', function () {
-            return Dipartimento::Dipartimenti()->whereNotNull('PART_IVA')->orderBy('NOME_DIP')->get();
-        //});       
+        return Cache::rememberForever($this->cacheKey() . ':dipartimenti', function () {
+            return Dipartimento::Dipartimenti()->get();
+        });       
     }
 
     /**
@@ -87,8 +87,8 @@ class DipartimentoController extends Controller
         //se l'utente corrente è super-admin oppure controllare permessi                 
         if (Auth::user()->hasPermissionTo('all dipartimenti')){
             return $this->index();
-        }
-
+                }
+        
         return $this->getUserDepartments();
     }
 
