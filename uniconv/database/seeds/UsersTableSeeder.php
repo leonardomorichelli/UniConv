@@ -71,7 +71,7 @@ class UsersTableSeeder extends Seeder
             $user = User::firstOrCreate( [
                 'email' => 'sara.buti@unicam.it',
                 'password' => Hash::make('testadmin'),
-                'name' => 'test admin',
+                'name' => 'Sara Buti',
                 'v_ie_ru_personale_id_ab'=> 4152,
             ]);        
         }
@@ -84,7 +84,7 @@ class UsersTableSeeder extends Seeder
             $user = User::firstOrCreate([
                 'email' => 'paolo.mancinelli@unicam.it',
                 'password' => Hash::make('testuser'),
-                'name' => 'test user',
+                'name' => 'Paolo Mancinelli',
                 'v_ie_ru_personale_id_ab'=> 808,
             ] );
         }

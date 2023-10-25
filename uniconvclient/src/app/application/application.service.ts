@@ -1117,7 +1117,18 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
   }
 
   static isResponsabileUfficio(posizorg: string): boolean {
-    return posizorg == 'RESP_UFF' || posizorg == 'COOR_PRO_D' || posizorg == 'VIC_RES_PL' || posizorg == 'RESP_PLESS' || posizorg == 'DIRIGENTE';
+    return (
+          //UniUrb
+          (posizorg == 'RESP_UFF') ||
+          (posizorg == 'COOR_PRO_D') ||
+          (posizorg == 'VIC_RES_PL') ||
+          (posizorg == 'RESP_PLESS') ||
+          (posizorg == 'DIRIGENTE') ||
+          //UniCam
+          (posizorg == 'RESP_PO') ||
+          (posizorg == 'MANAG01') ||
+          (posizorg == 'BIBL02')
+        );
   }
 
 

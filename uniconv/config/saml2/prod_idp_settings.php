@@ -204,7 +204,7 @@ $this_idp_env_id = 'PROD';
 //);
 
 $strict = true;
-$debug = true;
+$debug = false;
 
 $compressed = false;
 $encrypted = true;
@@ -227,9 +227,9 @@ return $settings = array(
             //'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
         ),
         "attributeConsumingService" => array(
-            "serviceName" => "UniconvUnicam",
+            "serviceName" => "Uniconv",
             //like in *AttributeFilter*
-            "serviceDescription" => "UniconvUnicam",
+            "serviceDescription" => "Uniconv",
             "requestedAttributes" => array(
                 //   https://ldap.com/ldap-oid-reference-guide/
                 /*

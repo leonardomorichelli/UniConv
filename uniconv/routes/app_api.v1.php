@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 
+//use App\Http\Controllers\Api\V1\AreaController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,17 +19,6 @@ use Illuminate\Http\Request;
 
 //aggiornare la documentazione
 //php artisan api:update
-
-Route::get('/info.json', function () {
-    $data = array(
-        "app_name" => "Uniconv",
-        "app_version" => "1.0.0"
-    );
-
-    header("Content-Type: application/json");
-    echo json_encode($data);
-    exit();
-});
 
 Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check'],  'namespace'=>'Api\V1'], function () {
 
@@ -63,6 +54,19 @@ Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check
 
 
 Route::group(['middleware' => ['cors','auth:api','log','check'], 'namespace'=>'Api\V1'],function(){
+    //info
+    Route::get('/info.json', function () {
+        $data = array(
+            "ateneo" => "Unicam",
+            "app_name" => "Uniconv",
+            "app_version" => "1.0.1"
+        );
+    
+        header("Content-Type: application/json");
+        echo json_encode($data);
+        exit();
+    });
+
     //users
     Route::get('users/{id}', 'UserController@show');
     Route::post('users/query', 'UserController@query'); 
@@ -166,13 +170,21 @@ Route::group(['middleware' => ['cors','auth:api','log','check'], 'namespace'=>'A
     //logattivita
     Route::post('logattivita/query','LogActivityController@query');
 
-    //Route::resource('dipartimenti','DipartimentoController');
-    Route::get('dipartimenti/','DipartimentoController@index');
-    Route::get('dipartimenti/user/{id}','DipartimentoController@getDipartimentiByUser');    
-    Route::get('dipartimenti/{id}','DipartimentoController@show');
-    Route::post('dipartimenti/query','DipartimentoController@query');
-    Route::get('dipartimenti/docenti/{codice}','DipartimentoController@getDocentiByDipartimento');
-    Route::get('dipartimenti/direttore/{codice}','DipartimentoController@getDirettoreByDipartimento');
+    ////Route::resource('dipartimenti','DipartimentoController');
+    //Route::get('dipartimenti/','DipartimentoController@index');
+    //Route::get('dipartimenti/user/{id}','DipartimentoController@getDipartimentiByUser');    
+    //Route::get('dipartimenti/{id}','DipartimentoController@show');
+    //Route::post('dipartimenti/query','DipartimentoController@query');
+    //Route::get('dipartimenti/docenti/{codice}','DipartimentoController@getDocentiByDipartimento');
+    //Route::get('dipartimenti/direttore/{codice}','DipartimentoController@getDirettoreByDipartimento');
+
+    //Route::resource('dipartimenti','AreaController');
+    Route::get('dipartimenti/','AreaController@index');
+    Route::get('dipartimenti/user/{id}','AreaController@getAreaByUser');    
+    Route::get('dipartimenti/{id}','AreaController@show');
+    Route::post('dipartimenti/query','AreaController@query');
+    Route::get('dipartimenti/docenti/{codice}','AreaController@getPersonaleByArea');
+    Route::get('dipartimenti/direttore/{codice}','AreaController@getResponsabileByArea');
     
 
     Route::get('comuni/{codice}','LocalitaController@getComuneById');

@@ -4,13 +4,14 @@ import { ExcelNumberFormat } from "ag-grid-community";
 export interface FileInfra {
     filename: string,
     filetype: string,
-    // per visualizzare il pdf | string è in base64 
+    // per visualizzare il pdf | string è in base64
     filevalue: ArrayBuffer | string,
 }
 
 export enum convenzioneFrom {
     dip = 'dip',
-    amm = 'amm'
+    amm = 'amm',
+    //are = 'are'
 }
 
 export enum rinnovoType {
@@ -20,7 +21,7 @@ export enum rinnovoType {
 }
 
 export interface Convenzione extends BaseEntity {
-    schematipotipo: string, 
+    schematipotipo: string,
     transition: string,
     user_id: number,
     descrizione_titolo: string,
@@ -29,6 +30,7 @@ export interface Convenzione extends BaseEntity {
     emittente: string,
     user: { id: number, name: string },
     dipartimento: { cd_dip: string, nome_breve: string },
+    //area: { id_ab: string, nome_breve: string },
     stato_avanzamento: string,
     convenzione_type: string,
     tipopagamento: { codice: string, descrizione: string },
@@ -54,7 +56,7 @@ export interface Convenzione extends BaseEntity {
     data_inizio_conv?: any,
     data_fine_conv?: any,
     data_stipula?: any,
-    unitaorganizzativa_affidatario?: string,    
+    unitaorganizzativa_affidatario?: string,
     convenzione_from: convenzioneFrom,
     rinnovo_type: rinnovoType,
     deleted_at?: any,
@@ -70,6 +72,11 @@ export interface ConvenzioneAmministrativa extends Convenzione{
     dipartimemto_cd_dip: null;
 }
 
+//export interface ConvenzioneArea extends Convenzione{
+//  convenzione_from: convenzioneFrom.are;
+//  area_id_ab: null;
+//}
+
 export interface Owner{
     v_ie_ru_personale_id_ab: string;
 }
@@ -82,7 +89,7 @@ export interface FileAttachment {
     attachmenttype?: {id: number, codice: string, descrizione: string},
     filename: string,
     filetype?: string,
-    // per visualizzare il pdf | string è in base64 
+    // per visualizzare il pdf | string è in base64
     filevalue?: ArrayBuffer | string,
     filepath?: string,
     docnumber?: string,

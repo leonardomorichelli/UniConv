@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Http\Controllers\Api\V1\QueryBuilder;
 use App\Dipartimento;
+use App\Area;
 use App\Service\RoleService;
 use Illuminate\Support\Facades\Cache;
 class UnitaOrganizzativa extends Model
@@ -48,20 +49,16 @@ class UnitaOrganizzativa extends Model
      */
     public function dipartimenti_cd_dip(){
         if ($this->isPlesso()){
-            //Plesso Economico - Umanistico (DESP-DISTUM)
-            if ($this->id_ab == 26618){
-                return [21, 8]; //[26121,4504];
-            }
-            //Plesso Giuridico-Umanistico (DIGIUR-DISCUI)
-            if ($this->id_ab == 26616){
-                return [1,25]; //[26124,4499,49025];
-            }
-            //Plesso Scientifico (DiSPeA-DiSB)
-            if ($this->id_ab == 32718){
-                return[20,23]; //[26080,27605];
-            }     
-            //... aggiungere ulteriori associazioni      
+            return [0, 0]; 
         }
+        return null;
+    }
+
+    public function aree_id_ab(){
+        if ($this->isArea()){
+            return [0, 0]; 
+        }
+        return null;
     }
 
 
@@ -103,6 +100,12 @@ class UnitaOrganizzativa extends Model
             }
             */
         }
+    }
+
+    public function aree(){
+        return Cache::remember($this->cacheKey() . ':aree', 60 * 24 * 20, function () {
+            return Area::index()->get();
+        });
     }
 
     public function dipartimenti_uo(){
@@ -190,5 +193,10 @@ class UnitaOrganizzativa extends Model
      public function personale()
      {
          return $this->hasMany(Personale::class, 'aff_org',  'uo');         
+     }
+
+     public function getUoPadre($uo)
+     {
+        return $this->where('uo', '=', $uo)->select('uo_padre')->pluck('uo_padre')->first();
      }
 }

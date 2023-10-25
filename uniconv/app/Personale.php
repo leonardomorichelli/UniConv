@@ -44,9 +44,9 @@ class Personale extends Model
         
     public function unitaRelation()
     {
-        return Cache::remember($this->cacheKey() . ':unita', 60 * 24 * 20, function () {
+        //return Cache::remember($this->cacheKey() . ':unita', 60 * 24 * 20, function () {
             return is_null($this->unita()->get()) ? false : $this->unita()->get();
-        });
+        //});
     }
 
     public function unita()

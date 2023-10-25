@@ -28,7 +28,7 @@ export class InsConvAmmComponent implements OnInit {
 
   options: FormlyFormOptions;
 
-  constructor(private service: ApplicationService, public authService: AuthService, private router: Router,  private cdRef : ChangeDetectorRef) { 
+  constructor(private service: ApplicationService, public authService: AuthService, private router: Router,  private cdRef : ChangeDetectorRef) {
 
     this.model = {
       schematipotipo: 'schematipo',
@@ -41,14 +41,15 @@ export class InsConvAmmComponent implements OnInit {
       emittente: '',
       user: { id: authService.userid, name: authService.username },
       dipartimento: { cd_dip: null, nome_breve: '' },
+      //area: { id_ab: null, nome_breve: '' },
       stato_avanzamento: null,
       convenzione_type: 'TO',
       tipopagamento: { codice: null, descrizione: '' },
       azienda: { id: null, denominazione: '' },
       unitaorganizzativa_uo: '',
       unitaorganizzativa_affidatario: '',
-      attachments: [],    
-      aziende:[],  
+      attachments: [],
+      aziende:[],
       convenzione_from: convenzioneFrom.amm,
       rinnovo_type: rinnovoType.non_rinnovabile
     };
@@ -69,10 +70,10 @@ export class InsConvAmmComponent implements OnInit {
         fieldGroup: [
           {
             wrappers: ['accordioninfo'],
-            fieldGroup: [          
+            fieldGroup: [
             ].concat(
               this.service.getInformazioniDescrittiveFields(this.model).map(x => {
-                if (x.key == 'user') {                  
+                if (x.key == 'user') {
                   setTimeout(()=> {
                     x.templateOptions.disabled = true;
                   }, 0);
@@ -82,14 +83,14 @@ export class InsConvAmmComponent implements OnInit {
             templateOptions: {
               label: 'Informazioni descrittive'
             },
-          },  
+          },
         ]
       }];
 
       if (this.getStorageModel()){
         let app = JSON.parse(this.getStorageModel());
-        this.checkHistory(app);                  
-        this.model = app;       
+        this.checkHistory(app);
+        this.model = app;
         this.setStorageModel();
       }else{
         if (this.checkHistory(this.model))
@@ -105,12 +106,12 @@ export class InsConvAmmComponent implements OnInit {
     if (this.form.valid) {
       this.isLoading = true;
       var tosubmit: ConvenzioneAmministrativa = { ...this.model, ...this.form.value };
-      
+
       this.service.createSchemaTipo(tosubmit, true).subscribe(
         result => {
           this.isLoading = false;
           sessionStorage.removeItem(this.prefix+'_model');
-          this.router.navigate(['home/dashboard/dashboard1']);  
+          this.router.navigate(['home/dashboard/dashboard1']);
         },
         error => {
           this.isLoading = false;
@@ -122,27 +123,27 @@ export class InsConvAmmComponent implements OnInit {
   }
 
   onAziendaRicerca(){
-    this.router.navigate(['home/aziendeloc']);     
+    this.router.navigate(['home/aziendeloc']);
   }
-  
+
   public onValidate() {
     ControlUtils.validate(this.fields[0]);
   }
-  
+
   getStorageModel(){
     if (this.prefix){
       return sessionStorage.getItem(this.prefix+'_model');
-    }     
+    }
     return null;
   }
 
   setStorageModel(){
     if (this.prefix){
       sessionStorage.setItem(this.prefix+'_model',JSON.stringify(this.model));
-    } 
+    }
   }
 
-  
+
   checkHistory(model){
     const entity = history.state ? history.state.entity : null;
     if (entity){
@@ -150,9 +151,9 @@ export class InsConvAmmComponent implements OnInit {
       {
         model.aziende = model.aziende.filter(x=>x !== (undefined || null || '') && x.id);
       }
-      this.pushToArray(model.aziende,entity);  
+      this.pushToArray(model.aziende,entity);
       return true;
-    }   
+    }
     return false;
   }
 
@@ -172,8 +173,8 @@ export class InsConvAmmComponent implements OnInit {
     if (this.form.touched){
       this.setStorageModel();
     }
-  
+
   }
 
- 
+
 }

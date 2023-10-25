@@ -18,6 +18,7 @@ use App\Http\Controllers\SoapControllerTitulus;
 use Artisaninweb\SoapWrapper\SoapWrapper;
 use App\Http\Controllers\Api\V1\LocalitaController;
 use App\Http\Controllers\Api\V1\DipartimentoController;
+use App\Http\Controllers\Api\V1\AreaController;
 use Illuminate\Http\UploadedFile;
 use Exception;
 use Storage;

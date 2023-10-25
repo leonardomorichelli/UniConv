@@ -3,7 +3,7 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { StepType, CoreSevice } from 'src/app/shared';
 import { ApplicationService } from '../application.service';
 import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
-import { Convenzione, FileAttachment, Owner, ConvenzioneDipartimentale, convenzioneFrom, rinnovoType } from '../convenzione';
+import { Convenzione, FileAttachment, Owner, ConvenzioneDipartimentale, /*ConvenzioneArea,*/ convenzioneFrom, rinnovoType } from '../convenzione';
 import { FormGroup, FormControl, ValidationErrors, FormArray } from '@angular/forms';
 import { encode, decode } from 'base64-arraybuffer';
 import { AuthService } from 'src/app/core';
@@ -25,26 +25,26 @@ const PDFJS: PDFJSStatic = require('pdfjs-dist');
   template: `
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '4px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-             
-      <button class="btn btn-outline-primary rounded-lg ml-1"  [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-        <span class="oi oi-arrow-top"></span>  
-        <span class="ml-2">{{ 'btn_salva' | translate }}</span>              
-      </button> 
-      <button type="button" class="btn btn-outline-primary rounded-lg ml-1"  (click)="onValidate()" >              
-        <span class="oi oi-flash"></span>  
-        <span class="ml-2">Valida</span>              
-      </button>  
-      <div class="btn-group btn-group">   
-      <button  class="btn btn-outline-primary rounded-lg ml-1" (click)="onNew()" >              
+
+      <button class="btn btn-outline-primary rounded-lg ml-1"  [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+        <span class="oi oi-arrow-top"></span>
+        <span class="ml-2">{{ 'btn_salva' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-outline-primary rounded-lg ml-1"  (click)="onValidate()" >
+        <span class="oi oi-flash"></span>
+        <span class="ml-2">Valida</span>
+      </button>
+      <div class="btn-group btn-group">
+      <button  class="btn btn-outline-primary rounded-lg ml-1" (click)="onNew()" >
         <span class="oi oi-document"></span>
         <span class="ml-2">Nuovo</span>
-      </button>    
+      </button>
     </div>
   </div>
-  
+
   <form *ngIf='model' [formGroup]="form" >
-    <formly-form  [model]="model" [fields]="fieldtabs" [form]="form" [options]="options">      
-    </formly-form> 
+    <formly-form  [model]="model" [fields]="fieldtabs" [form]="form" [options]="options">
+    </formly-form>
   </form>
   `,
   styles: []
@@ -77,7 +77,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
   constructor(private confirmationDialogService: ConfirmationDialogService, private service: ApplicationService, public authService: AuthService, private router: Router,  private cdRef : ChangeDetectorRef) {
 
     PDFJS.disableWorker = true;
-   
+
     this.model = {
       schematipotipo: 'schematipo',
       transition: 'self_transition',
@@ -89,23 +89,24 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
       emittente: '',
       user: { id: authService.userid, name: authService.username },
       dipartimento: { cd_dip: null, nome_breve: '' },
+      //area: { id_ab: null, nome_breve: '' },
       stato_avanzamento: null,
       convenzione_type: 'TO',
       tipopagamento: { codice: null, descrizione: '' },
       azienda: { id: null, denominazione: '' },
       unitaorganizzativa_uo: '',
       unitaorganizzativa_affidatario: '',
-      attachments: [],    
-      aziende:[],  
+      attachments: [],
+      aziende:[],
       convenzione_from: convenzioneFrom.dip,
       rinnovo_type: rinnovoType.non_rinnovabile,
     };
 
     if (this.getStorageModel()){
-      let app = JSON.parse(this.getStorageModel());      
-      this.checkHistory(app);                  
+      let app = JSON.parse(this.getStorageModel());
+      this.checkHistory(app);
       app.file_CD = "";
-      this.model = app;       
+      this.model = app;
       this.setStorageModel();
     }else{
       if (this.checkHistory(this.model))
@@ -119,7 +120,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
       },
     };
 
-    this.fieldtabs = [          
+    this.fieldtabs = [
       {
         type: 'tabinfra',
         templateOptions:{
@@ -161,7 +162,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
               },
             ].concat(
               this.service.getInformazioniDescrittiveFields(this.model, this.getAziendeMin(this.model)).map(x => {
-                if (x.key == 'user') {                  
+                if (x.key == 'user') {
                   setTimeout(()=> {
                     x.templateOptions.disabled = true;
                   }, 0);
@@ -174,7 +175,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
           },
           {
             wrappers: ['accordioninfo'],
-            fieldGroup: [          
+            fieldGroup: [
               {
                 fieldGroupClassName: 'row',
                 fieldGroup: [
@@ -192,30 +193,30 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                       ]
                     },
                     expressionProperties: {
-                      'templateOptions.disabled': (model: any, formState: any) => {                        
+                      'templateOptions.disabled': (model: any, formState: any) => {
                           return !(formState.model.file_CD == null || formState.model.file_CD == '');
                       },
-                    },            
+                    },
                   },
                   {
                     key: 'file_CD',
                     type: 'fileinput',
-                    className: "col-md-6",                                                
+                    className: "col-md-6",
                     validation: {
                       show: true,
                     },
                     templateOptions: {
                       label: 'Documento di approvazione (formato pdf)',
-                      description: 'Allegare in formato pdf la versione della delibera o della disposizione. Dimensione massima 2MB.',                      
+                      description: 'Allegare in formato pdf la versione della delibera o della disposizione. Dimensione massima 2MB.',
                       type: 'input',
                       placeholder: 'Scegli documento',
-                      accept: 'application/pdf',                      
-                      required: true,                                                                  
+                      accept: 'application/pdf',
+                      required: true,
                       onSelected: (selFile, field) => {
                         this.onSelectCurrentFile(selFile, this.model['file_CD_type'], field);
-                      },                                            
+                      },
                     },
-                    validators: {                        
+                    validators: {
                       formatpdf: {
                         expression: (c) => {
                          return /.+\.([pP][dD][fF])/.test(c.value);
@@ -223,8 +224,8 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                         message: (error, field: FormlyFieldConfig) =>  `Formato non consentito`,
                       },
                       maxsize: {
-                        expression: (c,f) => (this.mapAttachment.get(this.model['file_CD_type']) && 
-                          this.mapAttachment.get(this.model['file_CD_type'])._filesize && 
+                        expression: (c,f) => (this.mapAttachment.get(this.model['file_CD_type']) &&
+                          this.mapAttachment.get(this.model['file_CD_type'])._filesize &&
                           this.mapAttachment.get(this.model['file_CD_type'])._filesize > 2097152) ? false : true,
                         message: (error, field) => `La dimensione del file eccede la dimensione massima consentita `,
                       },
@@ -233,7 +234,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                 ],
               },
               {
-                fieldGroupClassName: 'row',         
+                fieldGroupClassName: 'row',
                 fieldGroup: [
                   {
                     key: 'docnumber',
@@ -241,7 +242,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                     className: "col-md-4",
                     templateOptions: {
                       label: 'Numero',
-                      required: true,                               
+                      required: true,
                     },
                   },
                   {
@@ -250,11 +251,11 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                     className: "col-md-8",
                     templateOptions: {
                       label: 'Data',
-                      required: true,                               
+                      required: true,
                     },
                   },
                 ]
-              },           
+              },
               {
                 key: 'file_DA',
                 type: 'fileinput',
@@ -273,8 +274,8 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                   onSelected: (selFile, field) => {
                     this.onSelectCurrentFile(selFile, MultistepSchematipoComponent.DOC_APP, field)
                   }
-                },                
-                validators: {                        
+                },
+                validators: {
                   formatpdf: {
                     expression: (c) => {
                      return c.value ? /.+\.([dD][oO][cC][xX]?)/.test(c.value) : true;
@@ -282,8 +283,8 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                     message: (error, field: FormlyFieldConfig) =>  `Formato non consentito`,
                   },
                   maxsize: {
-                    expression: (c,f) => (this.mapAttachment.get(MultistepSchematipoComponent.DOC_APP) && 
-                      this.mapAttachment.get(MultistepSchematipoComponent.DOC_APP)._filesize && 
+                    expression: (c,f) => (this.mapAttachment.get(MultistepSchematipoComponent.DOC_APP) &&
+                      this.mapAttachment.get(MultistepSchematipoComponent.DOC_APP)._filesize &&
                       this.mapAttachment.get(MultistepSchematipoComponent.DOC_APP)._filesize > 2097152) ? false : true,
                     message: (error, field) => `La dimensione del file eccede la dimensione massima consentita `,
                   },
@@ -306,7 +307,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                     this.onSelectCurrentFile(selFile, MultistepSchematipoComponent.PROSPETTO, field)
                   }
                 },
-                validators: {                        
+                validators: {
                   formatpdf: {
                     expression: (c) => {
                      return c.value ? /.+\.([xX][lL][sS][xX])$/.test(c.value) : true;
@@ -314,8 +315,8 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                     message: (error, field: FormlyFieldConfig) =>  `Formato non consentito`,
                   },
                   maxsize: {
-                    expression: (c,f) => (this.mapAttachment.get(MultistepSchematipoComponent.PROSPETTO) && 
-                      this.mapAttachment.get(MultistepSchematipoComponent.PROSPETTO)._filesize && 
+                    expression: (c,f) => (this.mapAttachment.get(MultistepSchematipoComponent.PROSPETTO) &&
+                      this.mapAttachment.get(MultistepSchematipoComponent.PROSPETTO)._filesize &&
                       this.mapAttachment.get(MultistepSchematipoComponent.PROSPETTO)._filesize > 2097152) ? false : true,
                     message: (error, field) => `La dimensione del file eccede la dimensione massima consentita `,
                   },
@@ -335,93 +336,93 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                 hideExpression: 'formState.model.schematipotipo == "schematipo"',
                 templateOptions: {
                   label: 'Ufficio affidatario procedura',
-                  required: true,                 
+                  required: true,
                   options: this.service.getValidationOffices(),
                   valueProp: 'uo',
                   labelProp: 'descr',
                 },
-              },              
+              },
               {
                 key: 'respons_v_ie_ru_personale_id_ab',
                 type: 'select',
-                hideExpression: 'formState.model.schematipotipo == "schematipo"',                
+                hideExpression: 'formState.model.schematipotipo == "schematipo"',
                 templateOptions: {
                   label: 'Responsabile ufficio',
                   valueProp: 'id',
-                  labelProp: 'descr',   
-                  required: true,                    
+                  labelProp: 'descr',
+                  required: true,
                 },
                 hooks: {
                   onInit: (field) => {
                     field.form.get('unitaorganizzativa_affidatario').valueChanges.pipe(
-                      takeUntil(this.onDestroy$),    
-                      distinctUntilChanged(),                  
+                      takeUntil(this.onDestroy$),
+                      distinctUntilChanged(),
                       filter(ev => ev !== null),
-                      tap(uo => {                                                                   
+                      tap(uo => {
                         field.formControl.setValue('');
                         field.templateOptions.options = this.service.getPersonaleUfficio(uo).pipe(
                           map(items => {
                             return items.filter(x => ApplicationService.isResponsabileUfficio(x.cd_tipo_posizorg));
-                          }),  
+                          }),
                           tap(items => {
                             if (items[0]){
-                              field.formControl.setValue(items[0].id); 
+                              field.formControl.setValue(items[0].id);
                             }
-                          }),                                                  
+                          }),
                         );
                       }),
                     ).subscribe();
                   }
-                }               
+                }
               },
               {
                 key: 'assignments',
-                type: 'repeat',          
-                hideExpression: 'formState.model.schematipotipo == "schematipo"',                         
-                templateOptions: {        
-                  required: true,                       
-                  label: 'Operatori',                                                                                        
-                },   
+                type: 'repeat',
+                hideExpression: 'formState.model.schematipotipo == "schematipo"',
+                templateOptions: {
+                  required: true,
+                  label: 'Operatori',
+                },
                 validators: {
                   unique: {
-                    expression: (c) => {           
-                      if (c.value)  {                              
+                    expression: (c) => {
+                      if (c.value)  {
                         var valueArr = c.value.map(function(item){ return item.v_ie_ru_personale_id_ab }).filter(x => x != null );
-                        var isDuplicate = valueArr.some(function(item, idx){ 
-                            return valueArr.indexOf(item) != idx 
-                        });              
+                        var isDuplicate = valueArr.some(function(item, idx){
+                            return valueArr.indexOf(item) != idx
+                        });
                         return !isDuplicate;
                       }
                       return true;
                     },
                     message: (error, field: FormlyFieldConfig) => `Nome ripetuto`,
-                  },                                
+                  },
                   atleastone: {
                     expression: (c) => {
                       if (c.value) {
                         if (c.value.length < 1)
-                          return false;              
+                          return false;
                       }else {
                         return false;
                       }
                       return true;
                     },
                     message: (error, field: FormlyFieldConfig) => `Inserire almeno un operatore`,
-                  },                                        
-                },               
+                  },
+                },
                 hooks: {
                   onInit: (field) => {
                     field.form.get('unitaorganizzativa_affidatario').valueChanges.pipe(
-                      takeUntil(this.onDestroy$),    
-                      distinctUntilChanged(),                                        
+                      takeUntil(this.onDestroy$),
+                      distinctUntilChanged(),
                       filter(ev => ev !== null),
-                      tap(uo => {  
+                      tap(uo => {
                           this.model.unitaorganizzativa_affidatario = uo;
-                          field.templateOptions.removeAll();                                                         
+                          field.templateOptions.removeAll();
                       })).subscribe();
                     }
-                  },          
-                fieldArray: {                  
+                  },
+                fieldArray: {
                   fieldGroupClassName: 'row',
                   fieldGroup: [
                   {
@@ -431,25 +432,25 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                     templateOptions: {
                       label: 'Operatore attività',
                       valueProp: 'id',
-                      labelProp: 'descr',  
-                      required: true,                     
-                    },                    
+                      labelProp: 'descr',
+                      required: true,
+                    },
                     hooks: {
-                      onInit: (field) => {                                              
-                        field.templateOptions.options = this.service.getPersonaleUfficio(this.model.unitaorganizzativa_affidatario).pipe(                    
-                        );                      
+                      onInit: (field) => {
+                        field.templateOptions.options = this.service.getPersonaleUfficio(this.model.unitaorganizzativa_affidatario).pipe(
+                        );
                       },
                     },
                   },
-                  ],   
+                  ],
                 },
               },
               {
                 key: 'description',
                 type: 'textarea',
-                hideExpression: 'formState.model.schematipotipo == "schematipo"',    
+                hideExpression: 'formState.model.schematipotipo == "schematipo"',
                 templateOptions: {
-                  label: 'Note',                  
+                  label: 'Note',
                   rows: 5,
                   description: "Testo inviato all'operatore"
                 },
@@ -461,12 +462,12 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
             templateOptions: {
               label: 'Approvazione',
               hidden: true,
-            },              
+            },
           }
         ]
       }];
 
-      
+
     const tabs = this.fieldtabs.find(f => f.type === 'tabinfra');
     const tabappr = tabs.fieldGroup[2];
     if (tabappr && this.model.schematipotipo == 'schematipo') {
@@ -474,8 +475,8 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
     }
     else {
       tabappr.templateOptions.hidden = false;
-    }     
-      
+    }
+
   }
 
   getAziendeMin(model){
@@ -493,9 +494,9 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
       {
         model.aziende = model.aziende.filter(x=>x !== (undefined || null || '') && x.id);
       }
-      this.pushToArray(model.aziende,entity);  
+      this.pushToArray(model.aziende,entity);
       return true;
-    }   
+    }
     return false;
   }
 
@@ -512,20 +513,20 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
   getStorageModel(){
     if (this.prefix){
       return sessionStorage.getItem(this.prefix+'_model');
-    }     
+    }
     return null;
   }
 
   setStorageModel(){
     if (this.prefix){
       sessionStorage.setItem(this.prefix+'_model',JSON.stringify(this.model));
-    } 
+    }
   }
 
 
   public onValidate() {
     ControlUtils.validate(this.fieldtabs[0]);
-  } 
+  }
 
 
   render_page(pageData) {
@@ -561,19 +562,19 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
 
       for (var i = 1; i <= counter; i++) {
         let pageText = await doc.getPage(i).then(pageData => this.render_page(pageData));
-        text = `${text}\n\n${pageText}`;      
-      }    
-            
+        text = `${text}\n\n${pageText}`;
+      }
+
       let number = text.match(/[d|D]elibera n.?\s?([A-Za-z0-9\/]*)\s*\n/);
       if (number && number[1]){
         this.form.get('docnumber').setValue(number[1]);
-      
+
       }
       let data_emissione = text.match(/[r|R]iunione del giorno\s([0-9]{2}\/[0-9]{2}\/[0-9]{4})\s?/);
       if (data_emissione && data_emissione[1]){
         let converted = data_emissione[1].replace(/\//g,'-');
         this.form.get('data_emissione').setValue(converted);
-      }      
+      }
       this.isLoading = false;
     });
   }
@@ -585,30 +586,30 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
       this.mapAttachment.delete(typeattachemnt);
       return;
     }
-    
+
     this.isLoading = true;
     let currentAttachment: FileAttachment = {
       model_type: 'convenzione',
       filename: currentSelFile.name,
-      attachmenttype_codice: typeattachemnt,      
+      attachmenttype_codice: typeattachemnt,
       _filesize: null
-    } 
-      
+    }
+
     currentAttachment._filesize = currentSelFile.size;
-    this.mapAttachment.set(currentAttachment.attachmenttype_codice, currentAttachment);      
-    field.formControl.markAsDirty();  
+    this.mapAttachment.set(currentAttachment.attachmenttype_codice, currentAttachment);
+    field.formControl.markAsDirty();
     field.formControl.updateValueAndValidity();
 
-    const reader = new FileReader();   
+    const reader = new FileReader();
 
     reader.onload = async (e: any) => {
       this.isLoading = true;
-      currentAttachment.filevalue = encode(e.target.result);    
-      
+      currentAttachment.filevalue = encode(e.target.result);
+
       if (currentSelFile.name.search('pdf')>0){
         try {
-          await this.parsePdf(e.target.result);   
-          field.formControl.markAsDirty();  
+          await this.parsePdf(e.target.result);
+          field.formControl.markAsDirty();
         } catch (error) {
           this.isLoading = false;
         }
@@ -619,7 +620,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.mapAttachment.set(currentAttachment.attachmenttype_codice, currentAttachment);    
+      this.mapAttachment.set(currentAttachment.attachmenttype_codice, currentAttachment);
       this.isLoading = false;
     }
     reader.readAsArrayBuffer(currentSelFile);
@@ -643,20 +644,21 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
           emittente: '',
           user: { id: this.authService.userid, name: this.authService.username },
           dipartimento: { cd_dip: null, nome_breve: '' },
+          //area: { id_ab: null, nome_breve: '' },
           stato_avanzamento: null,
           convenzione_type: 'TO',
           tipopagamento: { codice: null, descrizione: '' },
           azienda: { id: null, denominazione: '' },
           unitaorganizzativa_uo: '',
           unitaorganizzativa_affidatario: '',
-          attachments: [],    
-          aziende:[],  
+          attachments: [],
+          aziende:[],
           convenzione_from: convenzioneFrom.dip,
           rinnovo_type: rinnovoType.non_rinnovabile,
         };
       }
     });
-  
+
   }
 
   ngOnInit() {
@@ -668,12 +670,12 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
     if (this.form.touched){
       this.setStorageModel();
     }
-  
+
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.isLoading = true;      
+      this.isLoading = true;
       this.model.formstatus = this.form.status;
       var tosubmit: Convenzione = { ...this.model, ...this.form.value };
 
@@ -684,9 +686,9 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
       file.docnumber = this.model['docnumber'];
       file.emission_date = this.model['data_emissione'];
 
-      //aggiungo tutti gli allegati      
+      //aggiungo tutti gli allegati
       tosubmit.attachments = [];
-      tosubmit.attachments.push(...Array.from<FileAttachment>(this.mapAttachment.values()));     
+      tosubmit.attachments.push(...Array.from<FileAttachment>(this.mapAttachment.values()));
 
       this.service.createSchemaTipo(tosubmit, true).subscribe(
         result => {
@@ -694,7 +696,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
           this.form.markAsUntouched();
           sessionStorage.removeItem(this.prefix+'_model');
           this.isLoading = false;
-          this.router.navigate(['home/dashboard/dashboard1']);  
+          this.router.navigate(['home/dashboard/dashboard1']);
           //this.router.navigate(['home/convenzioni/' + result.id]);
         },
         error => {
@@ -707,7 +709,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
   }
 
   onAziendaRicerca(){
-    this.router.navigate(['home/aziendeloc']);     
+    this.router.navigate(['home/aziendeloc']);
   }
 
 

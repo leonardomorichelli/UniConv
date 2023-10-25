@@ -17,6 +17,7 @@ use App\User;
 use App\Notifications\ConvenzioneApprovata;
 use App\Tasks\SottoscrizioneTask;
 use App\AttachmentType;
+use App\UnitaOrganizzativa;
 
 use App\Http\Controllers\SoapControllerTitulus;
 use Artisaninweb\SoapWrapper\SoapWrapper;
@@ -186,6 +187,11 @@ class TitulusHelper
         // da titulus leggo il codice del responsabile del dipartimento di riferimento         
         // dal codice leggo il nome del resp sempre su titulus
         $mapping = MappingUfficio::where('unitaorganizzativa_uo', $unitaorganizzativa_uo)->first();
+        if($mapping === null) {
+            $uo =  new UnitaOrganizzativa;
+            $area = $uo->getUoPadre($unitaorganizzativa_uo);
+            $mapping = MappingUfficio::where('unitaorganizzativa_uo', $area)->first();
+        }
 
         $ctrStr = new StrutturaInternaController();        
         $strint = $ctrStr->getminimal($mapping->strutturainterna_cod_uff);       

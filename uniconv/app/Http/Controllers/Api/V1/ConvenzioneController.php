@@ -480,9 +480,9 @@ class ConvenzioneController extends Controller
                     abort(403, trans('global.utente_non_autorizzato')); 
                 }   
             }else if ($uo->isPlesso()){                 
-                if (!in_array($conv->dipartimemto_cd_dip, $uo->dipartimenti_cd_dip())){
-                    abort(403, trans('global.utente_non_autorizzato')); 
-                }  
+                //if (!in_array($conv->dipartimemto_cd_dip, $uo->aree_id_ab())){
+                //    abort(403, trans('global.utente_non_autorizzato')); 
+                //}  
             }else if (Auth::user()->hasRole('op_contabilita')){                                
                 if (!(in_array($uo->uo, $conv->scadenzeusertasks()->pluck('unitaorganizzativa_uo')->toArray()) || 
                         in_array($id_ab, $conv->scadenzeusertasks()->pluck('respons_v_ie_ru_personale_id_ab')->toArray()))

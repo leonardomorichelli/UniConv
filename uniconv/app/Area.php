@@ -9,17 +9,16 @@ use App\Personale;
 use App\UnitaOrganizzativa;
 use App\Ruolo;
 use App\Organico;
-class Dipartimento extends Model
+class Area extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $connection = 'oracle';   
-
-    public $table = 'V_IE_AC_DIPARTIMENTI';
-    public $primaryKey = 'CD_DIP';
+    protected $connection = 'oracle';
+    public $table = 'VISTA_ORG_ATTIVA';
+    public $primaryKey = 'ID_AB';
 
     /**
      * Scope a query to only include active dipartments.
@@ -27,12 +26,12 @@ class Dipartimento extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeDipartimenti($query)
+    public function scopeAree($query)
     {
-        return $query->where('DT_FINE_VAL', '>=',  Carbon::now())->whereNotNull('CD_MIUR')->select('cd_dip','nome_dip','nome_breve','dip_id','cd_miur','id_ab');
+        return $query->where('DATA_FIN', '>=',  Carbon::now())->where('TIPO', '=',  'ARE')->select(['uo AS cd_dip', 'descr AS nome_breve']);
     }
 
-    //restituisce tutto il personale afferente ad un dipartimento
+    //restituisce tutto il personale afferente ad una area
     public function personale()
     {
         return $this->hasManyThrough(Personale::class, UnitaOrganizzativa::class, 'id_ab', 'aff_org','dip_id','uo');
@@ -51,7 +50,7 @@ class Dipartimento extends Model
         return $this->hasMany(Organico::class, 'id_ab_uo', 'id_ab');
     }
 
-    public function direttoreDipartimento()
+    public function responsabileArea()
     {       
         return $this->organico()->valido()->respArea();        
     }

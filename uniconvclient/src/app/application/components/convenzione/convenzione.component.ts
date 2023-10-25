@@ -47,7 +47,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
   modelUserTaskDetail: any;
 
   transitions = new Subject<any>();
-  
+
   translate: MyTranslatePipe;
   flatten = new MyFlattenPipe('nome_utente');
   currency = new MycurrencyPipe();
@@ -66,7 +66,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
       fieldGroup: [
       {
         key: 'id',
-        type: 'input',       
+        type: 'input',
         templateOptions: {
           label: 'Codice convenzione',
           disabled: true
@@ -75,7 +75,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
           return !model.id;
         }
       },
-    
+
       {
         type: 'select',
         key: 'transition',
@@ -99,7 +99,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
       ]
     }
   ];
-  
+
   fieldsattachment: FormlyFieldConfig[] = [
     {
       className: 'section-label',
@@ -114,14 +114,14 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
         onClick: ($event) => this.open()
       },
       expressionProperties: {
-        'templateOptions.disabled': (model: any, formState: any) => {                        
+        'templateOptions.disabled': (model: any, formState: any) => {
             return !!model.deleted_at
         },
       },
       hideExpression: (model: any, formState: any) => {
         if (!this.canActivate())
           return true;
-      }    
+      }
     },
     {
       key: 'attachments',
@@ -146,7 +146,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
           );
         },
       },
-      hideExpression: (model: any, formState: any) => {        
+      hideExpression: (model: any, formState: any) => {
         return this.model.attachments == null || this.model.attachments.length == 0
       },
       fieldArray: {
@@ -159,7 +159,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
           fieldGroup: [
           //nome allegato, tipo allegato, data ora creazione
             {
-              fieldGroupClassName: 'row',            
+              fieldGroupClassName: 'row',
               fieldGroup: [
                 {
                   type: 'input',
@@ -197,7 +197,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
                   },
                 },
                 {
-                fieldGroupClassName: 'btn-toolbar',   
+                fieldGroupClassName: 'btn-toolbar',
                 className: 'col-md-3 btn-group',
                 fieldGroup: [
                 {
@@ -210,7 +210,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
                   },
                   hideExpression: (model: any, formState: any) => {
                     return model.filetype == 'empty';
-                },                                
+                },
                 },
                 {
                   type: 'button',
@@ -219,20 +219,20 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
                     btnType: 'primary oi oi-external-link',
                     title: 'Apri pagina esterna',
                     onClick: ($event, model) => {
-                      let titulus = window.open('', '_blank'); 
+                      let titulus = window.open('', '_blank');
                       this.service.getTitulusDocumentURL(model.id).subscribe(
-                        (data)=> titulus.location.href = data.url, 
-                        (error) => { 
-                          titulus.close(); 
+                        (data)=> titulus.location.href = data.url,
+                        (error) => {
+                          titulus.close();
                           console.log(error);
-                        }                                            
+                        }
                       );
-                      
+
                     },
-                  },      
+                  },
                   hideExpression: (model: any, formState: any) => {
                     return !model.num_prot;
-                },          
+                },
                 },
               ],
               },
@@ -260,7 +260,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
                   className:'col-md-3',
                   templateOptions: {
                     label: 'Numero',
-                    disabled: true,                                                 
+                    disabled: true,
                   },
                   hideExpression(model,formState){
                     return !model.docnumber;
@@ -298,9 +298,9 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
       }
     }
   ]
-  
+
   fieldsusertask: FormlyFieldConfig[];
-  
+
   //fieldstask: FormlyFieldConfig[];
 
   fieldscadenze: FormlyFieldConfig[] = [
@@ -324,22 +324,22 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
         }
       },
       expressionProperties: {
-        'templateOptions.disabled': (model: any, formState: any) => {                        
+        'templateOptions.disabled': (model: any, formState: any) => {
             return !!model.deleted_at
         },
       },
       hideExpression: (model: any, formState: any) => {
         if (!this.canActivate())
           return true;
-      } 
+      }
     },
     {
       key: 'scadenze',
-      type: 'datatablegroup',    
+      type: 'datatablegroup',
       templateOptions: {
         btnHidden: true,
         label: 'Scadenze',
-        hidetoolbar: true,   
+        hidetoolbar: true,
         limit: "20",
         groupExpansionDefault: true,
         enableSummary: true,
@@ -350,7 +350,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
           { name: '#', prop: 'id', summaryFunc:  null, width: 60, maxWidth:100 },
           { name: 'Tranche prevista', prop: 'data_tranche',summaryFunc:  null, },
           { name: 'Stato', prop: 'state', summaryFunc: null },
-          { 
+          {
             name: 'Importo', prop: 'dovuto_tranche',
             cellClass: "text-right", summaryFunc: (cells) => this.sumImporto(cells), maxWidth:'150', pipe: this.currency,
           },
@@ -399,17 +399,17 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
   }
 
   constructor(
-    protected scadenzaService: ScadenzaService, 
-    public confirmationDialogService: ConfirmationDialogService, 
-    private service: ApplicationService, 
+    protected scadenzaService: ScadenzaService,
+    public confirmationDialogService: ConfirmationDialogService,
+    private service: ApplicationService,
     protected authService: AuthService,
-    private route: ActivatedRoute, 
-    protected router: Router, 
-    private modalService: NgbModal, 
-    public activeModal: NgbActiveModal,        
+    private route: ActivatedRoute,
+    protected router: Router,
+    private modalService: NgbModal,
+    public activeModal: NgbActiveModal,
     protected location: Location,
     private translateService: TranslateService,
-    private ref: ChangeDetectorRef) 
+    private ref: ChangeDetectorRef)
   {
     this.translate = new MyTranslatePipe(translateService);
     //modello vuoto
@@ -424,6 +424,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
       emittente: '',
       user: { id: null, name: null },
       dipartimento: { cd_dip: null, nome_breve: '' },
+      //area: { id_ab: null, nome_breve: '' },
       stato_avanzamento: null,
       convenzione_type: 'TO',
       tipopagamento: { codice: null, descrizione: '' },
@@ -441,7 +442,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
       },
       {
         key: 'usertasks',
-        type: 'datatable',     
+        type: 'datatable',
         templateOptions: {
           btnHidden: true,
           label: 'Attività associate',
@@ -464,7 +465,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
           fieldGroup: []
         }
       }
-  
+
     ];
 
     // this.fieldstask = [
@@ -489,10 +490,10 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
     //       fieldGroup: []
     //     }
     //   }
-  
+
     // ];
 
-    this.fields = this.fields.concat(service.getInformazioniDescrittiveFields(this.model,0)); 
+    this.fields = this.fields.concat(service.getInformazioniDescrittiveFields(this.model,0));
   }
 
   get isNew(): boolean {
@@ -502,7 +503,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
   ngOnInit() {
 
     let cols: (Array<any>) = this.fieldscadenze.find(x => x.key == "scadenze").templateOptions.columns;
-    cols.find(x => x.prop == 'state').cellTemplate = this.statetemplate; 
+    cols.find(x => x.prop == 'state').cellTemplate = this.statetemplate;
     cols.find(x => x.prop == 'id' && x.name=='').cellTemplate = this.comandi;
 
     cols= this.fieldsusertask.find(x => x.key == "usertasks").templateOptions.columns;
@@ -527,7 +528,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
               //la resetmodel imposta tutti i valori del modello.
               this.options[0].resetModel(data)
             } else {
-              this.model = data;              
+              this.model = data;
             }
 
 
@@ -592,7 +593,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
     }
   }
 
-  protected updateTransition(id) {        
+  protected updateTransition(id) {
     this.service.getNextActions(id).subscribe((data) => {
       this.transitions.next([]);
       this.transitions.next(data);
@@ -655,8 +656,8 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
   download(event, model) {
     this.service.download(model.id).subscribe(file => {
       if (file.filevalue){
-        var blob = new Blob([decode(file.filevalue)]);             
-        saveAs(blob, file.filename);                  
+        var blob = new Blob([decode(file.filevalue)]);
+        saveAs(blob, file.filename);
       }
     },
       e => { console.log(e); }
@@ -673,7 +674,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
   private sumImporto(cells: number[]): number {
     const filteredCells = cells.filter(cell => !!cell);
     let total = filteredCells.reduce((sum, cell) => sum += Number(cell), 0);
-    return total; 
+    return total;
   }
 
   onBack(){
@@ -692,12 +693,12 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
     this.router.navigate(['home/convdetails', this.model.id]);
   }
 
-  public onValidate() {    
-    this.fields.forEach(f => ControlUtils.validate(f));        
+  public onValidate() {
+    this.fields.forEach(f => ControlUtils.validate(f));
   }
 
   public onDelete() {
-  
+
     this.confirmationDialogService.inputConfirm('Conferma', 'Vuoi procedere con l\'operazione di cancellazione della convenzione?')
     .then((confirmed) => {
       if (confirmed.result) {
@@ -739,7 +740,7 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
     return field.fieldGroup.every(f => this.isValid(f));
   }
 
-  rowSelection(row) {     
+  rowSelection(row) {
     if (row.id) {
       this.router.navigate(['home/scadenze', row.id], {
         queryParams: {
@@ -760,25 +761,25 @@ export class ConvenzioneComponent implements OnInit, OnDestroy, AfterContentChec
             this.isLoading = true;
             this.scadenzaService.remove(row.id).subscribe(
               prop => {
-                this.isLoading = false; 
+                this.isLoading = false;
                 this.onReload();
               },
-              error => { // error path        
+              error => { // error path
                 console.log(error);
-                this.isLoading = false; 
+                this.isLoading = false;
               }
             );
-            
+
 
 
           }
-          //console.log(confirmed);        
+          //console.log(confirmed);
         })
         .catch(() => {
           this.isLoading = false;
         });
-      
-    
+
+
   }
 
   removeDisabled(row){
