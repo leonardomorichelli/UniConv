@@ -18,11 +18,6 @@ cd ..
 
 #http://localhost:4200/
 
-#/etc/ssl/openssl.cnf
-#providers = provider_sect //uncomment
-
-#export OPENSSL_CONF=/dev/null
-
 sudo chgrp -R www-data ./public;
 sudo chmod -R 775 ./public;
 
