@@ -7,7 +7,7 @@ cd ..
 cd uniconvclient
 #rm -rf ./dist/
 #ng build --prod --configuration=production --base-href="/"
-##ng build --configuration=postdev --sourceMap --base-href="/"
+#ng build --prod --configuration=preprod --base-href="/"
 ng serve
 cd ..
 

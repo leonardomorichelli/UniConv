@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://127.0.0.1:80/', //'http://127.0.0.1:80/',
+  API_URL: 'http://localhost:80/',
   baseHref: '/',
-  whitelistedDomains: ['localhost:4200', 'uniconv.unicam.it','127.0.0.1:80'],
+  whitelistedDomains: ['localhost:4200', 'localhost:80'],
   blacklistedRoutes: ['localhost:4200/auth/'],
-  documentation: 'https://enoliva.bitbucket.io/index.html'
+  documentation: 'http://localhost:80/'
 };
 
 /*
