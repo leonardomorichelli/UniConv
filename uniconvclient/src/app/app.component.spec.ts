@@ -24,19 +24,19 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        NotFoundComponent,  
-        TestTabComponent,           
+        NotFoundComponent,
+        TestTabComponent,
       ],
       imports: [
-        BrowserModule, FormsModule, HttpClientModule, ApplicationModule, ReactiveFormsModule, SharedModule, NgbModule, 
-        AppRoutingModule, CoreModule, NgxDatatableModule,  NgxPermissionsModule.forRoot(), PdfViewerModule, ToastrModule.forRoot(),        
+        BrowserModule, FormsModule, HttpClientModule, ApplicationModule, ReactiveFormsModule, SharedModule, NgbModule,
+        AppRoutingModule, CoreModule, NgxDatatableModule,  NgxPermissionsModule.forRoot(), PdfViewerModule, ToastrModule.forRoot(),
         JwtModule.forRoot({
           config: {
             tokenGetter: tokenGetter,
-            whitelistedDomains: environment.whitelistedDomains, // ['localhost:4200', 'pcoliva.uniurb.it','unidemdev.uniurb.it'],
+            whitelistedDomains: environment.whitelistedDomains, // ['localhost:4200'],
             blacklistedRoutes: environment.blacklistedRoutes, //['localhost:4200/auth/']
           }
-        })    
+        })
       ]
     }).compileComponents();
   }));

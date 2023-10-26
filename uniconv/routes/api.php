@@ -44,8 +44,8 @@ Route::get('loginSaml', function(Request $request){
             if ($url){
                 if (isset($url['host'])){
                     Log::info('host: '.$url['host']);                 
-                    if ($url['host'] !== 'www.uniurb.it'){
-                        Log::info('redirect: https://www.unicam.it/');                 
+                    if ($url['host'] !== 'www.unicam.it'){
+                        Log::info('redirect: https://www.unicam.it/');
                         return redirect()->away('https://www.unicam.it/');
                     }                    
                 }

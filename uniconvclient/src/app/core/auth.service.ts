@@ -16,7 +16,7 @@ interface LoginResponse {
 
 const httpOptions = {
   headers: new HttpHeaders({
-    //'observe': 'response',    
+    //'observe': 'response',
     'Content-Type': 'application/json'
     //'Access-Control-Allow-Headers': 'Content-Type, X-Auth-Token, Authorization, X-Requested-With'
     //'Access-Control-Allow-Origin': '*'
@@ -27,10 +27,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  
-  private authUrl: string; //= 'http://pcoliva.uniurb.it/api';
+
+  private authUrl: string;
   private loggedIn = new BehaviorSubject<boolean>(false);
-  
+
   _username: string = '';
   _roles: string[]  = [''];
   _id: number;
@@ -42,18 +42,18 @@ export class AuthService {
     this.loggedIn.next(this.isAuthenticated());
     this.authUrl = AppConstants.baseURL;
   }
- 
-  login() {      
+
+  login() {
     return this.http.get(`${this.authUrl}/loginSaml`,httpOptions)
       .subscribe(res => {
         console.log(res);
       })
   }
 
-  loginWithToken(token: any){        
+  loginWithToken(token: any){
     localStorage.setItem(AuthService.TOKEN,token);
     this.loggedIn.next(this.isAuthenticated());
-    this.reload()    
+    this.reload()
   }
 
   cambiaUtente(id){
@@ -64,7 +64,7 @@ export class AuthService {
         this.permissionsService.flushPermissions();
         this.resetFields();
         this.loggedIn.next(false);
-        
+
         this.loginWithToken(data.token);
       })).subscribe(res => {
         console.log(res);
@@ -85,25 +85,25 @@ export class AuthService {
       const decodedToken = helper.decodeToken(localStorage.getItem(AuthService.TOKEN));
       this._email = decodedToken['email'];
       this._username = decodedToken['name'];
-      this._roles = decodedToken['roles']; 
-      console.log(this.roles);     
-      this._id = decodedToken['id'];    
+      this._roles = decodedToken['roles'];
+      console.log(this.roles);
+      this._id = decodedToken['id'];
       this.permissionsService.loadPermissions(this._roles);
     }
   }
 
   redirectFirstLogin(redirect){
-    
+
     if (redirect && redirect != 'home' && redirect != '/home' && redirect != ''){
         console.log(redirect);
-        this.router.navigate([redirect]);       
-        return;                         
+        this.router.navigate([redirect]);
+        return;
     }
-    
+
     //permissions: ['ADMIN','SUPER-ADMIN','OP_APPROVAZIONE','OP_CONTABILITA','ADMIN_AMM'],
     const permissions = this.permissionsService.getPermissions();
     if (permissions['ADMIN'] || permissions['OP_APPROVAZIONE'] || permissions['OP_CONTABILITA'] || permissions['ADMIN_AMM']){
-        this.router.navigate(['home/dashboard/dashboard1']);                    
+        this.router.navigate(['home/dashboard/dashboard1']);
     }else if (permissions['SUPER-ADMIN'] || permissions['OP_UFF_BILANCIO']){
         this.router.navigate(['home/convenzioni']);
     }else {
@@ -149,12 +149,12 @@ export class AuthService {
   /**
      * Check if the user is logged in
      */
-  get isLoggedIn() {    
+  get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
   public get userid(): number{
-    return this._id; 
+    return this._id;
   }
 
   public get email(): string {
