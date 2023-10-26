@@ -20,6 +20,19 @@ use Illuminate\Http\Request;
 //aggiornare la documentazione
 //php artisan api:update
 
+//info
+Route::get('/info.json', function () {
+    $data = array(
+        "ateneo" => "Unicam",
+        "app_name" => "Uniconv",
+        "app_version" => "1.0.1"
+    );
+
+    header("Content-Type: application/json");
+    echo json_encode($data);
+    exit();
+});
+
 Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check'],  'namespace'=>'Api\V1'], function () {
 
     Route::get('mappingruoli', 'MappingRuoloController@index');
@@ -55,13 +68,11 @@ Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check
 
 Route::group(['middleware' => ['cors','auth:api','log','check'], 'namespace'=>'Api\V1'],function(){
     //info
-    Route::get('/info.json', function () {
+    Route::get('/online.json', function () {
         $data = array(
-            "ateneo" => "Unicam",
-            "app_name" => "Uniconv",
-            "app_version" => "1.0.1"
+            "online" => true
         );
-    
+
         header("Content-Type: application/json");
         echo json_encode($data);
         exit();
