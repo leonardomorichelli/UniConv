@@ -1,4 +1,5 @@
 cd uniconv
+./clear.sh
 sudo systemctl stop nginx.service
 #php artisan migrate:fresh --seed
 sudo php artisan serve --port 80

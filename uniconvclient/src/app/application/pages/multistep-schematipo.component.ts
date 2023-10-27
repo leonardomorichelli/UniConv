@@ -182,7 +182,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                   {
                     key: 'file_CD_type',
                     type: 'select',
-                    defaultValue: 'DCD',
+                    defaultValue: 'DCD', //DSA
                     className: "col-md-6",
                     templateOptions: {
                       label: 'Tipo documento di approvazione',
@@ -190,6 +190,10 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                       options: [
                         { value: 'DCD', label: 'Delibera Consiglio di Dipartimento' },
                         { value: 'DDD', label: 'Decreto del direttore di dipartimento' },
+                        //{ value: 'DSA', label: 'Delibera Senato Accademico' },
+                        //{ value: 'DCA', label: 'Delibera Consiglio di Amministrazione' },
+                        //{ value: 'DCS', label: 'Delibera Consiglio della Scuola' },
+                        //{ value: 'DDS', label: 'Decreto del Direttore della Scuola' },
                       ]
                     },
                     expressionProperties: {
