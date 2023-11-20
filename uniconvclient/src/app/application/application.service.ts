@@ -141,7 +141,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                   options: [],
                   valueProp: 'cd_dip',
                   labelProp: 'nome_breve',
-                  label: 'Dipartimento',
+                  label: 'Area amministrazione responsabile',
                   required: true,
                   inizialization: () => {
                     return comp.dipartimento
@@ -165,7 +165,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
                 type: 'input',
                 className: "col-md-6",
                 templateOptions: {
-                  label: 'Responsabile scientifico',
+                  label: 'Referente della convenzione',
                   required: true,
                   maxLength: 40,
                 },
@@ -607,7 +607,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
           options: this.getDipartimenti(),
           valueProp: 'cd_dip',
           labelProp: 'nome_breve',
-          label: 'Dipartimento',
+          label: 'Area amministrazione responsabile',
           required: true
         },
       },
@@ -616,7 +616,7 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
         type: 'input',
         className: "col-md-6",
         templateOptions: {
-          label: 'Responsabile scientifico',
+          label: 'Referente della convenzione',
           required: true,
         },
       },

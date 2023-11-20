@@ -360,8 +360,8 @@ class Convenzione extends \App\Models\BaseEntity
         return $this->bolli()->where('tipobolli_codice','BOLLO_ALLEGATI')->first();
     }
 
-    // { value: 'DCD', label: 'Delibera Consiglio di Dipartimento' },
-    // { value: 'DDD', label: 'Decreto del direttore di dipartimento' },
+    // { value: 'DCD', label: 'Delibera Consiglio di Scuola' },
+    // { value: 'DDD', label: 'Decreto del direttore della Scuola' },
     public function tipo_documento_approvazione(){
         $attach = $this->attachments()->whereIn('attachmenttype_codice',['DCD','DDD'])->first();
         if ($attach){

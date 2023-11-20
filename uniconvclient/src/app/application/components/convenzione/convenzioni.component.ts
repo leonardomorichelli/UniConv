@@ -74,7 +74,7 @@ export class ConvenzioniComponent extends BaseResearchComponent {
         options: this.service.getDipartimenti(),
         valueProp: 'cd_dip',
         labelProp: 'nome_breve',
-        label: 'Dipartimento',
+        label: 'Area amministrazione responsabile',
         required: true
       },
     },
@@ -83,7 +83,7 @@ export class ConvenzioniComponent extends BaseResearchComponent {
       type: 'input',
       className: "col-md-6",
       templateOptions: {
-        label: 'Responsabile scientifico',
+        label: 'Referente della convenzione',
         required: true,
 
       }
@@ -270,7 +270,7 @@ export class ConvenzioniComponent extends BaseResearchComponent {
               { name: 'Azienda o ente', prop:'aziende', pipe: this.flatten, minWidth: 300 },
               { name: 'Dipartimento', prop: 'dipartimemto_cd_dip', cellTemplate: this.tooltipCellTemplate,
                 pipe: this.translate, width: 135, maxWidth: 135 },
-              { name: 'Responsabile scientifico', prop: 'resp_scientifico', width: 150},
+              { name: 'Referente della convenzione', prop: 'resp_scientifico', width: 150},
               { name: 'Tipo convenzione', prop: 'convenzione_type', pipe: this.translate },
               { name: 'Ambito', prop: 'ambito', pipe: this.translate },
               { name: 'Modalità di pagamento', prop: 'tipopagamento.descrizione', width: 200 },

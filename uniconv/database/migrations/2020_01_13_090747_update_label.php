@@ -18,8 +18,8 @@ class UpdateLabel extends Migration
 
         $attachType = AttachmentType::where('codice','DDD')->first();
         if ($attachType){
-            $attachType->descrizione = 'Decreto del direttore di dipartimento';
-            $attachType->descrizione_compl = 'Decreto del direttore di dipartimento';
+            $attachType->descrizione = 'Decreto del direttore della Scuola';
+            $attachType->descrizione_compl = 'Decreto del direttore della Scuola';
             $attachType->save();
         }
 

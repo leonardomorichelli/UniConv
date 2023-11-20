@@ -61,7 +61,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: 'multistep-schematipo',
-        title: 'Dipartimentale', //Aree
+        title: 'Scuola di Ateneo', //Aree
         icon: 'icon-File',
         class: '',
         extralink: false,
@@ -70,7 +70,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: 'ins-conv-amm',
-        title: 'Amministrativa', //Amministrativa
+        title: 'Amministrazione Centrale', //Amministrativa
         icon: 'icon-File',
         class: '',
         extralink: false,

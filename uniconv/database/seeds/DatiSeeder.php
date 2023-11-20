@@ -233,16 +233,16 @@ class DatiSeeder extends Seeder
         DB::table('attachmenttypes')->insert([   
             'codice' => 'DDD',        
             'gruppo' => 'proposta',
-            'descrizione' => 'Decreto del direttore di dipartimento',
-            'descrizione_compl' => 'Decreto del direttore di dipartimento',         
+            'descrizione' => 'Decreto del direttore della Scuola',
+            'descrizione_compl' => 'Decreto del direttore della Scuola',         
             'parent_type' => Convenzione::class,   
         ]);
 
         DB::table('attachmenttypes')->insert([   
             'codice' => 'DCD',        
             'gruppo' => 'proposta',
-            'descrizione' => 'Delibera Consiglio di Dipartimento',  
-            'descrizione_compl' => 'Delibera Consiglio di Dipartimento',        
+            'descrizione' => 'Delibera Consiglio di Scuola',  
+            'descrizione_compl' => 'Delibera Consiglio di Scuola',        
             'parent_type' => Convenzione::class,    
         ]);
         
@@ -298,8 +298,8 @@ class DatiSeeder extends Seeder
         DB::table('attachmenttypes')->insert([   
             'codice' => 'DA',      
             'gruppo' => 'proposta',
-            'descrizione' => 'Documento appoggio',   
-            'descrizione_compl' => 'Documento appoggio',   
+            'descrizione' => 'Bozza convenzione',   
+            'descrizione_compl' => 'Bozza convenzione',   
             'parent_type' => Convenzione::class,         
         ]);
 

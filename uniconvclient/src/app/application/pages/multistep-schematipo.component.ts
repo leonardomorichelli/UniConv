@@ -188,8 +188,8 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                       label: 'Tipo documento di approvazione',
                       required: true,
                       options: [
-                        { value: 'DCD', label: 'Delibera Consiglio di Dipartimento' },
-                        { value: 'DDD', label: 'Decreto del direttore di dipartimento' },
+                        { value: 'DCD', label: 'Delibera Consiglio di Scuola' },
+                        { value: 'DDD', label: 'Decreto del direttore della Scuola' },
                         //{ value: 'DSA', label: 'Delibera Senato Accademico' },
                         //{ value: 'DCA', label: 'Delibera Consiglio di Amministrazione' },
                         //{ value: 'DCS', label: 'Delibera Consiglio della Scuola' },
@@ -267,14 +267,15 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                   show: true,
                 },
                 templateOptions: {
-                  label: 'Documento appoggio (formato word)',
-                  type: 'input',
+                  label: 'Bozza convenzione (formato word)',
                   description: 'Versione editabile (file word) della delibera o della disposizione. Dimensione massima 2MB.',
+                  type: 'input',
                   placeholder: 'Scegli documento',
+                  accept: '.doc,.docx ,application/msword',
+                  required: true,
                   // tooltip: {
                   //   content: 'Versione editabile (file word) della delibera o della disposizione'
                   // },
-                  accept: '.doc,.docx ,application/msword',
                   onSelected: (selFile, field) => {
                     this.onSelectCurrentFile(selFile, MultistepSchematipoComponent.DOC_APP, field)
                   }

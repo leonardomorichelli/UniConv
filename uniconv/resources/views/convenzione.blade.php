@@ -53,8 +53,8 @@
 	<p class="center"><b>ART. 1 - PREMESSE</b></p>
 	<p>Le premesse fanno parte integrante e sostanziale del presente atto.</p>
 
-	<p class="center"><b>ART. 2 – OGGETTO DELLA CONVENZIONE E RESPONSABILE SCIENTIFICO</b></p>
-	<p class="justify">La “____________” affida all'Università, sotto la direzione del Responsabile Scientifico
+	<p class="center"><b>ART. 2 – OGGETTO DELLA CONVENZIONE E REFERENTE DELLA CONVENZIONE</b></p>
+	<p class="justify">La “____________” affida all'Università, sotto la direzione del Referente della convenzione
 	Prof.____________________________, che accetta, l’esecuzione delle seguenti prestazioni 
 	___________________, qui di seguito indicate dettagliatamente:
 	- _________________________________________________________________________ ;
@@ -63,7 +63,7 @@
 	- _________________________________________________________________________ ;</p>
 	
 	<p class="center"><b>ART.3 - COLLABORAZIONI (se necessario)</b></p>
-	<p class="justify">Il Responsabile scientifico si avvarrà delle seguenti collaborazioni (interne e/o esterne):
+	<p class="justify">Il Referente della convenzione si avvarrà delle seguenti collaborazioni (interne e/o esterne):
 		- ______________________________________;
 		- ______________________________________;
 		Tale collaborazioni necessarie ai fini dell’espletamento delle attività di cui sopra, saranno garantite con oneri
