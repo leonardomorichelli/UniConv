@@ -49,7 +49,7 @@ class TitulusHelper
      * @param $send_email appaiono i tasti di invio email
      * @param $addrepertorio il documento protocolollato viene aggiunto al repertorio 'RepProv','Convenzione e Accordi'
      */
-    public static function saveDocumentInTitulus($oggetto,  $attachments, $tipodoc, $aziende, $conv, $fascicolo_nrecord, $send_mail=false, $addrepertorio=false){
+    public static function saveDocumentInTitulus($oggetto, $attachments, $tipodoc, $aziende, $conv, $fascicolo_nrecord, $send_mail=false, $addrepertorio=false){
 
         $titolario = $conv->titolario_classificazione;        
 

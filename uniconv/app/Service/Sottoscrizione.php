@@ -51,7 +51,7 @@ class Sottoscrizione
                 if ($attachment['attachmenttype_codice'] == 'LTU_FIRM_UNIURB'){
                     //aggiunge le info sul nrecord e num_prot                     
                     //allego un solo documento
-                    $data['attachments'][$key] = TitulusHelper::saveDocumentInTitulus(TitulusHelper::OGGETTO_SOTTOSCRIZIONE,array($attachment),  Documento::PARTENZA, $aziende, $conv, $conv->nrecord)[0];                    
+                    $data['attachments'][$key] = TitulusHelper::saveDocumentInTitulus(TitulusHelper::OGGETTO_SOTTOSCRIZIONE, array($attachment), Documento::PARTENZA, $aziende, $conv, $conv->nrecord)[0];
                 }
             }
         }   
