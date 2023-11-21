@@ -60,7 +60,8 @@ export interface Convenzione extends BaseEntity {
     convenzione_from: convenzioneFrom,
     rinnovo_type: rinnovoType,
     deleted_at?: any,
-    formstatus?: string
+    formstatus?: string,
+    docBozza?: any,
 }
 
 export interface ConvenzioneDipartimentale extends Convenzione{

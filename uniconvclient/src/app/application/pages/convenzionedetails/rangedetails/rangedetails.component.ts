@@ -14,10 +14,10 @@ export class RangedetailsComponent implements OnInit {
   isLoading = false;
 
   @Input() labeln: string = 'n.';
-  @Input() numero: string;
-
   @Input() labelil: string = 'il';
   @Input() labeldel: string = 'del';
+
+  @Input() numero: string;
   @Input() data: string;
   @Input() id: any = null;
 
@@ -31,17 +31,17 @@ export class RangedetailsComponent implements OnInit {
       this.isLoading = true;
       this.appService.download(id).subscribe(file => {
         this.isLoading = false;
-        if (file && file.filevalue){
+        if (file && file.filevalue) {
           var blob = new Blob([decode(file.filevalue)]);
           saveAs(blob, file.filename);
-        } else {          
+        } else {
           this.appService.messageService.add(InfraMessageType.Info, "Errore nel download del file");
         }
-        
+
       },
-        e => { 
-          this.isLoading = false; 
-          console.log(e); 
+        e => {
+          this.isLoading = false;
+          console.log(e);
         }
       );
     }
