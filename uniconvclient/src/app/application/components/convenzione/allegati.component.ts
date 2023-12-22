@@ -13,8 +13,8 @@ import { encode, decode } from 'base64-arraybuffer';
 
   <h4>Allegati</h4>
   <form *ngIf='model' [formGroup]="form" >
-    <formly-form  [model]="model" [fields]="fields" [form]="form" [options]="options">  
-    </formly-form> 
+    <formly-form  [model]="model" [fields]="fields" [form]="form" [options]="options">
+    </formly-form>
   </form>
 
   <br>
@@ -37,7 +37,7 @@ export class AllegatiComponent implements OnInit {
   model: any;
   currentSelFile: File;
   isLoading: boolean;
- 
+
 
   fields: FormlyFieldConfig[] = [
     {
@@ -68,7 +68,7 @@ export class AllegatiComponent implements OnInit {
           type: 'fileinput',
           className: "col-md-5",
           templateOptions: {
-            label: 'Scegli documento',
+            label: 'Scegli il documento',
             type: 'input',
             placeholder: 'Scegli file tipo pdf',
             accept: 'application/pdf',
@@ -90,10 +90,10 @@ export class AllegatiComponent implements OnInit {
         },
         {
           type: 'button',
-          className: "col-md-2 d-flex align-items-start mt-4 pt-2",          
+          className: "col-md-2 d-flex align-items-start mt-4 pt-2",
           templateOptions: {
-            text: 'Carica',            
-            btnType: 'primary',            
+            text: 'Carica',
+            btnType: 'primary',
             onClick: ($event, model) => this.add(),
           },
           expressionProperties: {
@@ -103,20 +103,20 @@ export class AllegatiComponent implements OnInit {
           },
         },
       ],
-     
-    },  
+
+    },
 
     {
       key: 'attachments',
       type: 'repeat',
-      wrappers: ['accordion'],     
+      wrappers: ['accordion'],
       templateOptions: {
         btnHidden: true,
         label: 'Gestione allegati',
-      },   
+      },
       hideExpression: (model: any, formState: any) => {
          return this.model.attachments.length == 0
-      },   
+      },
       fieldArray: {
         fieldGroupClassName: 'row',
         fieldGroup: [
@@ -138,7 +138,7 @@ export class AllegatiComponent implements OnInit {
               label: 'Tipologia',
             },
           },
-        ],      
+        ],
       }
     }
   ]
@@ -178,7 +178,7 @@ export class AllegatiComponent implements OnInit {
       currentAttachment.filevalue = encode(e.target.result);
       this.callUpdate(currentAttachment);
     }
-    reader.readAsArrayBuffer(this.currentSelFile); 
+    reader.readAsArrayBuffer(this.currentSelFile);
   }
 
   private callUpdate(currentFile: FileAttachment) {

@@ -57,12 +57,11 @@ class Personale extends Model
     public function mappingufficio()
     {
         return $this->belongsTo(MappingUfficio::class,'aff_org','unitaorganizzativa_uo');
-    } 
-
+    }
 
     public function scopeFindByIdAB($query, $id_ab)
     {        
-        return $query->where('id_ab',$id_ab);
+        return $query->where('id_ab', $id_ab);
     }
 
 
@@ -90,5 +89,10 @@ class Personale extends Model
     /** restituisce il nome utente ricercabile su titulus */
     public function getUtenteNomepersonaAttribute(){
         return strtolower($this->attributes['cognome']).' '.strtolower($this->attributes['nome']);
+    }    
+    
+    public function GetPersonaByIdAb($id_ab)
+    {
+        return $this->where('id_ab', $id_ab)->first();
     }
 }

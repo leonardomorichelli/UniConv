@@ -18,15 +18,15 @@ import { ConfirmationDialogService } from 'src/app/shared/confirmation-dialog/co
   <div class="container-fluid">
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-  <div class="btn-group btn-group">        
-    <button class="btn btn-outline-primary rounded-lg"  [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-      <span class="oi oi-arrow-top"></span>  
-      <span class="ml-2">{{ 'btn_salva' | translate }} e invia</span>              
-    </button> 
-    <button class="btn btn-outline-primary rounded-lg ml-1"  (click)="onValidate()" >              
-    <span class="oi oi-flash"></span>  
-    <span class="ml-2">Valida</span>              
-  </button> 
+  <div class="btn-group btn-group">
+    <button class="btn btn-outline-primary rounded-lg"  [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+      <span class="oi oi-arrow-top"></span>
+      <span class="ml-2">{{ 'btn_salva' | translate }} e invia</span>
+    </button>
+    <button class="btn btn-outline-primary rounded-lg ml-1"  (click)="onValidate()" >
+    <span class="oi oi-flash"></span>
+    <span class="ml-2">Valida</span>
+  </button>
   </div>
   </div>
   <h4 *ngIf="title">{{title}}</h4>
@@ -42,7 +42,7 @@ import { ConfirmationDialogService } from 'src/app/shared/confirmation-dialog/co
 })
 
 export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
-  
+
   public STATE = 'attivo';
   public static WORKFLOW_ACTION: string = 'richiestapagamento'; //TRASITION
   public static ABSULTE_PATH: string = 'home/inviorichiestapagamento';
@@ -66,7 +66,7 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
           className: "col-md-12",
           templateOptions: {
             label: 'Scadenza',
-            type: 'string',            
+            type: 'string',
             entityName: 'scadenza',
             entityLabel: 'Scadenza',
             entityPath: 'home/scadenze',
@@ -74,26 +74,26 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
             descriptionProp: 'dovuto_tranche',
             descriptionFunc: (data) => {
                 if (data && data.convenzione){
-                  this.updateEmail(data.convenzione.id); 
+                  this.updateEmail(data.convenzione.id);
                   return data.dovuto_tranche +' - ' + 'Convenzione n. '+data.convenzione.id+' - '+data.convenzione.descrizione_titolo;
                 }
                 return '';
             },
             rules: [{value: this.STATE, field: "state", operator: "="}],
             copymodel: true,
-            isLoading: false,          
+            isLoading: false,
           },
           expressionProperties: {
-            'templateOptions.disabled': (model: any, formState: any) => {                        
+            'templateOptions.disabled': (model: any, formState: any) => {
                 return formState.disabled_id;
             },
-          },              
+          },
         },
       ]
     },
-    {     
+    {
       key: 'attachment1',
-      fieldGroup: [        
+      fieldGroup: [
         {
           fieldGroupClassName: 'row',
           fieldGroup: [
@@ -102,9 +102,9 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
               type: 'select',
               className: "col-md-5",
               defaultValue: 'RICHIESTA_PAGAMENTO',
-              templateOptions: {                
-                options: [                  
-                  { codice: 'RICHIESTA_PAGAMENTO', descrizione: 'Richiesta pagamento' },                  
+              templateOptions: {
+                options: [
+                  { codice: 'RICHIESTA_PAGAMENTO', descrizione: 'Richiesta pagamento' },
                 ],
                 valueProp: 'codice',
                 labelProp: 'descrizione',
@@ -115,7 +115,7 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
             {
               key: 'filename',
               type: 'fileinput',
-              className: "col-md-7",              
+              className: "col-md-7",
               templateOptions: {
                 label: 'Scegli il documento',
                 type: 'input',
@@ -123,30 +123,30 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
                 required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
-              },      
+              },
             },
             {
               key: 'filevalue',
               type: 'input',
               templateOptions: {
-                type: 'hidden'        
+                type: 'hidden'
               },
-            },          
+            },
           ],
         },
       ],
     },
     {
       key: 'email',
-      type: 'input',          
+      type: 'input',
       templateOptions: {
         translate: true,
-        label: 'AZIENDALOC.PEC', 
+        label: 'AZIENDALOC.PEC',
         disabled: true,
-        required: true,   
-        description: 'Contatti delle aziende o enti associate alla convenzione',                            
-      },          
-    },         
+        required: true,
+        description: 'Contatti delle aziende o enti associate alla convenzione',
+      },
+    },
 
   ]
 
@@ -157,58 +157,58 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
       currentAttachment.filevalue = null;
       return;
     }
-  
+
     this.isLoading = true;
     currentAttachment.model_type = 'convenzione';
-    
-    const reader = new FileReader();   
+
+    const reader = new FileReader();
 
     reader.onload = async (e: any) => {
       this.isLoading = true;
       field.formControl.parent.get('filevalue').setValue(encode(e.target.result));
-      
+
       if (!currentAttachment.filevalue) {
         this.isLoading = false;
         return;
-      }    
+      }
       this.isLoading = false;
     }
     reader.readAsArrayBuffer(currentSelFile);
   }
-  
-  constructor(protected service: ApplicationService, protected scadService: ScadenzaService, protected route: ActivatedRoute, protected router: Router, 
+
+  constructor(protected service: ApplicationService, protected scadService: ScadenzaService, protected route: ActivatedRoute, protected router: Router,
     protected location: Location, protected confirmationDialogService: ConfirmationDialogService) {
     super(route, router, location)
     this.isLoading = false;
   }
 
   ngOnInit() {
-    
+
     this.route.params.subscribe(params => {
-      this.options.formState.disabled_id = false;                
-      if (params['id']) {  
-        this.options.formState.disabled_id = true;                
-        //leggere la minimal della convenzione        
+      this.options.formState.disabled_id = false;
+      if (params['id']) {
+        this.options.formState.disabled_id = true;
+        //leggere la minimal della convenzione
         this.model = this.service.getRichiestaEmissioneData();
         if (this.model){
           this.options.formState.model = this.model;
-          this.options.formState.disabled_covenzione_id = true;          
+          this.options.formState.disabled_covenzione_id = true;
         }else{
           this.isLoading=true;
           this.model = { convenzione: {}};
-          //leggere la minimal della convenzione        
+          //leggere la minimal della convenzione
           this.scadService.getById(params['id']).subscribe(
             result => {
-              if (result){            
-                  this.model = result;   
-                  this.options.formState.model = this.model;                      
+              if (result){
+                  this.model = result;
+                  this.options.formState.model = this.model;
               }
               this.isLoading=false;
             }
           );
         }
 
-     
+
 
       };
     });
@@ -217,15 +217,15 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
   updateEmail(convenzione_id){
     if (convenzione_id){
       this.service.getAziende(convenzione_id).subscribe(
-        result => { 
-          setTimeout(() => {                        
+        result => {
+          setTimeout(() => {
             if (result && result[0]){
               const emails = (result.map(it => it.pec_email)).join(', ');
               if (this.form.get('email'))
                 this.form.get('email').setValue(emails);
-            }else 
+            }else
               this.form.get('email').setValue('email non associata');
-          }, 0);              
+          }, 0);
         }
       );
     }
@@ -236,20 +236,20 @@ export class InvioRichiestaPagamentoComponent extends BaseEntityComponent {
     if (this.form.valid) {
       this.isLoading = true;
       var tosubmit = { ...this.model, ...this.form.value };
-      
+
       this.service.invioRichiestaPagamentoStep(tosubmit,true).subscribe(
-        result => {          
-          
+        result => {
+
           this.confirmationDialogService.confirm("Finestra messaggi", result.message, "Chiudi", null, 'lg').then(
             () => this.router.navigate(['home/dashboard/dashboard1']),
             () => this.router.navigate(['home/dashboard/dashboard1']))
-          .catch(() => {           
+          .catch(() => {
           });
 
-          this.isLoading = false;         
+          this.isLoading = false;
         },
         error => {
-          this.isLoading = false;       
+          this.isLoading = false;
         });
     }
   }

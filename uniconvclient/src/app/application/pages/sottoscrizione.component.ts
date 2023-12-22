@@ -5,7 +5,7 @@ import { ApplicationService } from '../application.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { encode, decode } from 'base64-arraybuffer';
 import { takeUntil, startWith, tap, distinctUntilKeyChanged, distinctUntilChanged } from 'rxjs/operators';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { ConfirmationDialogService } from 'src/app/shared/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
@@ -142,7 +142,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 valueProp: 'codice',
                 labelProp: 'descrizione',
                 label: 'Tipo documento',
-                required: true,
+                //required: true,
               },
               hooks: {
                 onInit: (field) => {
@@ -224,6 +224,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 valueProp: 'codice',
                 labelProp: 'descrizione',
                 label: 'Tipo documento',
+                required: true,
               },
               expressionProperties: {
                 'templateOptions.required': 'formState.model.stipula_format == "digitale"'
@@ -257,11 +258,12 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
-              expressionProperties: {
-                'templateOptions.required': 'formState.model.stipula_format == "digitale"'
-              },
+              //expressionProperties: {
+              //  'templateOptions.required': 'formState.model.stipula_format == "digitale"'
+              //},
             },
 
           ],
@@ -380,7 +382,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                     valueProp: 'codice',
                     labelProp: 'descrizione',
                     label: 'Tipo documento',
-                    required: true,
+                    //required: true,
                   },
                 },
                 //filename
@@ -455,6 +457,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 valueProp: 'codice',
                 labelProp: 'descrizione',
                 label: 'Tipo documento',
+                required: true,
               },
             },
             {
@@ -466,11 +469,10 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
-
             },
-
           ],
         },
 

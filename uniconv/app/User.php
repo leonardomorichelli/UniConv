@@ -246,5 +246,10 @@ class User extends Authenticatable implements JWTSubject
         $myself->cd_csa = $myself->cd_csa_resp;
         return $myself;
     }
+
+    public function GetUserById($id)
+    {
+        return $this->where('id', $id)->first();
+    }
 }
 

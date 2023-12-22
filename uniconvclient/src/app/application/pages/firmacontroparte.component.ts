@@ -15,15 +15,15 @@ import { NgbStringAdapter } from 'src/app/NgbStringAdapter';
   <div class="container-fluid">
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-  <div class="btn-group btn-group">        
-    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-      <span class="oi oi-arrow-top"></span>  
-      <span class="ml-2">{{ 'btn_salva' | translate }}</span>              
-    </button> 
-    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >              
-    <span class="oi oi-flash"></span>  
-    <span class="ml-2">Valida</span>              
-  </button> 
+  <div class="btn-group btn-group">
+    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+      <span class="oi oi-arrow-top"></span>
+      <span class="ml-2">{{ 'btn_salva' | translate }}</span>
+    </button>
+    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >
+    <span class="oi oi-flash"></span>
+    <span class="ml-2">Valida</span>
+  </button>
   </div>
   </div>
   <h4 *ngIf="title">{{title}}</h4>
@@ -41,7 +41,7 @@ import { NgbStringAdapter } from 'src/app/NgbStringAdapter';
 export class FirmaControparteComponent extends BaseEntityComponent {
 
   public STATE = 'da_firmare_controparte2';
-  public static WORKFLOW_ACTION: string = 'firma_da_controparte2'; 
+  public static WORKFLOW_ACTION: string = 'firma_da_controparte2';
   public static ABSULTE_PATH: string = 'home/firmacontroparte';
 
   adapter = new NgbStringAdapter();
@@ -88,7 +88,7 @@ export class FirmaControparteComponent extends BaseEntityComponent {
         //stipula format
         {
           key: 'stipula_format',
-          type: 'select', 
+          type: 'select',
           templateOptions: {
             options: [
               { codice: 'cartaceo', descrizione: 'Stipula cartacea' },
@@ -196,7 +196,7 @@ export class FirmaControparteComponent extends BaseEntityComponent {
                   templateOptions: {
                     label: 'Data',
                     required: true,
-                    //required: true,                               
+                    //required: true,
                   },
                   hideExpression: (model: any, formState: any) => {
                     return (formState.model.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -231,9 +231,10 @@ export class FirmaControparteComponent extends BaseEntityComponent {
                 label: 'Scegli il documento',
                 type: 'input',
                 placeholder: 'Scegli file documento',
-                accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,            
+                accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
-              },          
+              },
             },
             {
               key: 'filevalue',
@@ -265,7 +266,7 @@ export class FirmaControparteComponent extends BaseEntityComponent {
                 required: true,
                 label: 'Data di stipula convenzione',
               },
-            },          
+            },
           ]
         }
       ]
@@ -415,13 +416,13 @@ export class FirmaControparteComponent extends BaseEntityComponent {
         this.isLoading = true;
         this.model.convenzione_id = params['id'];
         this.model.disabled_covenzione_id = true;
-        //leggere la minimal della convenzione        
+        //leggere la minimal della convenzione
         this.service.getMinimal(this.model.convenzione_id).subscribe(
           result => {
             if (result) {
               setTimeout(() => {
                 const field = this.fields[0].fieldGroup.find(x => x.key == 'convenzione');
-                field.templateOptions.init(result);       
+                field.templateOptions.init(result);
               });
               this.isLoading = false;
             }
@@ -458,7 +459,7 @@ export class FirmaControparteComponent extends BaseEntityComponent {
         },
         error => {
           this.isLoading = false;
-          //this.service.messageService.error(error);          
+          //this.service.messageService.error(error);
         });
     }
   }

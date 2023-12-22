@@ -14,7 +14,7 @@ import { ApplicationService } from 'src/app/application/application.service';
   templateUrl: './registrazione-completamento-direttore.component.html',
   styles: []
 })
-//ng g c application/pages/registrazione/registrazioneCompletamentoDirettore  -s true --spec false 
+//ng g c application/pages/registrazione/registrazioneCompletamentoDirettore  -s true --spec false
 export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComponent {
 
   public STATE = 'da_firmare_direttore2';
@@ -29,7 +29,7 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
     //decodifica convenzione
     {
       key: 'convenzione',
-      type: 'externalobject',      
+      type: 'externalobject',
       templateOptions: {
         label: 'Convenzione',
         type: 'string',
@@ -39,19 +39,19 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
         entityPath: 'home/convenzioni',
         codeProp: 'id',
         descriptionProp: 'descrizione_titolo',
-        isLoading: false,    
+        isLoading: false,
         rules: [{value: this.STATE, field: "current_place", operator: "="}],
-      },  
+      },
       expressionProperties: {
         'templateOptions.disabled': 'formState.disabled_covenzione_id',
-      },    
-    },   
+      },
+    },
     //stipula format
     {
       key: 'stipula_format',
       type: 'select',
       defaultValue: 'cartaceo',
-      templateOptions: {        
+      templateOptions: {
         options: [
           { codice: 'cartaceo', descrizione: 'Stipula cartacea' },
           { codice: 'digitale', descrizione: 'Stipula digitale' },
@@ -63,7 +63,7 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
       },
       expressionProperties: {
         'templateOptions.disabled': 'formState.disabled_covenzione_id',
-      },    
+      },
     },
     //allegato 1 lettera in uscita
     {
@@ -78,7 +78,7 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
               className: "col-md-5",
               defaultValue: 'LTU_FIRM_ENTRAMBI_PROT',
               templateOptions: {
-                //todo chiedere lato server 
+                //todo chiedere lato server
                 options: [],
                 valueProp: 'codice',
                 labelProp: 'descrizione',
@@ -94,11 +94,11 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
                     tap(type => {
                       if (type == 'digitale') {
                         field.templateOptions.options = [
-                          { codice: 'LTU_FIRM_ENTRAMBI_PROT', descrizione: 'Lettera di trasmissione via PEC già protocollata' },                              
+                          { codice: 'LTU_FIRM_ENTRAMBI_PROT', descrizione: 'Lettera di trasmissione via PEC già protocollata' },
                           { codice: 'NESSUN_DOC', descrizione: 'Nessun documento di accompagnamento' }
                         ];
                       } else {
-                        field.templateOptions.options = [                              
+                        field.templateOptions.options = [
                           { codice: 'LTU_FIRM_ENTRAMBI', descrizione: 'Lettera di trasmissione già protocollata' },
                           { codice: 'NESSUN_DOC', descrizione: 'Nessun documento di accompagnamento' }
                         ];
@@ -124,14 +124,14 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
               hideExpression: (model, formState) => {
                 return (formState.model.attachment1.attachmenttype_codice == 'NESSUN_DOC');
               },
-            }, 
+            },
             {
               key: 'doc',
               type: 'externalobject',
               className: "col-md-7",
               templateOptions: {
                 label: 'Numero di protocollo',
-                required: true,      
+                required: true,
                 subpattern: /^[0-9]+-[a-zA-Z]+-\d{7}$/,
                 type: 'string',
                 entityName: 'documento',
@@ -144,7 +144,7 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
               hideExpression: (model, formState) => {
                 return (formState.model.attachment1.attachmenttype_codice !== 'LTU_FIRM_ENTRAMBI_PROT');
               },
-            }, 
+            },
             {
               key: 'data_sottoscrizione',
               type: 'datepicker',
@@ -152,7 +152,7 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
               templateOptions: {
                 label: 'Data',
                 required: true,
-                //required: true,                               
+                //required: true,
               },
               hideExpression: (model: any, formState: any) => {
                 return (formState.model.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -162,7 +162,7 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
               key: 'filevalue',
               type: 'input',
               templateOptions: {
-                type: 'hidden'        
+                type: 'hidden'
               },
             },
           ],
@@ -179,8 +179,8 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
           type: 'select',
           className: "col-md-5",
           defaultValue: 'CONV_FIRM_ENTRAMBI',
-          templateOptions: {                
-            //required: true,  
+          templateOptions: {
+            //required: true,
             options: [{ stipula_type: 'ditta', codice: 'CONV_FIRM_ENTRAMBI', descrizione: 'Convenzione firmata da entrambi' }],
             valueProp: 'codice',
             labelProp: 'descrizione',
@@ -188,29 +188,29 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
           },
           expressionProperties: {
             'templateOptions.required': (model: any, formState: any) => formState.model.stipula_format == 'digitale',
-          },  
+          },
         },
         {
           key: 'filename',
           type: 'fileinput',
           className: "col-md-5",
           templateOptions: {
-            //required: true,  
             label: 'Scegli il documento',
             type: 'input',
             placeholder: 'Scegli file documento',
-            accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,            
+            accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+            required: true,
             onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
           },
-          expressionProperties: {
-            'templateOptions.required': (model: any, formState: any) => formState.model.stipula_format == 'digitale',
-          },  
-        },            
+          //expressionProperties: {
+          //  'templateOptions.required': (model: any, formState: any) => formState.model.stipula_format == 'digitale',
+          //},
+        },
         {
           key: 'filevalue',
           type: 'input',
           templateOptions: {
-            type: 'hidden'        
+            type: 'hidden'
           },
         },
 
@@ -225,20 +225,20 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
           type: 'datepicker',
           className: "col-md-6",
           templateOptions: {
-            required: true,  
+            required: true,
             label: 'Data inizio convenzione',
           }
         },
         {
           key: 'data_fine_conv',
           type: 'datepicker',
-          className: "col-md-6",        
+          className: "col-md-6",
           templateOptions: {
-            required: true,  
+            required: true,
             label: 'Data fine convenzione',
-          }      
-        }            
-      ]       
+          }
+        }
+      ]
     },
     //scadenze
     {
@@ -246,16 +246,16 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
       type: 'repeat',
       templateOptions: {
         label: 'Scadenziario',
-      },    
+      },
       fieldArray: {
         fieldGroupClassName: 'row',
         fieldGroup:  [
           {
             key: 'data_tranche',
             type: 'datepicker',
-            className: "col-md-5",                
-            templateOptions: {                  
-              required: true,                    
+            className: "col-md-5",
+            templateOptions: {
+              required: true,
               label: 'Tranche prevista',
             },
           },
@@ -264,13 +264,13 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
             type: 'maskcurrency',
             className: "col-md-5",
             templateOptions: {
-              required: true,  
-              label: 'Importo',                  
-            },  
+              required: true,
+              label: 'Importo',
+            },
           },
 
-        ],                
-      } 
+        ],
+      }
     }
 
   ];
@@ -283,46 +283,46 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
   }
 
   onSelectCurrentFile(currentSelFile, field: FormlyFieldConfig){
-    
+
     let currentAttachment = field.formControl.parent.value;
     if (currentSelFile == null) {
       //caso di cancellazione
       currentAttachment.filevalue = null;
       return;
     }
-  
+
     this.isLoading = true;
     currentAttachment.model_type = 'convenzione';
-    
-    const reader = new FileReader();   
+
+    const reader = new FileReader();
 
     reader.onload = async (e: any) => {
       this.isLoading = true;
       field.formControl.parent.get('filevalue').setValue(encode(e.target.result));
-      
+
       if (!currentAttachment.filevalue) {
         this.isLoading = false;
         return;
-      }    
+      }
       this.isLoading = false;
     }
     reader.readAsArrayBuffer(currentSelFile);
   }
 
   ngOnInit() {
-    
+
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.model.convenzione_id = params['id'];         
+        this.model.convenzione_id = params['id'];
         this.isLoading=true;
-        //leggere la minimal della convenzione        
+        //leggere la minimal della convenzione
         this.service.getMinimal(this.model.convenzione_id).subscribe(
           result => {
-            if (result){             
+            if (result){
               setTimeout(()=> {
-                this.fields.find(x=> x.key == 'convenzione').templateOptions.init(result);                                            
-                this.form.get('stipula_format').setValue(result.stipula_format);           
-              });                                      
+                this.fields.find(x=> x.key == 'convenzione').templateOptions.init(result);
+                this.form.get('stipula_format').setValue(result.stipula_format);
+              });
             }
             this.isLoading=false;
           }
@@ -339,24 +339,24 @@ export class RegistrazioneCompletamentoDirettoreComponent extends BaseEntityComp
     if (this.form.valid) {
       this.isLoading = true;
       var tosubmit = { ...this.model, ...this.form.value };
-      
+
       if (!tosubmit.convenzione_id){
         tosubmit.convenzione_id = this.model.convenzione.id;
       }
 
-      tosubmit.transition = RegistrazioneCompletamentoDirettoreComponent.WORKFLOW_ACTION;      
+      tosubmit.transition = RegistrazioneCompletamentoDirettoreComponent.WORKFLOW_ACTION;
       this.service.registrazioneComplSottoscrizione(tosubmit,true).subscribe(
-        result => {          
+        result => {
           this.confirmationDialogService.confirm("Finestra messaggi", result.message, "Chiudi", null, 'lg').then(
             () =>this.router.navigate(['home/convdetails', this.model.convenzione_id]),
             () => this.router.navigate(['home/dashboard/dashboard1']))
-          .catch(() => {           
+          .catch(() => {
           });
-          this.isLoading = false;                                 
+          this.isLoading = false;
         },
         error => {
           this.isLoading = false;
-          //this.service.messageService.error(error);          
+          //this.service.messageService.error(error);
         });
     }
   }

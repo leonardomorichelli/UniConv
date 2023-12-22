@@ -213,7 +213,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                       label: 'Documento di approvazione (formato pdf)',
                       description: 'Allegare in formato pdf la versione della delibera o della disposizione. Dimensione massima 2MB.',
                       type: 'input',
-                      placeholder: 'Scegli documento',
+                      placeholder: 'Scegli il documento',
                       accept: 'application/pdf',
                       required: true,
                       onSelected: (selFile, field) => {
@@ -270,7 +270,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                   label: 'Bozza convenzione (formato word)',
                   description: 'Versione editabile (file word) della delibera o della disposizione. Dimensione massima 2MB.',
                   type: 'input',
-                  placeholder: 'Scegli documento',
+                  placeholder: 'Scegli il documento',
                   accept: '.doc,.docx ,application/msword',
                   required: true,
                   // tooltip: {
@@ -305,7 +305,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                 templateOptions: {
                   label: 'Prospetto ripartizione costi e proventi',
                   type: 'input',
-                  placeholder: 'Scegli documento',
+                  placeholder: 'Scegli il documento',
                   accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                   description: 'Dimensione massima 2MB.',
                   onSelected: (selFile, field) => {

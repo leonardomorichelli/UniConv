@@ -14,6 +14,7 @@ use App\Http\Resources\WorkflowConvenzione;
 use App\Http\Resources\WorkflowConvenzioneSchemaTipoResource;
 use Workflow;
 use App\User;
+use App\Personale;
 use App\Notifications\ConvenzioneApprovata;
 use App\Tasks\SottoscrizioneTask;
 use App\AttachmentType;
@@ -58,6 +59,15 @@ class TitulusHelper
         if ($dip){
             $unitaorganizzativa = $dip->unitaOrganizzativa()->first();
             $unitaorganizzativa_uo = $unitaorganizzativa->uo;
+        } else {
+            $u = new User();
+            $p = new Personale();
+            $uo = new UnitaOrganizzativa();
+
+            $user = $u->GetUserById($conv->user_id);
+            $persona = $p->GetPersonaByIdAb($user->v_ie_ru_personale_id_ab);
+            $unitaorganizzativa = $uo->GetUoByAffOrg($persona->aff_org);
+            $unitaorganizzativa_uo = $unitaorganizzativa->uo;
         }
 
         //legge la il tipo di allegato per inserire la descrizione corretta
@@ -87,16 +97,12 @@ class TitulusHelper
             }
         }
             
-        if ($unitaorganizzativa_uo){
-            TitulusHelper::addRPA_Titulus($doc,$unitaorganizzativa_uo);        
-            TitulusHelper::addCC_Titulus($doc);
-        }else{            
-            //unità organizzativa a cui è associata la convenzione 
-            //caso convenzioni amministrative
-            TitulusHelper::addRPA_Titulus($doc, $conv->unitaorganizzativa_uo);        
-            //in cc utente corrente ... 
-            TitulusHelper::addCC_Titulus($doc);
+        if ($conv->unitaorganizzativa_uo) {
+            TitulusHelper::addRPA_Titulus($doc, $conv->unitaorganizzativa_uo);
+        } else { 
+            TitulusHelper::addRPA_Titulus($doc, $unitaorganizzativa_uo);
         }
+        TitulusHelper::addCC_Titulus($doc);
 
         //if (App::environment(['local','preprod'])) {         
         //    $doc->addCC("Attività sistemistiche e software Gestionali e Documentali", "vitali david");

@@ -73,7 +73,7 @@ export class UploadfileComponent implements OnInit {
         key: 'filename',
         type: 'fileinput',
         templateOptions: {
-          label: 'Scegli documento',
+          label: 'Scegli il documento',
           type: 'input',
           placeholder: 'Scegli file documento',
           accept: '.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,.p7m,application/pkcs7-mime,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -113,7 +113,7 @@ export class UploadfileComponent implements OnInit {
             return '';
           },
           isLoading: false,
-          //rules: [{value: "arrivo", field: "doc_tipo", operator: "="}],                       
+          //rules: [{value: "arrivo", field: "doc_tipo", operator: "="}],
         },
         hideExpression: (model, formState) => {
           if (model)
@@ -219,7 +219,7 @@ export class UploadfileComponent implements OnInit {
       return of([
         { codice: 'FATTURA_ELETTRONICA', descrizione_compl: 'Fattura elettronica' },
         { codice: 'NOTA_DEBITO', descrizione_compl: 'Nota di debito' },
-        { codice: 'NOTA_INTEGRATA', descrizione_compl: 'Nota integrata' }        
+        { codice: 'NOTA_INTEGRATA', descrizione_compl: 'Nota integrata' }
       ])
     }
   }

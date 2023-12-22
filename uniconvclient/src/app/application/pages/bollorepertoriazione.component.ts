@@ -18,15 +18,15 @@ const PDFJS: PDFJSStatic = require('pdfjs-dist');
   <div class="container-fluid">
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-  <div class="btn-group btn-group">        
-    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-      <span class="oi oi-arrow-top"></span>  
-      <span class="ml-2">{{ 'btn_salva' | translate }} e repertoria</span>              
-    </button> 
-    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >              
-    <span class="oi oi-flash"></span>  
-    <span class="ml-2">Valida</span>              
-  </button> 
+  <div class="btn-group btn-group">
+    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+      <span class="oi oi-arrow-top"></span>
+      <span class="ml-2">{{ 'btn_salva' | translate }} e repertoria</span>
+    </button>
+    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >
+    <span class="oi oi-flash"></span>
+    <span class="ml-2">Valida</span>
+  </button>
   </div>
   </div>
   <h4 *ngIf="title">{{title}}</h4>
@@ -44,7 +44,7 @@ const PDFJS: PDFJSStatic = require('pdfjs-dist');
 export class BolloRepertoriazioneComponent extends BaseEntityComponent {
 
   public static STATE = 'firmato';
-  public static WORKFLOW_ACTION: string = 'repertorio'; 
+  public static WORKFLOW_ACTION: string = 'repertorio';
   public static ABSULTE_PATH: string = 'home/bollorepertoriazione';
 
   public numPages: number;
@@ -119,19 +119,19 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
   };
 
   static sceltaBolli = (that) => {
-    return {      
+    return {
       fieldGroup: [
         //bollo contratto atti e provv.
         {
-          key: 'bollo_atti',                    
+          key: 'bollo_atti',
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
               key: 'num_righe',
               type: 'numfix',
               className: 'col-md-4',
-              templateOptions: {    
-                translate: true,              
+              templateOptions: {
+                translate: true,
                 min: 1,
                 required: true,
                 label: 'num_righe_bolli_atti',
@@ -143,8 +143,8 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
               className: "col-md-4",
               defaultValue: 'BOLLO_ATTI',
               templateOptions: {
-                translate: true,    
-                options: GlobalConstants.tariffa_bolli['BOLLO_ATTI'],    
+                translate: true,
+                options: GlobalConstants.tariffa_bolli['BOLLO_ATTI'],
                 label: 'tariffa_bolli_atti',
                 required: true,
               },
@@ -160,15 +160,15 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
                 label: 'num_bolli_atti',
               },
             },
-          ],         
+          ],
           hideExpression: (model, formstate) => {
             return (formstate.model.bollo_virtuale == false);
           },
 
         },
-        //bollo allegato  
+        //bollo allegato
         {
-          key: 'bollo_allegati',                    
+          key: 'bollo_allegati',
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
@@ -193,7 +193,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
               defaultValue: 'BOLLO_ALLEGATI',
               templateOptions: {
                 translate: true,
-                options: GlobalConstants.tariffa_bolli['BOLLO_ALLEGATI'],    
+                options: GlobalConstants.tariffa_bolli['BOLLO_ALLEGATI'],
                 label: 'tariffa_bolli_allegati',
               },
             },
@@ -212,15 +212,15 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
                 },
               },
             },
-          ],         
+          ],
           hideExpression: (model, formstate) => {
             return (formstate.model.bollo_virtuale == false);
           },
 
         },
-        //bollo allegato tecnico 
+        //bollo allegato tecnico
         // {
-        //   key: 'bollo_allegato_tecnico',                    
+        //   key: 'bollo_allegato_tecnico',
         //   fieldGroupClassName: 'row',
         //   fieldGroup: [
         //     {
@@ -228,9 +228,9 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
         //       type: 'numfix',
         //       className: 'col-md-2',
         //       templateOptions: {
-        //         min: 1,                
+        //         min: 1,
         //         label: 'Numero righe allegato tecnico',
-        //       },                
+        //       },
         //     },
         //     {
         //       key: 'tipobolli_codice',
@@ -239,7 +239,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
         //       defaultValue: 'BOLLO_ALLEGATO_TECNICO',
         //       templateOptions: {
         //         options: [
-        //           { label: '2 €', value: 'BOLLO_ALLEGATO_TECNICO' },                    
+        //           { label: '2 €', value: 'BOLLO_ALLEGATO_TECNICO' },
         //         ],
         //         label: 'Tariffa',
         //         required: true,
@@ -250,11 +250,11 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
         //       type: 'numfix',
         //       className: 'col-md-2',
         //       templateOptions: {
-        //         min: 1,                
-        //         label: 'Numero bolli allegato tecnico',                
-        //       },               
-        //     },                  
-        //     ],          
+        //         min: 1,
+        //         label: 'Numero bolli allegato tecnico',
+        //       },
+        //     },
+        //     ],
         //     hideExpression: (model, formstate) => {
         //       return (formstate.model.bollo_virtuale == false);
         //     },
@@ -276,8 +276,8 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
         BolloRepertoriazioneComponent.comboStipulaFormat,
         //bollo virtuale
         BolloRepertoriazioneComponent.comboBolloVirtuale,
-       
-        //allegato 1 per repertoriare        
+
+        //allegato 1 per repertoriare
         {
           key: 'attachment1',
           fieldGroup: [
@@ -290,7 +290,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   defaultValue: 'DOC_BOLLATO_FIRMATO',
                   templateOptions: {
-                    //todo chiedere lato server 
+                    //todo chiedere lato server
                     options: [
                       { codice: 'DOC_BOLLATO_FIRMATO', descrizione: 'Convenzione firmata e bollata' },
                     ],
@@ -298,20 +298,20 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
                     labelProp: 'descrizione',
                     label: 'Tipo documento',
                   },
-                  //RES - CRITICA - 2) Utente [E]          
+                  //RES - CRITICA - 2) Utente [E]
                 },
                 {
                   key: 'filename',
                   type: 'fileinput',
-                  className: "col-md-7",          
+                  className: "col-md-7",
                   templateOptions: {
-                    required: true,
                     label: 'Scegli il documento',
                     type: 'input',
                     readonly: true,
                     maxLength: 255,
                     placeholder: 'Scegli file documento',
-                    accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,                
+                    accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                    required: true,
                     onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
                   },
                   validators: {
@@ -332,7 +332,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
         },
         //allegati opzionali
         {
-         
+
           fieldGroup: [
             {
               template: '<h5 class="mt-3">Allegati opzionali</h5>',
@@ -418,7 +418,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
         title: 'Bollo virtuale'
       },
       fieldGroup: [
-         //bolli 
+         //bolli
          BolloRepertoriazioneComponent.sceltaBolli(this),
       ],
       hideExpression: (model, formstate) => {
@@ -474,14 +474,14 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
 
     if (field.validation)
       field.validation.show = true;
-    else 
+    else
       field.validation = {
         show: true
       }
 
     currentAttachment._filesize = currentSelFile.size;
     field.formControl.updateValueAndValidity();
-    
+
     this.isLoading = true;
     currentAttachment.model_type = 'convenzione';
 
@@ -496,7 +496,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
       // } else {
       //   this.numLines = null;
       //   this.numPages = null;
-      // }     
+      // }
 
       if (!currentAttachment.filevalue) {
         this.isLoading = false;
@@ -558,7 +558,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
       if (params['id']) {
         this.model.convenzione_id = params['id'];
         this.isLoading = true;
-        //leggere la minimal della convenzione        
+        //leggere la minimal della convenzione
         this.service.getMinimal(this.model.convenzione_id).subscribe(
           result => {
             if (result) {
@@ -591,7 +591,7 @@ export class BolloRepertoriazioneComponent extends BaseEntityComponent {
           this.isLoading = false;
         },
         error => {
-          this.isLoading = false;     
+          this.isLoading = false;
         });
     }
   }

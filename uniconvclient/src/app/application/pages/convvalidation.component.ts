@@ -15,15 +15,15 @@ import { MultistepSchematipoComponent } from './multistep-schematipo.component';
   <div class="container-fluid">
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-  <div class="btn-group btn-group">        
-    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-      <span class="oi oi-arrow-top"></span>  
-      <span class="ml-2">{{ 'btn_salva' | translate }}</span>              
-    </button> 
-    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >              
-    <span class="oi oi-flash"></span>  
-    <span class="ml-2">Valida</span>              
-  </button> 
+  <div class="btn-group btn-group">
+    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+      <span class="oi oi-arrow-top"></span>
+      <span class="ml-2">{{ 'btn_salva' | translate }}</span>
+    </button>
+    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >
+    <span class="oi oi-flash"></span>
+    <span class="ml-2">Valida</span>
+  </button>
   </div>
   </div>
   <h4 *ngIf="title">{{title}}</h4>
@@ -32,7 +32,7 @@ import { MultistepSchematipoComponent } from './multistep-schematipo.component';
       <formly-form [model]="model" [fields]="fields" [form]="form" [options]="options">
       </formly-form>
   </form>
-  
+
   <button class="btn btn-primary mt-3" type="button" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()">{{ 'btn_salva' | translate }}</button>
   </div>
   `,
@@ -42,31 +42,31 @@ export class ConvvalidationComponent extends BaseEntityComponent {
 
   public static WORKFLOW_ACTION: string = 'store_validazione'; //TRASITION
   public static ABSULTE_PATH: string = 'home/validazione';
-  
+
   protected docappid = null
 
   fields: FormlyFieldConfig[] = [
     {
-      fieldGroupClassName: 'display-flex',      
+      fieldGroupClassName: 'display-flex',
       fieldGroup: [
         {
-          type: 'button',                    
-          templateOptions: {        
-            text: 'Scarica convenzione formato word',            
-            btnType: 'btn btn-primary btn-sm border-0 rounded-0',       
+          type: 'button',
+          templateOptions: {
+            text: 'Scarica convenzione formato word',
+            btnType: 'btn btn-primary btn-sm border-0 rounded-0',
             title: 'Scarica convenzione',
             onClick: ($event, model) => this.download(this.docappid),
           },
           hideExpression: (model: any, formState: any) => {
             return !this.docappid;
-          },                                     
+          },
         },
       ]
-    },     
+    },
     {
 
       key: 'convenzione_id',
-      type: 'external',      
+      type: 'external',
       templateOptions: {
         label: 'Convenzione',
         type: 'string',
@@ -76,19 +76,19 @@ export class ConvvalidationComponent extends BaseEntityComponent {
         entityPath: 'home/convenzioni',
         codeProp: 'id',
         descriptionProp: 'descrizione_titolo',
-        descriptionFunc: (data) => {          
+        descriptionFunc: (data) => {
             if (data  && data.attachments && data.attachments.length > 0){
               this.docappid = data.attachments.find(x => x.attachmenttype_codice == MultistepSchematipoComponent.DOC_APP);
-              return data.descrizione_titolo;          
+              return data.descrizione_titolo;
             }
             if (data){
-              return data.descrizione_titolo ? data.descrizione_titolo : '';            
+              return data.descrizione_titolo ? data.descrizione_titolo : '';
             }
             return '';
         },
-        isLoading: false,    
+        isLoading: false,
         rules: [{value: "inapprovazione", field: "current_place", operator: "="}],
-      },  
+      },
       expressionProperties: {
         'templateOptions.disabled': 'formState.disabled_covenzione_id',
       },
@@ -97,11 +97,11 @@ export class ConvvalidationComponent extends BaseEntityComponent {
     {
       key: 'attachments',
       type: 'repeat',
-      templateOptions: {        
+      templateOptions: {
         label: 'Documenti di approvazione',
         min: 1,
         max: 4,
-        template: "<hr></hr>",   
+        template: "<hr></hr>",
       },
       validators: {
         unique: {
@@ -121,7 +121,7 @@ export class ConvvalidationComponent extends BaseEntityComponent {
           expression: (c) => {
             if (c.value) {
               if (c.value.length < 1)
-                return false;              
+                return false;
             }else {
               return false;
             }
@@ -130,7 +130,7 @@ export class ConvvalidationComponent extends BaseEntityComponent {
           message: (error, field: FormlyFieldConfig) => `Inserire almeno un documento`,
         }
       },
-      fieldArray: {                     
+      fieldArray: {
         fieldGroup: [
           {
             fieldGroupClassName: 'row',
@@ -153,21 +153,21 @@ export class ConvvalidationComponent extends BaseEntityComponent {
                 required: true,
               }
             },
-            {              
-              //NB è stato richiesto in fase di validazione di poter inserire dei 
+            {
+              //NB è stato richiesto in fase di validazione di poter inserire dei
               //riferimenti ad degli allegati ma senza includere il file
               key: 'filename',
               type: 'fileinput',
               className: "col-md-6",
               templateOptions: {
-                label: 'Scegli documento',
-                type: 'input',              
+                label: 'Scegli il documento',
+                type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-                required: false,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
-            },   
+            },
             ],
           },
           {
@@ -179,7 +179,7 @@ export class ConvvalidationComponent extends BaseEntityComponent {
                 className: "col-md-6",
                 templateOptions: {
                   label: 'Numero',
-                  required: true,                               
+                  required: true,
                 },
               },
               {
@@ -188,38 +188,38 @@ export class ConvvalidationComponent extends BaseEntityComponent {
                 className: "col-md-6",
                 templateOptions: {
                   label: 'Data',
-                  required: true,                               
+                  required: true,
                 },
               },
               {
                 key: 'filevalue',
                 type: 'input',
                 templateOptions: {
-                  type: 'hidden'        
+                  type: 'hidden'
                 },
               },
             ],
-          },                             
+          },
         ],
-                  
-      },     
+
+      },
     },
   ]
 
   onSelectCurrentFile(currentSelFile, field: FormlyFieldConfig){
-    
-  
+
+
     let currentAttachment = field.formControl.parent.value;
     if (currentSelFile == null) {
       //caso di cancellazione
       currentAttachment.filevalue = null;
       return;
     }
-  
+
     this.isLoading = true;
     currentAttachment.model_type = 'convenzione';
-    
-    const reader = new FileReader();   
+
+    const reader = new FileReader();
 
     reader.onload = async (e: any) => {
       this.isLoading = true;
@@ -227,11 +227,11 @@ export class ConvvalidationComponent extends BaseEntityComponent {
       field.formControl.parent.get('filevalue').setValue(encode(e.target.result));
       if (currentSelFile.name.search('pdf')>0){
         try {
-          let result = await ControlUtils.parsePdf(e.target.result);     
+          let result = await ControlUtils.parsePdf(e.target.result);
           field.formControl.parent.get('docnumber').setValue(result.docnumber);
           field.formControl.parent.get('emission_date').setValue(result.converted);
 
-          field.formControl.markAsDirty();         
+          field.formControl.markAsDirty();
         } catch (error) {
           console.log(error);
           this.isLoading = false;
@@ -241,39 +241,39 @@ export class ConvvalidationComponent extends BaseEntityComponent {
       if (!currentAttachment.filevalue) {
         this.isLoading = false;
         return;
-      }    
+      }
       this.isLoading = false;
     }
     reader.readAsArrayBuffer(currentSelFile);
 
 
   }
-  
+
   constructor(protected service: ApplicationService, protected route: ActivatedRoute, protected router: Router, protected location: Location) {
     super(route, router, location)
     this.isLoading = false;
   }
 
-  ngOnInit() {    
-    this.route.params.subscribe(params => {            
+  ngOnInit() {
+    this.route.params.subscribe(params => {
       if (params['id']){
         this.model.convenzione_id = params['id'];
         this.options.formState.disabled_covenzione_id = true;
       };
     });
-  }  
+  }
 
   onSubmit() {
     if (this.form.valid) {
       this.isLoading = true;
       var tosubmit = { ...this.model, ...this.form.value };
       this.service.validationStep(tosubmit,true).subscribe(
-        result => {          
-          this.isLoading = false;          
-          this.router.navigate(['home/dashboard/dashboard1']);                
+        result => {
+          this.isLoading = false;
+          this.router.navigate(['home/dashboard/dashboard1']);
         },
         error => {
-          this.isLoading = false;    
+          this.isLoading = false;
         });
     }
   }
@@ -292,7 +292,7 @@ export class ConvvalidationComponent extends BaseEntityComponent {
     );
 
   }
-  
+
 
 
 }

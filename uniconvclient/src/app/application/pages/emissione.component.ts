@@ -14,15 +14,15 @@ import { map } from 'rxjs/operators';
   <div class="container-fluid">
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-  <div class="btn-group btn-group">        
-    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-      <span class="oi oi-arrow-top"></span>  
-      <span class="ml-2">{{ 'btn_salva' | translate }}</span>              
-    </button> 
-    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >              
-    <span class="oi oi-flash"></span>  
-    <span class="ml-2">Valida</span>              
-  </button> 
+  <div class="btn-group btn-group">
+    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+      <span class="oi oi-arrow-top"></span>
+      <span class="ml-2">{{ 'btn_salva' | translate }}</span>
+    </button>
+    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >
+    <span class="oi oi-flash"></span>
+    <span class="ml-2">Valida</span>
+  </button>
   </div>
   </div>
   <h4 *ngIf="title">{{title}}</h4>
@@ -38,7 +38,7 @@ import { map } from 'rxjs/operators';
 })
 
 export class EmissioneComponent extends BaseEntityComponent {
-  
+
   public STATE = 'inemissione';
   public static WORKFLOW_ACTION: string = 'emissione'; //TRASITION
   public static ABSULTE_PATH: string = 'home/emissione';
@@ -57,20 +57,20 @@ export class EmissioneComponent extends BaseEntityComponent {
       template: '<h5></h5>',
     },
     {
-      fieldGroupClassName: 'display-flex',      
+      fieldGroupClassName: 'display-flex',
       fieldGroup: [
         {
-          type: 'button',         
-          className: 'ml-1 pl-1',     
-          templateOptions: {        
-            text: 'Scarica convenzione repertoriata',            
-            btnType: 'btn btn-primary btn-sm border-0 rounded-0',       
+          type: 'button',
+          className: 'ml-1 pl-1',
+          templateOptions: {
+            text: 'Scarica convenzione repertoriata',
+            btnType: 'btn btn-primary btn-sm border-0 rounded-0',
             title: 'Scarica convenzione',
             onClick: ($event, model) => this.download($event, model),
           },
           hideExpression: (model: any, formState: any) => {
             return !this.attachid;
-          },                                     
+          },
         },
       ],
     },
@@ -81,7 +81,7 @@ export class EmissioneComponent extends BaseEntityComponent {
       className: "col-md-12",
       templateOptions: {
         label: 'Scadenza',
-        type: 'string',            
+        type: 'string',
         entityName: 'scadenza',
         entityLabel: 'Scadenza',
         entityPath: 'home/scadenze',
@@ -93,14 +93,14 @@ export class EmissioneComponent extends BaseEntityComponent {
                 this.attachid = data.convenzione.attachments.find(x => x.attachmenttype_codice == 'DOC_BOLLATO_FIRMATO');
               }
               if(this.update){
-                this.model =  {...this.model, ...data};  
-                this.options.formState.model = this.model; 
+                this.model =  {...this.model, ...data};
+                this.options.formState.model = this.model;
                 if (data.attachments){
                   const attach = data.attachments.find(x => x.attachmenttype_codice == 'FATTURA_ELETTRONICA' || x.attachmenttype_codice == 'NOTA_DEBITO')
                   if (attach){
                     this.model.attachment1.doc = { num_prot: attach.num_prot, oggetto: ''};
                   }
-                }                
+                }
               }
               this.model.attachment1.attachmenttype_codice = data.tipo_emissione;
               return data.dovuto_tranche +' - ' + 'Convenzione n. '+data.convenzione.id+' - '+data.convenzione.descrizione_titolo;
@@ -109,28 +109,28 @@ export class EmissioneComponent extends BaseEntityComponent {
         },
         rules: [{value: this.STATE, field: "state", operator: "="}],
         copymodel: true,
-        isLoading: false,          
+        isLoading: false,
       },
       expressionProperties: {
         'templateOptions.disabled': (model: any, formState: any) => { return model.id; },
       },
-    },      
-    
-    {     
+    },
+
+    {
       key: 'attachment1',
-      fieldGroup: [        
+      fieldGroup: [
         {
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
               key: 'attachmenttype_codice',
               type: 'select',
-              className: "col-md-5",                       
+              className: "col-md-5",
               templateOptions: {
                 options: [
                   { codice: 'NOTA_DEBITO', descrizione: 'Emissione nota di debito' },
-                  { codice: 'FATTURA_ELETTRONICA', descrizione: 'Fattura elettronica' },     
-                  { codice: 'RICHIESTA_PAGAMENTO', descrizione: 'Richiesta pagamento' },                  
+                  { codice: 'FATTURA_ELETTRONICA', descrizione: 'Fattura elettronica' },
+                  { codice: 'RICHIESTA_PAGAMENTO', descrizione: 'Richiesta pagamento' },
                 ],
                 valueProp: 'codice',
                 labelProp: 'descrizione',
@@ -162,7 +162,7 @@ export class EmissioneComponent extends BaseEntityComponent {
               key: 'filevalue',
               type: 'input',
               templateOptions: {
-                type: 'hidden'        
+                type: 'hidden'
               },
             },
             {
@@ -170,7 +170,7 @@ export class EmissioneComponent extends BaseEntityComponent {
               type: 'externalobject',
               className: "col-md-7",
               templateOptions: {
-                label: 'Numero di protocollo',     
+                label: 'Numero di protocollo',
                 type: 'string',
                 subpattern: /^[0-9]+-[a-zA-Z]+-\d{7}$/,
                 entityName: 'documento',
@@ -184,56 +184,56 @@ export class EmissioneComponent extends BaseEntityComponent {
               hideExpression: (model, formState) => {
                 return formState.model.attachment1 != null && formState.model.attachment1.attachmenttype_codice == 'RICHIESTA_PAGAMENTO';
               },
-            },           
+            },
           ],
         },
       ],
     },
-    //data e numero fattura 
+    //data e numero fattura
     {
-      fieldGroupClassName: 'row',      
-      fieldGroup: [    
+      fieldGroupClassName: 'row',
+      fieldGroup: [
         {
           key: 'data_fattura',
-          type: 'datepicker',          
-          className: "col-md-6",          
+          type: 'datepicker',
+          className: "col-md-6",
           templateOptions: {
             required: true,
-            label: 'Data',          
-          },        
+            label: 'Data',
+          },
         },
         {
           key: 'num_fattura',
           type: 'input',
-          className: "col-md-6",          
+          className: "col-md-6",
           templateOptions: {
             required: true,
-            label: 'Numero',                    
-          },        
-        },     
+            label: 'Numero',
+          },
+        },
     ],
     hideExpression: (model, formState) => {
       return formState.model.attachment1 != null && formState.model.attachment1.attachmenttype_codice == 'RICHIESTA_PAGAMENTO';
     },
 
     },
-    {       
-      type: 'template',    
-      templateOptions: {      
-        template: '',              
-      },   
+    {
+      type: 'template',
+      templateOptions: {
+        template: '',
+      },
       expressionProperties: {
         'templateOptions.template': this.taskemission.pipe(map(x=>{
             return `<h5 class="panel-title">
               Messaggio
-            </h5>          
+            </h5>
             <div class="mb-1">
-              ${x.data ? x.data.description : ''}    
+              ${x.data ? x.data.description : ''}
             </div>
-          `}))                            
+          `}))
       },
-    },       
-    
+    },
+
   ]
 
   onSelectCurrentFile(currentSelFile, field: FormlyFieldConfig){
@@ -243,25 +243,25 @@ export class EmissioneComponent extends BaseEntityComponent {
       currentAttachment.filevalue = null;
       return;
     }
-  
+
     this.isLoading = true;
     currentAttachment.model_type = 'scadenza';
-    
-    const reader = new FileReader();   
+
+    const reader = new FileReader();
 
     reader.onload = async (e: any) => {
       this.isLoading = true;
       field.formControl.parent.get('filevalue').setValue(encode(e.target.result));
-      
+
       if (!currentAttachment.filevalue) {
         this.isLoading = false;
         return;
-      }    
+      }
       this.isLoading = false;
     }
     reader.readAsArrayBuffer(currentSelFile);
   }
-  
+
 
 
   constructor(protected service: ApplicationService, protected scadService: ScadenzaService, protected route: ActivatedRoute, protected router: Router, protected location: Location) {
@@ -270,33 +270,33 @@ export class EmissioneComponent extends BaseEntityComponent {
   }
 
   ngOnInit() {
-    
+
     this.route.params.subscribe(params => {
-      if (params['id']) {                  
-        //leggere la minimal della convenzione        
+      if (params['id']) {
+        //leggere la minimal della convenzione
           this.isLoading=true;
           this.model = { convenzione: {}};
-          //leggere la minimal della convenzione        
+          //leggere la minimal della convenzione
           this.scadService.getById(params['id']).subscribe(
             result => {
-              if (result){            
-                setTimeout(() => {                  
-                  this.model = {...this.model, ...result};   
-                  this.options.formState.model = this.model; 
-                  
+              if (result){
+                setTimeout(() => {
+                  this.model = {...this.model, ...result};
+                  this.options.formState.model = this.model;
+
                   if (result.attachments){
                     const attach = result.attachments.find(x => x.attachmenttype_codice == 'FATTURA_ELETTRONICA' || x.attachmenttype_codice == 'NOTA_DEBITO')
                     if (attach){
                       this.model.attachment1.doc = { num_prot: attach.num_prot, oggetto: ''};
                     }
-                  }   
+                  }
 
                   if (this.model.usertasks){
                     const task = (this.model.usertasks as Array<any>).filter(x => x.workflow_place == 'inemissione' && (x.state == 'aperto'))[0];
                     if (task)
                      this.taskemission.next(task);
                   }
-                  
+
                 },0);
               }
               this.isLoading=false;
@@ -304,40 +304,40 @@ export class EmissioneComponent extends BaseEntityComponent {
           );
         }else{
           this.update=true;
-        }        
-      });    
+        }
+      });
   }
 
   onSubmit() {
     if (this.form.valid) {
       this.isLoading = true;
-      var tosubmit = { ...this.model, ...this.form.value };  
+      var tosubmit = { ...this.model, ...this.form.value };
       tosubmit.convenzione = undefined;
       tosubmit.attachment1 = {...this.model.attachment1, ...this.form.value.attachment1 }
       tosubmit.attachment1.doc = {...this.model.attachment1.doc, ...this.form.value.attachment1.doc }
 
       if (this.update && (['emesso','inpagamento'].includes(this.model.state))){
         this.service.modificaEmissioneStep(tosubmit,true).subscribe(
-          result => {          
-            this.isLoading = false;          
-            this.router.navigate(['home/dashboard/dashboard1']);                
+          result => {
+            this.isLoading = false;
+            this.router.navigate(['home/dashboard/dashboard1']);
           },
           error => {
-            this.isLoading = false;       
+            this.isLoading = false;
         });
       }else{
         this.service.emissioneStep(tosubmit,true).subscribe(
-          result => {          
-            this.isLoading = false;          
-            this.router.navigate(['home/dashboard/dashboard1']);                
+          result => {
+            this.isLoading = false;
+            this.router.navigate(['home/dashboard/dashboard1']);
           },
           error => {
-            this.isLoading = false;       
-        });       
+            this.isLoading = false;
+        });
       }
-    
 
-      
+
+
     }
   }
 

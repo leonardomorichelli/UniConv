@@ -38,7 +38,7 @@ class Sottoscrizione
         $conv = Convenzione::findOrFail($data['convenzione_id']);    
         $aziende = $conv->aziende()->get();
 
-        //caso cartaceo uniub
+        //caso cartaceo uniurb
         if ($request->stipula_type == Convenzione::STIPULA_UNIURB && $request->stipula_format == Convenzione::STIPULA_ANALOGICA){
             //adapter input data
             $objdata = (object) $data['an_dg_uniurb_an_controparte'];            

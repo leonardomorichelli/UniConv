@@ -111,7 +111,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                     valueProp: 'codice',
                     labelProp: 'descrizione',
                     label: 'Tipo documento',
-                    required: true,
+                    //required: true,
                   },
                 },
                 {
@@ -157,7 +157,6 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                   templateOptions: {
                     label: 'Data',
                     required: true,
-                    //required: true,
                   },
                   hideExpression:(model: any, formState: any) => {
                     return (formState.model.cartaceo_uniurb.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -182,6 +181,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 valueProp: 'codice',
                 labelProp: 'descrizione',
                 label: 'Tipo documento',
+                required: true,
               },
             },
             {
@@ -193,11 +193,10 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
-
             },
-
           ],
         },
       ],
@@ -302,6 +301,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 valueProp: 'codice',
                 labelProp: 'descrizione',
                 label: 'Tipo documento',
+                required: true,
               },
             },
             {
@@ -313,6 +313,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
 
@@ -350,7 +351,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                     valueProp: 'codice',
                     labelProp: 'descrizione',
                     label: 'Tipo documento',
-                    required: true,
+                    //required: true,
                   },
                 },
                 {
@@ -418,6 +419,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 valueProp: 'codice',
                 labelProp: 'descrizione',
                 label: 'Tipo documento',
+                required: true,
               },
             },
             {
@@ -429,6 +431,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
 
@@ -466,7 +469,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                     valueProp: 'codice',
                     labelProp: 'descrizione',
                     label: 'Tipo documento',
-                    required: true,
+                    //required: true,
                   },
                 },
                 {
@@ -535,6 +538,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 valueProp: 'codice',
                 labelProp: 'descrizione',
                 label: 'Tipo documento',
+                required: true,
               },
             },
             {
@@ -546,6 +550,7 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                 type: 'input',
                 placeholder: 'Scegli file documento',
                 accept: 'application/pdf', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
 

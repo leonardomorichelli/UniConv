@@ -199,4 +199,8 @@ class UnitaOrganizzativa extends Model
      {
         return $this->where('uo', '=', $uo)->select('uo_padre')->pluck('uo_padre')->first();
      }
+
+     public function GetUoByAffOrg($aff_org) {
+         return $this->where('uo', $aff_org)->first();
+     }
 }

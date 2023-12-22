@@ -15,15 +15,15 @@ import { NgbStringAdapter } from 'src/app/NgbStringAdapter';
   <div class="container-fluid">
   <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="btn-toolbar mb-4" role="toolbar">
-  <div class="btn-group btn-group">        
-    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >              
-      <span class="oi oi-arrow-top"></span>  
-      <span class="ml-2">{{ 'btn_salva' | translate }}</span>              
-    </button> 
-    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >              
-    <span class="oi oi-flash"></span>  
-    <span class="ml-2">Valida</span>              
-  </button> 
+  <div class="btn-group btn-group">
+    <button class="btn btn-outline-primary rounded-lg" [disabled]="!form.valid || !form.dirty" (click)="onSubmit()" >
+      <span class="oi oi-arrow-top"></span>
+      <span class="ml-2">{{ 'btn_salva' | translate }}</span>
+    </button>
+    <button class="btn btn-outline-primary rounded-lg ml-1" (click)="onValidate()" >
+    <span class="oi oi-flash"></span>
+    <span class="ml-2">Valida</span>
+  </button>
   </div>
   </div>
   <h4 *ngIf="title">{{title}}</h4>
@@ -85,7 +85,7 @@ export class FirmaDirettoreComponent extends BaseEntityComponent {
             'templateOptions.disabled': 'formState.disabled_covenzione_id',
           },
         },
-        //stipula format 
+        //stipula format
         {
           key: 'stipula_format',
           type: 'select',
@@ -168,7 +168,7 @@ export class FirmaDirettoreComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   templateOptions: {
                     label: 'Data',
-                    required: true,                               
+                    required: true,
                   },
                   hideExpression: (model: any, formState: any) => {
                     return (formState.model.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -210,7 +210,8 @@ export class FirmaDirettoreComponent extends BaseEntityComponent {
                 label: 'Scegli il documento',
                 type: 'input',
                 placeholder: 'Scegli file documento',
-                accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,            
+                accept: 'application/pdf,.p7m,application/pkcs7-mime', //.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                required: true,
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
             },
@@ -237,7 +238,7 @@ export class FirmaDirettoreComponent extends BaseEntityComponent {
                 translate: true,
                 label: 'AZIENDALOC.PEC',
                 disabled: true,
-                description: 'Contatti delle aziende o enti associate alla convenzione',                           
+                description: 'Contatti delle aziende o enti associate alla convenzione',
               },
             },
           ],
@@ -262,7 +263,7 @@ export class FirmaDirettoreComponent extends BaseEntityComponent {
                 required: true,
                 label: 'Data di stipula convenzione',
               },
-            },          
+            },
           ]
         }
       ]
@@ -411,12 +412,12 @@ export class FirmaDirettoreComponent extends BaseEntityComponent {
       if (params['id']) {
         this.isLoading = true;
         this.model.convenzione_id = params['id'];
-        //leggere la minimal della convenzione        
+        //leggere la minimal della convenzione
         this.service.getMinimal(this.model.convenzione_id).subscribe(
           result => {
-            if (result) {  
+            if (result) {
               setTimeout(() => {
-                this.fields[0].fieldGroup.find(x => x.key == 'convenzione').templateOptions.init(result);          
+                this.fields[0].fieldGroup.find(x => x.key == 'convenzione').templateOptions.init(result);
               });
             }
             this.isLoading = false;
@@ -449,7 +450,7 @@ export class FirmaDirettoreComponent extends BaseEntityComponent {
         },
         error => {
           this.isLoading = false;
-          //this.service.messageService.error(error);          
+          //this.service.messageService.error(error);
         });
     }
   }
