@@ -8,6 +8,7 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { UserLoginComponent } from './user-login/user-login.component';
+import { OnLineComponent } from './on-line/online.component';
 
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { MessageComponent } from './message/message.component';
@@ -382,6 +383,7 @@ export const customCurrencyMaskConfig = {
   ],
   exports: [
     UserLoginComponent,
+    OnLineComponent,
     ShowErrorsComponent,
     DynamicFormComponent,
     MessageComponent,
@@ -444,7 +446,7 @@ export const customCurrencyMaskConfig = {
     ListItemComponent,
   ],
   declarations: [
-    UserLoginComponent, UserLoginComponent, ShowErrorsComponent,
+    UserLoginComponent, OnLineComponent, ShowErrorsComponent,
     DynamicFormComponent, MessageComponent, ControlGenericListComponent, DynamicTableComponent,
     DatepickerTypeComponent, RepeatTypeComponent, PanelWrapperComponent, AccordionWrapperComponent,
     QueryBuilderComponent, GenericTypeComponent, ExternalTypeComponent, LookupComponent, ExternalqueryComponent,

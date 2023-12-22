@@ -1167,6 +1167,10 @@ export class ApplicationService implements ServiceQuery, ServiceEntity {
     );
   }
 
+  getIsOnline(): any {
+    return this.http.get<any>(this._baseURL + '/online', httpOptions);
+  }
+
   /**
      * Handle Http operation that failed.
      * Let the app continue.

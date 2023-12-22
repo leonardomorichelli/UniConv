@@ -7,7 +7,7 @@ import { InfraMessageType } from 'src/app/shared/message/message';
 @Component({
   selector: 'app-rangedetails',
   templateUrl: './rangedetails.component.html',
-  styles: []
+  styleUrls: []
 })
 export class RangedetailsComponent implements OnInit {
 

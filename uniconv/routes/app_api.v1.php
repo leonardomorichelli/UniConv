@@ -68,7 +68,7 @@ Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check
 
 Route::group(['middleware' => ['cors','auth:api','log','check'], 'namespace'=>'Api\V1'],function(){
     //info
-    Route::get('/online.json', function () {
+    Route::get('/online', function () {
         $data = array(
             "online" => true
         );
