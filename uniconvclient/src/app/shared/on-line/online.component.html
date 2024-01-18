@@ -1,16 +1,20 @@
 <li class="nav-item">
-
   <ng-template *ngIf="online; then bloccoIf else bloccoElse"></ng-template>
   <ng-template #bloccoIf>
-
     <a class="nav-link online-link" href="javascript:void(0)">
       <i class="ti-face-smile mr-2"></i>on-line
     </a>
   </ng-template>
   <ng-template #bloccoElse>
-
-    <a class="nav-link offline-link" href="https://uniconv.unicam.it/">
-      <i class="ti-face-sad mr-2"></i>off-line
-    </a>
+    <div class="div_out">
+    </div>
+    <div class="div_in">
+      <i class="ti-face-sad mr-2"></i><br>
+      <h3>Sessione Scaduta</h3>
+      <p>eseguire l'accesso:</p>
+      <a class="btn btn-danger" href="https://uniconv.unicam.it/" role="button">
+        https://uniconv.unicam.it/
+      </a>
+    </div>
   </ng-template>
 </li>

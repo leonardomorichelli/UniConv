@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApplicationService } from 'src/app/application/application.service';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-online',
@@ -8,24 +9,28 @@ import { ApplicationService } from 'src/app/application/application.service';
 })
 export class OnLineComponent implements OnInit, OnDestroy {
 
-  private polling: any = null;
+  private service;
+  private auth;
+
+  polling: any = null;
   online: boolean = true;
 
-  constructor(protected appservice: ApplicationService) {
-  }
-
-  checkIsOnLine() {
-    console.log("onLine:");
-    if (this.appservice != undefined) {
-      let result = this.appservice.getIsOnline();
-      console.log(result);
-      this.online = (result.online === true) ? (true) : (false);
-    }
+  constructor(applicationService: ApplicationService, authService: AuthService) {
+    this.service = applicationService;
+    this.auth = authService;
   }
 
   ngOnInit() {
     if (this.polling == null) {
-      this.polling = setInterval(this.checkIsOnLine, 5000);
+      this.polling = setInterval(((service, auth) => {
+        auth.refreshToken();
+        service.getIsOnline().subscribe(
+          (response) => {
+            this.online = (response.online === true) ? (true) : (false);
+          }, (error) => {
+            this.online = (false);
+          });
+      }), (1000 * 60 * 5), this.service, this.auth);
     }
   }
 

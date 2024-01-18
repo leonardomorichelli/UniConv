@@ -20,19 +20,6 @@ use Illuminate\Http\Request;
 //aggiornare la documentazione
 //php artisan api:update
 
-//info
-Route::get('/info.json', function () {
-    $data = array(
-        "ateneo" => "Unicam",
-        "app_name" => "Uniconv",
-        "app_version" => "1.0.1"
-    );
-
-    header("Content-Type: application/json");
-    echo json_encode($data);
-    exit();
-});
-
 Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check'],  'namespace'=>'Api\V1'], function () {
 
     Route::get('mappingruoli', 'MappingRuoloController@index');
@@ -65,19 +52,13 @@ Route::group(['middleware' => ['cors','auth:api','log','role:super-admin','check
     
 });
 
+//info
+Route::group(['middleware' => ['cors','auth:api','log','check'],  'namespace'=>'Api\V1'], function () {
+    Route::get('info/version', 'InfoController@version');
+    Route::get('info/online', 'InfoController@online');
+});
 
 Route::group(['middleware' => ['cors','auth:api','log','check'], 'namespace'=>'Api\V1'],function(){
-    //info
-    Route::get('/online', function () {
-        $data = array(
-            "online" => true
-        );
-
-        header("Content-Type: application/json");
-        echo json_encode($data);
-        exit();
-    });
-
     //users
     Route::get('users/{id}', 'UserController@show');
     Route::post('users/query', 'UserController@query'); 
