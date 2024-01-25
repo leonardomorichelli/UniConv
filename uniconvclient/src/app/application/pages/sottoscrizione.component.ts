@@ -160,7 +160,10 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                     tap(type => {
                       this.checkLabelButton();
                       if (type == 'uniurb') {
-                        field.templateOptions.options = [{ stipula_type: 'uniurb', codice: 'LTU_FIRM_UNIURB', descrizione: 'Lettera di trasmissione' }];
+                        field.templateOptions.options = [
+                          { stipula_type: 'uniurb', codice: 'LTU_FIRM_UNIURB', descrizione: 'Lettera di trasmissione' },
+                          { stipula_type: 'controparte', codice: 'NESSUN_DOC', descrizione: 'Nessun documento di accompagnamento' }
+                        ];
                       } else {
                         field.templateOptions.options = [
                           { stipula_type: 'controparte', codice: 'LTE_FIRM_CONTR', descrizione: "Lettera ricevuta dall'Azienda o Ente"},
@@ -187,9 +190,7 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                 onSelected: (selFile, field) => { this.onSelectCurrentFile(selFile, field); }
               },
               hideExpression:(model: any, formState: any) => {
-                  return (formState.model.stipula_format == 'cartaceo' &&
-                          formState.model.stipula_type == 'controparte' &&
-                          formState.model.an_dg_uniurb_an_controparte.attachment1.attachmenttype_codice == 'NESSUN_DOC');
+                  return (formState.model.an_dg_uniurb_an_controparte.attachment1.attachmenttype_codice == 'NESSUN_DOC');
                 },
             },
             //sottoscrizione
@@ -199,8 +200,8 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
               className: "col-md-5",
               templateOptions: {
                 label: 'Data',
-                required: true,
                 //required: true,
+                required: false,
               },
               hideExpression:(model: any, formState: any) => {
                 return (formState.model.an_dg_uniurb_an_controparte.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -430,8 +431,8 @@ export class SottoscrizioneComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   templateOptions: {
                     label: 'Data',
-                    required: true,
                     //required: true,
+                    required: false,
                   },
                   hideExpression:(model: any, formState: any) => {
                     return (formState.model.digitale_controparte.attachment1.attachmenttype_codice !== 'NESSUN_DOC');

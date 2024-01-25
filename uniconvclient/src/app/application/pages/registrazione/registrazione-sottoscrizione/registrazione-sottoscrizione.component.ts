@@ -156,7 +156,8 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   templateOptions: {
                     label: 'Data',
-                    required: true,
+                    //required: true,
+                    required: false,
                   },
                   hideExpression:(model: any, formState: any) => {
                     return (formState.model.cartaceo_uniurb.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -277,7 +278,8 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   templateOptions: {
                     label: 'Data',
-                    required: true,
+                    //required: true,
+                    required: false,
                   },
                   hideExpression:(model: any, formState: any) => {
                     return (formState.model.digitale_uniurb.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -395,7 +397,8 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   templateOptions: {
                     label: 'Data',
-                    required: true,
+                    //required: true,
+                    required: false,
                   },
                   hideExpression:(model: any, formState: any) => {
                     return (formState.model.cartaceo_controparte.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
@@ -514,7 +517,8 @@ export class RegistrazioneSottoscrizioneComponent extends BaseEntityComponent {
                   className: "col-md-5",
                   templateOptions: {
                     label: 'Data',
-                    required: true,
+                    //required: true,
+                    required: false,
                   },
                   hideExpression:(model: any, formState: any) => {
                     return (formState.model.digitale_controparte.attachment1.attachmenttype_codice !== 'NESSUN_DOC');
