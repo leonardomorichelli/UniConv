@@ -1,20 +1,19 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { StepType, CoreSevice } from 'src/app/shared';
-import { ApplicationService } from '../application.service';
-import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
-import { Convenzione, FileAttachment, Owner, ConvenzioneDipartimentale, /*ConvenzioneArea,*/ convenzioneFrom, rinnovoType } from '../convenzione';
 import { FormGroup, FormControl, ValidationErrors, FormArray } from '@angular/forms';
-import { encode, decode } from 'base64-arraybuffer';
+import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import { Convenzione, FileAttachment, Owner, ConvenzioneDipartimentale, /*ConvenzioneArea,*/ convenzioneFrom, rinnovoType } from '../convenzione';
+import { ApplicationService } from '../application.service';
 import { AuthService } from 'src/app/core';
-import { InfraMessageType } from 'src/app/shared/message/message';
-import { takeUntil, startWith, tap, filter, map, distinct, distinctUntilChanged } from 'rxjs/operators';
+import { encode, decode } from 'base64-arraybuffer';
 import { Subject, Observable } from 'rxjs';
 import { PDFJSStatic } from 'pdfjs-dist';
-import { ChangeDetectorRef } from '@angular/core';
 import ControlUtils from 'src/app/shared/dynamic-form/control-utils';
+import { StepType, CoreSevice } from 'src/app/shared';
+import { takeUntil, startWith, tap, filter, map, distinct, distinctUntilChanged } from 'rxjs/operators';
+import { ChangeDetectorRef } from '@angular/core';
 import { ConfirmationDialogService } from 'src/app/shared/confirmation-dialog/confirmation-dialog.service';
-
+import { InfraMessageType } from 'src/app/shared/message/message';
 
 const PDFJS: PDFJSStatic = require('pdfjs-dist');
 
@@ -51,8 +50,6 @@ const PDFJS: PDFJSStatic = require('pdfjs-dist');
 })
 
 export class MultistepSchematipoComponent implements OnInit, OnDestroy {
-
-
   public static DECRETO_DIRETTORIALE = 'DDD';
   public static DELIBERA_CONSIGLIO_DIPARTIMENTO = 'DCD';
   public static DECRETO_RETTORALE = 'DR';
@@ -108,7 +105,7 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
       app.file_CD = "";
       this.model = app;
       this.setStorageModel();
-    }else{
+    } else {
       if (this.checkHistory(this.model))
         this.setStorageModel();
     }
@@ -268,13 +265,13 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
                 },
                 templateOptions: {
                   label: 'Bozza convenzione (formato word)',
-                  description: 'Versione editabile (file word) della delibera o della disposizione. Dimensione massima 2MB.',
+                  description: 'Versione editabile (file word) della bozza di convenzione. Dimensione massima 2MB.',
                   type: 'input',
                   placeholder: 'Scegli il documento',
                   accept: '.doc,.docx ,application/msword',
                   required: true,
                   // tooltip: {
-                  //   content: 'Versione editabile (file word) della delibera o della disposizione'
+                  //   content: 'Versione editabile (file word) della bozza di convenzione'
                   // },
                   onSelected: (selFile, field) => {
                     this.onSelectCurrentFile(selFile, MultistepSchematipoComponent.DOC_APP, field)
@@ -472,7 +469,6 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
         ]
       }];
 
-
     const tabs = this.fieldtabs.find(f => f.type === 'tabinfra');
     const tabappr = tabs.fieldGroup[2];
     if (tabappr && this.model.schematipotipo == 'schematipo') {
@@ -481,7 +477,6 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
     else {
       tabappr.templateOptions.hidden = false;
     }
-
   }
 
   getAziendeMin(model){
@@ -532,7 +527,6 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
   public onValidate() {
     ControlUtils.validate(this.fieldtabs[0]);
   }
-
 
   render_page(pageData) {
 
@@ -629,7 +623,6 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     }
     reader.readAsArrayBuffer(currentSelFile);
-
   }
 
   onNew(){
@@ -716,6 +709,4 @@ export class MultistepSchematipoComponent implements OnInit, OnDestroy {
   onAziendaRicerca(){
     this.router.navigate(['home/aziendeloc']);
   }
-
-
 }
