@@ -97,10 +97,10 @@ class TitulusHelper
             }
         }
             
-        if ($conv->unitaorganizzativa_uo) {
-            TitulusHelper::addRPA_Titulus($doc, $conv->unitaorganizzativa_uo);
-        } else { 
+        if ($unitaorganizzativa_uo) {
             TitulusHelper::addRPA_Titulus($doc, $unitaorganizzativa_uo);
+        } else {
+            TitulusHelper::addRPA_Titulus($doc, $conv->unitaorganizzativa_uo);
         }
         TitulusHelper::addCC_Titulus($doc);
 

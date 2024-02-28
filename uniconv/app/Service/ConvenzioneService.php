@@ -397,7 +397,7 @@ class ConvenzioneService implements ApplicationService
         $data = Sottoscrizione::exec($request);
 
         $conv = $this->convenzioneRepository->updateSottoscrizioneStep($data);   
-         //chiudere i task associati ... di tipo sottoscrizione
+        //chiudere i task associati ... di tipo sottoscrizione
         //$tasks = $conv->usertasks()->where('workflow_place',Convenzione::APPROVATO)->whereNull('workflow_transition')->get();
         $tasks = $conv->usertasks()->where('workflow_place',Convenzione::APPROVATO)->get();
         $this->closeTasks($tasks);
