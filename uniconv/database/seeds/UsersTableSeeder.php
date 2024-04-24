@@ -70,26 +70,26 @@ class UsersTableSeeder extends Seeder
         if ($user==null) {     
             $user = User::firstOrCreate( [
                 'email' => 'sara.buti@unicam.it',
-                'password' => Hash::make('testadmin'),
+                'password' => Hash::make('testsuperadmin'),
                 'name' => 'Sara Buti',
                 'v_ie_ru_personale_id_ab'=> 4152,
             ]);        
         }
-        if (!$user->hasRole('admin')){
-            $user->assignRole('admin');  
+        if (!$user->hasRole('super-admin')){
+            $user->assignRole('super-admin');  
         }
 
         $user = User::where('email', 'paolo.mancinelli@unicam.it')->first();        
         if ($user==null){
             $user = User::firstOrCreate([
                 'email' => 'paolo.mancinelli@unicam.it',
-                'password' => Hash::make('testuser'),
+                'password' => Hash::make('testadmin'),
                 'name' => 'Paolo Mancinelli',
                 'v_ie_ru_personale_id_ab'=> 808,
             ] );
         }
-        if (!$user->hasRole('viewer')){
-            $user->assignRole('viewer');
+        if (!$user->hasRole('admin')){
+            $user->assignRole('admin');
         }        
     }
 }
