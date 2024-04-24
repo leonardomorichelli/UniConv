@@ -84,11 +84,10 @@ class AreaController extends Controller
         
         //se utente corrente afferisce ad un dipartimento restituire quello
         //se l'utente corrente afferisca al plesso restituire tutti i dipartimenti sottostanti
-        //se l'utente corrente è super-admin oppure controllare permessi                 
+        //se l'utente corrente è super-admin oppure controllare permessi
         if (Auth::user()->hasPermissionTo('all dipartimenti')){
             return $this->index();
-        }
-        
+        }        
         return $this->getUserAres();
     }
 
